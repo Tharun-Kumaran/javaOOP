@@ -8,7 +8,7 @@ public class task1 {
 		// TODO Auto-generated method stub
 		boolean whetherRaining=false;
 		boolean weekend=true;
-		System.out.println("Is whether raining?"+ whetherRaining +"\nIs weekend?" + weekend);	
+		System.out.println("Is whether raining?"+ whetherRaining +"\nIs weekend ?" + weekend);	
 
 	}
 
