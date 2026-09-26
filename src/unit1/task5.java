@@ -12,13 +12,13 @@ class Student{
 	String department;
 	float cgpa;
 	
-	public Student(int roolNUmber,String name,String department,float cgpa, int rollNumber) {
+	public Student(int rollNumber,String name,String department,float cgpa) {
 		this.rollNumber=rollNumber;
 		this.name=name;
 		this.department=department;
 		this.cgpa=cgpa;
 	}
-	public int printRoolNumber() {
+	public int printRollNumber() {
 		return rollNumber;
 	}
 	public String printName() {
@@ -43,7 +43,7 @@ public class task5 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Student s1= new Student(01,"Ram","CSE",9, 0);
+		Student s1= new Student(01,"Ram","CSE",9.0f);
 		System.out.println(s1);
 		
 
