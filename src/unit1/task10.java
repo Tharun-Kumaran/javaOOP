@@ -1,5 +1,12 @@
 package unit1;
+/*Create an abstract class Animal with an abstract method sound().
+Create:
+• Dog
+• Cat
+Display the sounds produced by each animal*/
+
 //Define the abstract class Animal
+
 abstract class Animal {
  // Abstract method (does not have a body)
  public abstract void sound();

@@ -1,5 +1,10 @@
 package unit1;
 
+/*Create a class BankAccount with private variables:
+• accountNumber
+• balance
+Create getters and setters to access the data.*/
+
 public class task11 {
     // Private variables (Data Hiding)
     private String accountNumber;
