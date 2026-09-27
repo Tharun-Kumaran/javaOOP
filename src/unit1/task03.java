@@ -1,7 +1,7 @@
 package unit1;
 /*Write a Java program that uses short variables to store moderate-sized numbers representing
 geographic elevations (above and below sea level)*/
-public class task3 {
+public class task03 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

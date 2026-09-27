@@ -39,7 +39,7 @@ public String toString() {
 			+ rollNumber + " " + department + " " + cgpa;
 }
 }
-public class task5 {
+public class task05 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
