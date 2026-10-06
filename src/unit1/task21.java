@@ -1,4 +1,7 @@
 package unit1;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
 /*Write a Java program to implement a Mobile Store using a parameterized constructor. Create
 a Mobile class with the attributes brand and price. Accept the values through the constructor and
 display the details of two different mobile objects.*/
@@ -25,6 +28,8 @@ class Mobile1 {
 public class task21 {
 
 	public static void main(String[] args) {
+		System.out.println("Name: Tharun-Kumaran");
+		System.out.println("Roll No: 2117250020478");
 		// TODO Auto-generated method stub
 		System.out.println("=== Welcome to the Mobile Store ===");
         
