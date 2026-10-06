@@ -1,4 +1,7 @@
 package unit1;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
 /*Create a class Student with:
 • Roll Number
 • Name
@@ -30,6 +33,8 @@ class Student6 {
 public class task19 {
 
 	public static void main(String[] args) {
+		System.out.println("Name: Tharun-Kumaran");
+		System.out.println("Roll No: 2117250020478");
 		// TODO Auto-generated method stub
 		Student6 student1 = new Student6(101, "Alice");
         Student6 student2 = new Student6(102, "Bob");

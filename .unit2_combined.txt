@@ -1,0 +1,2211 @@
+
+
+===========================================================================
+                         TASK01
+===========================================================================
+
+SOURCE CODE
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+
+package unit2;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
+import java.util.*;
+public class task01 {
+    public static void main(String[] args) {
+		System.out.println("Name: Tharun-Kumaran");
+		System.out.println("Roll No: 2117250020478");
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter size: ");
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        int sum = 0;
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+            sum += a[i];
+        }
+        System.out.println("Sum = " + sum);
+    }
+}
+
+
+OUTPUT
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+Compilation Error:
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 does not exist
+import unit2.mypackage1.Addition;
+                       ^
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+        ^
+  symbol:   class Addition
+  location: class task12
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+                       ^
+  symbol:   class Addition
+  location: class task12
+3 errors
+
+
+
+
+===========================================================================
+                         TASK02
+===========================================================================
+
+SOURCE CODE
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+
+package unit2;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
+import java.util.*;
+public class task02 {
+    public static void main(String[] args) {
+		System.out.println("Name: Tharun-Kumaran");
+		System.out.println("Roll No: 2117250020478");
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Rows and columns: ");
+        int r = sc.nextInt(), c = sc.nextInt();
+        int[][] a = new int[r][c], b = new int[r][c];
+        for (int i=0;i<r;i++)
+            for (int j=0;j<c;j++) a[i][j]=sc.nextInt();
+        for (int i=0;i<r;i++)
+            for (int j=0;j<c;j++) b[i][j]=sc.nextInt();
+        System.out.println("Result:");
+        for (int i=0;i<r;i++) {
+            for (int j=0;j<c;j++)
+                System.out.print((a[i][j]+b[i][j])+" ");
+            System.out.println();
+        }
+    }
+}
+
+
+OUTPUT
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+Compilation Error:
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 does not exist
+import unit2.mypackage1.Addition;
+                       ^
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+        ^
+  symbol:   class Addition
+  location: class task12
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+                       ^
+  symbol:   class Addition
+  location: class task12
+3 errors
+
+
+
+
+===========================================================================
+                         TASK03
+===========================================================================
+
+SOURCE CODE
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+
+package unit2;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
+import java.util.*;
+public class task03 {
+    public static void main(String[] args) {
+		System.out.println("Name: Tharun-Kumaran");
+		System.out.println("Roll No: 2117250020478");
+        Scanner sc = new Scanner(System.in);
+        int n=sc.nextInt(), max=Integer.MIN_VALUE;
+        int[] a=new int[n];
+        for(int i=0;i<n;i++) a[i]=sc.nextInt();
+        for(int x:a) if(x>max) max=x;
+        System.out.println("Largest = "+max);
+    }
+}
+
+
+OUTPUT
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+Compilation Error:
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 does not exist
+import unit2.mypackage1.Addition;
+                       ^
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+        ^
+  symbol:   class Addition
+  location: class task12
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+                       ^
+  symbol:   class Addition
+  location: class task12
+3 errors
+
+
+
+
+===========================================================================
+                         TASK04
+===========================================================================
+
+SOURCE CODE
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+
+package unit2;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
+import java.util.*;
+public class task04 {
+    static void findSum(int[] arr) {
+        int sum=0;
+        for(int x:arr) sum+=x;
+        System.out.println("Sum = "+sum);
+    }
+    public static void main(String[] args) {
+		System.out.println("Name: Tharun-Kumaran");
+		System.out.println("Roll No: 2117250020478");
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int[] a=new int[n];
+        for(int i=0;i<n;i++) a[i]=sc.nextInt();
+        findSum(a);
+    }
+}
+
+
+OUTPUT
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+Compilation Error:
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 does not exist
+import unit2.mypackage1.Addition;
+                       ^
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+        ^
+  symbol:   class Addition
+  location: class task12
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+                       ^
+  symbol:   class Addition
+  location: class task12
+3 errors
+
+
+
+
+===========================================================================
+                         TASK05
+===========================================================================
+
+SOURCE CODE
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+
+package unit2;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
+import java.util.*;
+public class task05 {
+    static void countEvenOdd(int[] arr) {
+        int even=0,odd=0;
+        for(int x:arr) {
+            if(x%2==0) even++;
+            else odd++;
+        }
+        System.out.println("Even = "+even);
+        System.out.println("Odd = "+odd);
+    }
+    public static void main(String[] args) {
+		System.out.println("Name: Tharun-Kumaran");
+		System.out.println("Roll No: 2117250020478");
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int[] a=new int[n];
+        for(int i=0;i<n;i++) a[i]=sc.nextInt();
+        countEvenOdd(a);
+    }
+}
+
+
+OUTPUT
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+Compilation Error:
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 does not exist
+import unit2.mypackage1.Addition;
+                       ^
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+        ^
+  symbol:   class Addition
+  location: class task12
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+                       ^
+  symbol:   class Addition
+  location: class task12
+3 errors
+
+
+
+
+===========================================================================
+                         TASK06
+===========================================================================
+
+SOURCE CODE
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+
+package unit2;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
+import java.util.*;
+public class task06 {
+    static int[] reverseArray(int[] arr) {
+        int[] r=new int[arr.length];
+        for(int i=0;i<arr.length;i++) r[i]=arr[arr.length-1-i];
+        return r;
+    }
+    public static void main(String[] args) {
+		System.out.println("Name: Tharun-Kumaran");
+		System.out.println("Roll No: 2117250020478");
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int[] a=new int[n];
+        for(int i=0;i<n;i++) a[i]=sc.nextInt();
+        System.out.println(Arrays.toString(reverseArray(a)));
+    }
+}
+
+
+OUTPUT
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+Compilation Error:
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 does not exist
+import unit2.mypackage1.Addition;
+                       ^
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+        ^
+  symbol:   class Addition
+  location: class task12
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+                       ^
+  symbol:   class Addition
+  location: class task12
+3 errors
+
+
+
+
+===========================================================================
+                         TASK07
+===========================================================================
+
+SOURCE CODE
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+
+package unit2;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
+import java.util.*;
+public class task07 {
+    public static void main(String[] args) {
+		System.out.println("Name: Tharun-Kumaran");
+		System.out.println("Roll No: 2117250020478");
+        Scanner sc=new Scanner(System.in);
+        int r=sc.nextInt(),c=sc.nextInt();
+        int[][] a=new int[r][c],b=new int[r][c];
+        for(int i=0;i<r;i++) for(int j=0;j<c;j++) a[i][j]=sc.nextInt();
+        for(int i=0;i<r;i++) for(int j=0;j<c;j++) b[i][j]=sc.nextInt();
+        for(int i=0;i<r;i++) {
+            for(int j=0;j<c;j++) System.out.print((a[i][j]+b[i][j])+" ");
+            System.out.println();
+        }
+    }
+}
+
+
+OUTPUT
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+Compilation Error:
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 does not exist
+import unit2.mypackage1.Addition;
+                       ^
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+        ^
+  symbol:   class Addition
+  location: class task12
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+                       ^
+  symbol:   class Addition
+  location: class task12
+3 errors
+
+
+
+
+===========================================================================
+                         TASK08
+===========================================================================
+
+SOURCE CODE
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+
+package unit2;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
+import java.util.*;
+public class task08 {
+    public static void main(String[] args) {
+		System.out.println("Name: Tharun-Kumaran");
+		System.out.println("Roll No: 2117250020478");
+        Scanner sc=new Scanner(System.in);
+        int r1=sc.nextInt(),c1=sc.nextInt();
+        int[][] a=new int[r1][c1];
+        for(int i=0;i<r1;i++) for(int j=0;j<c1;j++) a[i][j]=sc.nextInt();
+
+        int r2=sc.nextInt(),c2=sc.nextInt();
+        int[][] b=new int[r2][c2];
+        for(int i=0;i<r2;i++) for(int j=0;j<c2;j++) b[i][j]=sc.nextInt();
+
+        if(c1!=r2) { System.out.println("Multiplication not possible"); return; }
+
+        int[][] p=new int[r1][c2];
+        for(int i=0;i<r1;i++)
+            for(int j=0;j<c2;j++)
+                for(int k=0;k<c1;k++)
+                    p[i][j]+=a[i][k]*b[k][j];
+
+        for(int[] row:p) {
+            for(int x:row) System.out.print(x+" ");
+            System.out.println();
+        }
+    }
+}
+
+
+OUTPUT
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+Compilation Error:
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 does not exist
+import unit2.mypackage1.Addition;
+                       ^
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+        ^
+  symbol:   class Addition
+  location: class task12
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+                       ^
+  symbol:   class Addition
+  location: class task12
+3 errors
+
+
+
+
+===========================================================================
+                         TASK09
+===========================================================================
+
+SOURCE CODE
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+
+package unit2;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
+import java.util.*;
+public class task09 {
+    public static void main(String[] args) {
+		System.out.println("Name: Tharun-Kumaran");
+		System.out.println("Roll No: 2117250020478");
+        Scanner sc=new Scanner(System.in);
+        int r=sc.nextInt(),c=sc.nextInt();
+        int[][] a=new int[r][c];
+        for(int i=0;i<r;i++) for(int j=0;j<c;j++) a[i][j]=sc.nextInt();
+        for(int j=0;j<c;j++) {
+            for(int i=0;i<r;i++) System.out.print(a[i][j]+" ");
+            System.out.println();
+        }
+    }
+}
+
+
+OUTPUT
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+Compilation Error:
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 does not exist
+import unit2.mypackage1.Addition;
+                       ^
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+        ^
+  symbol:   class Addition
+  location: class task12
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+                       ^
+  symbol:   class Addition
+  location: class task12
+3 errors
+
+
+
+
+===========================================================================
+                         TASK10
+===========================================================================
+
+SOURCE CODE
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+
+package unit2;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
+import java.util.*;
+public class task10 {
+    public static void main(String[] args) {
+		System.out.println("Name: Tharun-Kumaran");
+		System.out.println("Roll No: 2117250020478");
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt(),m=sc.nextInt();
+        int[][] marks=new int[n][m];
+        int[] total=new int[n];
+
+        for(int i=0;i<n;i++)
+            for(int j=0;j<m;j++) {
+                marks[i][j]=sc.nextInt();
+                total[i]+=marks[i][j];
+            }
+
+        System.out.println("Marks:");
+        for(int[] row:marks) {
+            for(int x:row) System.out.print(x+" ");
+            System.out.println();
+        }
+
+        System.out.println("Totals:");
+        for(int x:total) System.out.println(x);
+
+        int highest=0;
+        for(int x:total) if(x>highest) highest=x;
+        System.out.println("Highest = "+highest);
+    }
+}
+
+
+OUTPUT
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+Compilation Error:
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 does not exist
+import unit2.mypackage1.Addition;
+                       ^
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+        ^
+  symbol:   class Addition
+  location: class task12
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+                       ^
+  symbol:   class Addition
+  location: class task12
+3 errors
+
+
+
+
+===========================================================================
+                         TASK11
+===========================================================================
+
+SOURCE CODE
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+
+package unit2;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
+import java.util.*;
+public class task11 {
+    public static void main(String[] args) {
+		System.out.println("Name: Tharun-Kumaran");
+		System.out.println("Roll No: 2117250020478");
+        Scanner sc=new Scanner(System.in);
+        String s=sc.nextLine();
+        String clean=s.toLowerCase().replaceAll("\\s+","");
+        String rev=new StringBuilder(clean).reverse().toString();
+        System.out.println(clean.equals(rev) ? "Palindrome" : "Not Palindrome");
+    }
+}
+
+
+OUTPUT
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+Compilation Error:
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 does not exist
+import unit2.mypackage1.Addition;
+                       ^
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+        ^
+  symbol:   class Addition
+  location: class task12
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+                       ^
+  symbol:   class Addition
+  location: class task12
+3 errors
+
+
+
+
+===========================================================================
+                         TASK12
+===========================================================================
+
+SOURCE CODE
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+
+package unit2;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
+import unit2.mypackage1.Addition;
+public class task12 {
+    public static void main(String[] args) {
+		System.out.println("Name: Tharun-Kumaran");
+		System.out.println("Roll No: 2117250020478");
+        Addition a=new Addition();
+        System.out.println("Sum = "+a.add(10,20));
+    }
+}
+
+
+OUTPUT
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+Compilation Error:
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 does not exist
+import unit2.mypackage1.Addition;
+                       ^
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+        ^
+  symbol:   class Addition
+  location: class task12
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+                       ^
+  symbol:   class Addition
+  location: class task12
+3 errors
+
+
+
+
+===========================================================================
+                         TASK13
+===========================================================================
+
+SOURCE CODE
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+
+package unit2;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
+/**
+ * Demonstrates Javadoc comments.
+ * @author Tharun
+ * @version 1.0
+ */
+public class task13 {
+    /**
+     * Adds two integers.
+     * @param a first number
+     * @param b second number
+     * @return sum
+     */
+    public int add(int a,int b) {
+        return a+b;
+    }
+
+    public static void main(String[] args) {
+		System.out.println("Name: Tharun-Kumaran");
+		System.out.println("Roll No: 2117250020478");
+        task13 t=new task13();
+        System.out.println("Sum = "+t.add(10,20));
+    }
+}
+
+
+OUTPUT
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+Compilation Error:
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 does not exist
+import unit2.mypackage1.Addition;
+                       ^
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+        ^
+  symbol:   class Addition
+  location: class task12
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+                       ^
+  symbol:   class Addition
+  location: class task12
+3 errors
+
+
+
+
+===========================================================================
+                         TASK14
+===========================================================================
+
+SOURCE CODE
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+
+package unit2;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
+class Vehicle {
+    void start() { System.out.println("Vehicle started"); }
+}
+class Car extends Vehicle {
+    void drive() { System.out.println("Car is driving"); }
+}
+class SportsCar extends Car {
+    void turbo() { System.out.println("Turbo mode activated"); }
+}
+public class task14 {
+    public static void main(String[] args) {
+		System.out.println("Name: Tharun-Kumaran");
+		System.out.println("Roll No: 2117250020478");
+        SportsCar s=new SportsCar();
+        s.start();
+        s.drive();
+        s.turbo();
+    }
+}
+
+
+OUTPUT
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+Compilation Error:
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 does not exist
+import unit2.mypackage1.Addition;
+                       ^
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+        ^
+  symbol:   class Addition
+  location: class task12
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+                       ^
+  symbol:   class Addition
+  location: class task12
+3 errors
+
+
+
+
+===========================================================================
+                         TASK15
+===========================================================================
+
+SOURCE CODE
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+
+package unit2;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
+class Shape {
+    void showShape() { System.out.println("Shape"); }
+}
+class Polygon extends Shape {
+    void showPolygon() { System.out.println("Polygon"); }
+}
+class Triangle extends Polygon {
+    void showTriangle() { System.out.println("Triangle"); }
+}
+public class task15 {
+    public static void main(String[] args) {
+		System.out.println("Name: Tharun-Kumaran");
+		System.out.println("Roll No: 2117250020478");
+        Triangle t=new Triangle();
+        t.showShape();
+        t.showPolygon();
+        t.showTriangle();
+    }
+}
+
+
+OUTPUT
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+Compilation Error:
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 does not exist
+import unit2.mypackage1.Addition;
+                       ^
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+        ^
+  symbol:   class Addition
+  location: class task12
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+                       ^
+  symbol:   class Addition
+  location: class task12
+3 errors
+
+
+
+
+===========================================================================
+                         TASK16
+===========================================================================
+
+SOURCE CODE
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+
+package unit2;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
+class Parent {
+    void display() { System.out.println("Parent"); }
+}
+class ChildA extends Parent {
+    @Override void display() { System.out.println("Child A"); }
+}
+class ChildB extends Parent {
+    @Override void display() { System.out.println("Child B"); }
+}
+public class task16 {
+    public static void main(String[] args) {
+		System.out.println("Name: Tharun-Kumaran");
+		System.out.println("Roll No: 2117250020478");
+        Parent p;
+        p=new ChildA();
+        p.display();
+        p=new ChildB();
+        p.display();
+    }
+}
+
+
+OUTPUT
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+Compilation Error:
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 does not exist
+import unit2.mypackage1.Addition;
+                       ^
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+        ^
+  symbol:   class Addition
+  location: class task12
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+                       ^
+  symbol:   class Addition
+  location: class task12
+3 errors
+
+
+
+
+===========================================================================
+                         TASK17
+===========================================================================
+
+SOURCE CODE
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+
+package unit2;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
+class Constants {
+    static final double PI=3.14159;
+    final void display() {
+        System.out.println("PI = "+PI);
+    }
+}
+public class task17 {
+    public static void main(String[] args) {
+		System.out.println("Name: Tharun-Kumaran");
+		System.out.println("Roll No: 2117250020478");
+        Constants c=new Constants();
+        c.display();
+        // c.PI=3.14; // ERROR: final variable cannot be reassigned
+        // class Test extends Constants {
+        //     void display() {} // ERROR: final method cannot be overridden
+        // }
+    }
+}
+
+
+OUTPUT
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+Compilation Error:
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 does not exist
+import unit2.mypackage1.Addition;
+                       ^
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+        ^
+  symbol:   class Addition
+  location: class task12
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+                       ^
+  symbol:   class Addition
+  location: class task12
+3 errors
+
+
+
+
+===========================================================================
+                         TASK18
+===========================================================================
+
+SOURCE CODE
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+
+package unit2;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
+abstract class Employee {
+    String name;
+    Employee(String name) { this.name=name; }
+    abstract double calculateSalary();
+}
+class Manager extends Employee {
+    Manager(String name) { super(name); }
+    double calculateSalary() { return 75000; }
+}
+class Developer extends Employee {
+    Developer(String name) { super(name); }
+    double calculateSalary() { return 60000; }
+}
+public class task18 {
+    public static void main(String[] args) {
+		System.out.println("Name: Tharun-Kumaran");
+		System.out.println("Roll No: 2117250020478");
+        Employee e1=new Manager("Anita");
+        Employee e2=new Developer("Karthik");
+        System.out.println(e1.name+" Salary: "+e1.calculateSalary());
+        System.out.println(e2.name+" Salary: "+e2.calculateSalary());
+    }
+}
+
+
+OUTPUT
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+Compilation Error:
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 does not exist
+import unit2.mypackage1.Addition;
+                       ^
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+        ^
+  symbol:   class Addition
+  location: class task12
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+                       ^
+  symbol:   class Addition
+  location: class task12
+3 errors
+
+
+
+
+===========================================================================
+                         TASK19
+===========================================================================
+
+SOURCE CODE
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+
+package unit2;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
+import java.util.*;
+public class task19 {
+    public static void main(String[] args) {
+		System.out.println("Name: Tharun-Kumaran");
+		System.out.println("Roll No: 2117250020478");
+        Scanner sc=new Scanner(System.in);
+        int a=sc.nextInt(),b=sc.nextInt();
+        try {
+            System.out.println("Result = "+(a/b));
+        } catch(ArithmeticException e) {
+            System.out.println("ArithmeticException: Cannot divide by zero");
+        }
+    }
+}
+
+
+OUTPUT
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+Compilation Error:
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 does not exist
+import unit2.mypackage1.Addition;
+                       ^
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+        ^
+  symbol:   class Addition
+  location: class task12
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+                       ^
+  symbol:   class Addition
+  location: class task12
+3 errors
+
+
+
+
+===========================================================================
+                         TASK20
+===========================================================================
+
+SOURCE CODE
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+
+package unit2;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
+class InvalidAgeException extends Exception {
+    InvalidAgeException(String msg) { super(msg); }
+}
+class NegativeSalaryException extends RuntimeException {
+    NegativeSalaryException(String msg) { super(msg); }
+}
+public class task20 {
+    static void checkAge(int age) throws InvalidAgeException {
+        if(age<18) throw new InvalidAgeException("Age must be 18 or above");
+    }
+    static void checkSalary(double salary) {
+        if(salary<0) throw new NegativeSalaryException("Salary cannot be negative");
+    }
+    public static void main(String[] args) {
+		System.out.println("Name: Tharun-Kumaran");
+		System.out.println("Roll No: 2117250020478");
+        try {
+            checkAge(15);
+        } catch(InvalidAgeException e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            checkSalary(-5000);
+        } catch(NegativeSalaryException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
+
+
+OUTPUT
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+Compilation Error:
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 does not exist
+import unit2.mypackage1.Addition;
+                       ^
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+        ^
+  symbol:   class Addition
+  location: class task12
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+                       ^
+  symbol:   class Addition
+  location: class task12
+3 errors
+
+
+
+
+===========================================================================
+                         TASK21
+===========================================================================
+
+SOURCE CODE
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+
+package unit2;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
+import java.util.*;
+class ZeroDivisorException extends Exception {
+    ZeroDivisorException(String msg) { super(msg); }
+}
+public class task21 {
+    static int divide(int a,int b) throws ZeroDivisorException {
+        if(b==0) throw new ZeroDivisorException("Divisor cannot be zero");
+        return a/b;
+    }
+    public static void main(String[] args) {
+		System.out.println("Name: Tharun-Kumaran");
+		System.out.println("Roll No: 2117250020478");
+        Scanner sc=new Scanner(System.in);
+        int a=sc.nextInt(),b=sc.nextInt();
+        try {
+            System.out.println("Result = "+divide(a,b));
+        } catch(ZeroDivisorException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            System.out.println("Operation complete");
+        }
+    }
+}
+
+
+OUTPUT
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+Compilation Error:
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 does not exist
+import unit2.mypackage1.Addition;
+                       ^
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+        ^
+  symbol:   class Addition
+  location: class task12
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+                       ^
+  symbol:   class Addition
+  location: class task12
+3 errors
+
+
+
+
+===========================================================================
+                         TASK22
+===========================================================================
+
+SOURCE CODE
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+
+package unit2;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
+import java.util.*;
+class Book {
+    String isbn,title;
+    Book(String isbn,String title) {
+        this.isbn=isbn; this.title=title;
+    }
+    @Override public String toString() {
+        return isbn+" - "+title;
+    }
+    @Override public boolean equals(Object o) {
+        if(this==o) return true;
+        if(!(o instanceof Book)) return false;
+        return isbn.equals(((Book)o).isbn);
+    }
+    @Override public int hashCode() {
+        return isbn.hashCode();
+    }
+}
+public class task22 {
+    public static void main(String[] args) {
+		System.out.println("Name: Tharun-Kumaran");
+		System.out.println("Roll No: 2117250020478");
+        HashSet<Book> books=new HashSet<>();
+        books.add(new Book("111","Java"));
+        books.add(new Book("111","Java Programming"));
+        books.add(new Book("222","Python"));
+        System.out.println(books);
+    }
+}
+
+
+OUTPUT
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+Compilation Error:
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 does not exist
+import unit2.mypackage1.Addition;
+                       ^
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+        ^
+  symbol:   class Addition
+  location: class task12
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+                       ^
+  symbol:   class Addition
+  location: class task12
+3 errors
+
+
+
+
+===========================================================================
+                         TASK23
+===========================================================================
+
+SOURCE CODE
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+
+package unit2;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
+import java.lang.reflect.*;
+class Student {
+    private String name="Divya";
+    private int age=20;
+    private void displayInfo() {
+        System.out.println("Name: "+name+", Age: "+age);
+    }
+}
+public class task23 {
+    public static void main(String[] args) throws Exception {
+        Student s=new Student();
+        Class<?> c=s.getClass();
+
+        System.out.println("Fields:");
+        for(Field f:c.getDeclaredFields()) {
+            f.setAccessible(true);
+            System.out.println(f.getName()+" = "+f.get(s));
+        }
+
+        System.out.println("Methods:");
+        for(Method m:c.getDeclaredMethods())
+            System.out.println(m.getName());
+
+        Method m=c.getDeclaredMethod("displayInfo");
+        m.setAccessible(true);
+        m.invoke(s);
+    }
+}
+
+
+OUTPUT
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+Compilation Error:
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 does not exist
+import unit2.mypackage1.Addition;
+                       ^
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+        ^
+  symbol:   class Addition
+  location: class task12
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+                       ^
+  symbol:   class Addition
+  location: class task12
+3 errors
+
+
+
+
+===========================================================================
+                         TASK24
+===========================================================================
+
+SOURCE CODE
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+
+package unit2;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
+interface Animal {
+    void sound();
+}
+interface Pet extends Animal {
+    void play();
+}
+class Dog implements Pet {
+    public void sound() { System.out.println("Dog barks"); }
+    public void play() { System.out.println("Dog is playing"); }
+}
+public class task24 {
+    public static void main(String[] args) {
+		System.out.println("Name: Tharun-Kumaran");
+		System.out.println("Roll No: 2117250020478");
+        Dog d=new Dog();
+        d.sound();
+        d.play();
+    }
+}
+
+
+OUTPUT
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+Compilation Error:
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 does not exist
+import unit2.mypackage1.Addition;
+                       ^
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+        ^
+  symbol:   class Addition
+  location: class task12
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+                       ^
+  symbol:   class Addition
+  location: class task12
+3 errors
+
+
+
+
+===========================================================================
+                         TASK25
+===========================================================================
+
+SOURCE CODE
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+
+package unit2;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
+interface Vehicle2 {
+    void start();
+}
+interface Car2 extends Vehicle2 {
+    void stop();
+    void displayDetails();
+}
+class Honda implements Car2 {
+    public void start() { System.out.println("Honda started"); }
+    public void stop() { System.out.println("Honda stopped"); }
+    public void displayDetails() {
+        System.out.println("Brand: Honda");
+        System.out.println("Type: Car");
+    }
+}
+public class task25 {
+    public static void main(String[] args) {
+		System.out.println("Name: Tharun-Kumaran");
+		System.out.println("Roll No: 2117250020478");
+        Honda h=new Honda();
+        h.start();
+        h.displayDetails();
+        h.stop();
+    }
+}
+
+
+OUTPUT
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+Compilation Error:
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 does not exist
+import unit2.mypackage1.Addition;
+                       ^
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+        ^
+  symbol:   class Addition
+  location: class task12
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+                       ^
+  symbol:   class Addition
+  location: class task12
+3 errors
+
+
+
+
+===========================================================================
+                         TASK26
+===========================================================================
+
+SOURCE CODE
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+
+package unit2;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
+import java.util.*;
+class BookClone implements Cloneable {
+    String title;
+    ArrayList<String> chapters;
+
+    BookClone(String title,ArrayList<String> chapters) {
+        this.title=title;
+        this.chapters=chapters;
+    }
+
+    public BookClone clone() throws CloneNotSupportedException {
+        return (BookClone)super.clone();
+    }
+
+    public BookClone deepClone() throws CloneNotSupportedException {
+        BookClone b=(BookClone)super.clone();
+        b.chapters=new ArrayList<>(chapters);
+        return b;
+    }
+}
+public class task26 {
+    public static void main(String[] args) throws Exception {
+        ArrayList<String> list=new ArrayList<>();
+        list.add("Introduction");
+
+        BookClone original=new BookClone("Java",list);
+
+        BookClone shallow=original.clone();
+        BookClone deep=original.deepClone();
+
+        shallow.chapters.add("OOP");
+        System.out.println("Original after shallow clone: "+original.chapters);
+
+        deep.chapters.add("Exceptions");
+        System.out.println("Original after deep clone: "+original.chapters);
+        System.out.println("Deep clone: "+deep.chapters);
+    }
+}
+
+
+OUTPUT
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+Compilation Error:
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 does not exist
+import unit2.mypackage1.Addition;
+                       ^
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+        ^
+  symbol:   class Addition
+  location: class task12
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+                       ^
+  symbol:   class Addition
+  location: class task12
+3 errors
+
+
+
+
+===========================================================================
+                         TASK27
+===========================================================================
+
+SOURCE CODE
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+
+package unit2;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
+class Account {
+    int accountNumber=101;
+    String customerName="Ravi";
+    double balance=5000;
+
+    class Transaction {
+        void display() {
+            System.out.println("Account: "+accountNumber);
+            System.out.println("Customer: "+customerName);
+            System.out.println("Balance: "+balance);
+            System.out.println("Transaction: Deposit");
+        }
+    }
+}
+public class task27 {
+    public static void main(String[] args) {
+		System.out.println("Name: Tharun-Kumaran");
+		System.out.println("Roll No: 2117250020478");
+        Account a=new Account();
+        Account.Transaction t=a.new Transaction();
+        t.display();
+    }
+}
+
+
+OUTPUT
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+Compilation Error:
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 does not exist
+import unit2.mypackage1.Addition;
+                       ^
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+        ^
+  symbol:   class Addition
+  location: class task12
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+                       ^
+  symbol:   class Addition
+  location: class task12
+3 errors
+
+
+
+
+===========================================================================
+                         TASK28
+===========================================================================
+
+SOURCE CODE
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+
+package unit2;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
+class Bank {
+    static String bankName="ABC Bank";
+
+    static class Branch {
+        void display() {
+            System.out.println("Bank: "+bankName);
+            System.out.println("Branch: Chennai");
+        }
+    }
+}
+public class task28 {
+    public static void main(String[] args) {
+		System.out.println("Name: Tharun-Kumaran");
+		System.out.println("Roll No: 2117250020478");
+        Bank.Branch b=new Bank.Branch();
+        b.display();
+    }
+}
+
+
+OUTPUT
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+Compilation Error:
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 does not exist
+import unit2.mypackage1.Addition;
+                       ^
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+        ^
+  symbol:   class Addition
+  location: class task12
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+                       ^
+  symbol:   class Addition
+  location: class task12
+3 errors
+
+
+
+
+===========================================================================
+                         TASK29
+===========================================================================
+
+SOURCE CODE
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+
+package unit2;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
+class Bank2 {
+    void openAccount() {
+        class Customer {
+            void display() {
+                System.out.println("Customer account opened successfully");
+            }
+        }
+        Customer c=new Customer();
+        c.display();
+    }
+}
+public class task29 {
+    public static void main(String[] args) {
+		System.out.println("Name: Tharun-Kumaran");
+		System.out.println("Roll No: 2117250020478");
+        new Bank2().openAccount();
+    }
+}
+
+
+OUTPUT
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+Compilation Error:
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 does not exist
+import unit2.mypackage1.Addition;
+                       ^
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+        ^
+  symbol:   class Addition
+  location: class task12
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+                       ^
+  symbol:   class Addition
+  location: class task12
+3 errors
+
+
+
+
+===========================================================================
+                         TASK30
+===========================================================================
+
+SOURCE CODE
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+
+package unit2;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
+abstract class Transaction {
+    abstract void processTransaction();
+}
+public class task30 {
+    public static void main(String[] args) {
+		System.out.println("Name: Tharun-Kumaran");
+		System.out.println("Roll No: 2117250020478");
+        Transaction t=new Transaction() {
+            void processTransaction() {
+                System.out.println("Bank transaction processed");
+            }
+        };
+        t.processTransaction();
+    }
+}
+
+
+OUTPUT
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+Compilation Error:
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 does not exist
+import unit2.mypackage1.Addition;
+                       ^
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+        ^
+  symbol:   class Addition
+  location: class task12
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+                       ^
+  symbol:   class Addition
+  location: class task12
+3 errors
+
+
+
+
+===========================================================================
+                         TASK31
+===========================================================================
+
+SOURCE CODE
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+
+package unit2;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
+import java.lang.reflect.*;
+interface Calculator {
+    int add(int a,int b);
+}
+class CalculatorImpl implements Calculator {
+    public int add(int a,int b) {
+        return a+b;
+    }
+}
+class LoggingHandler implements InvocationHandler {
+    private final Object target;
+    LoggingHandler(Object target) {
+        this.target=target;
+    }
+    public Object invoke(Object proxy,Method method,Object[] args) throws Throwable {
+        long start=System.nanoTime();
+        Object result=method.invoke(target,args);
+        long end=System.nanoTime();
+
+        System.out.println("Method: "+method.getName());
+        System.out.println("Result: "+result);
+        System.out.println("Time: "+(end-start)+" ns");
+        return result;
+    }
+}
+public class task31 {
+    public static void main(String[] args) {
+		System.out.println("Name: Tharun-Kumaran");
+		System.out.println("Roll No: 2117250020478");
+        Calculator real=new CalculatorImpl();
+
+        Calculator proxy=(Calculator)Proxy.newProxyInstance(
+            Calculator.class.getClassLoader(),
+            new Class<?>[]{Calculator.class},
+            new LoggingHandler(real)
+        );
+
+        proxy.add(10,20);
+    }
+}
+
+
+OUTPUT
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+Compilation Error:
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 does not exist
+import unit2.mypackage1.Addition;
+                       ^
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+        ^
+  symbol:   class Addition
+  location: class task12
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+                       ^
+  symbol:   class Addition
+  location: class task12
+3 errors
+
+
+
+
+===========================================================================
+                         TASK32
+===========================================================================
+
+SOURCE CODE
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+
+package unit2;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
+import java.io.*;
+public class task32 {
+    public static void main(String[] args) {
+		System.out.println("Name: Tharun-Kumaran");
+		System.out.println("Roll No: 2117250020478");
+        String source="source.txt";
+        String destination="copy.txt";
+
+        try(FileInputStream in=new FileInputStream(source);
+            FileOutputStream out=new FileOutputStream(destination)) {
+
+            int b;
+            while((b=in.read())!=-1)
+                out.write(b);
+
+            System.out.println("File copied successfully");
+
+        } catch(IOException e) {
+            System.out.println("Error: "+e.getMessage());
+        }
+    }
+}
+
+
+OUTPUT
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+Compilation Error:
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 does not exist
+import unit2.mypackage1.Addition;
+                       ^
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+        ^
+  symbol:   class Addition
+  location: class task12
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+                       ^
+  symbol:   class Addition
+  location: class task12
+3 errors
+
+
+
+
+===========================================================================
+                         TASK33
+===========================================================================
+
+SOURCE CODE
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+
+package unit2;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
+import java.io.*;
+public class task33 {
+    public static void main(String[] args) {
+		System.out.println("Name: Tharun-Kumaran");
+		System.out.println("Roll No: 2117250020478");
+        String file="data.txt";
+        int lines=0,words=0,chars=0;
+
+        try(BufferedReader br=new BufferedReader(new FileReader(file))) {
+            String line;
+            while((line=br.readLine())!=null) {
+                lines++;
+                chars+=line.length();
+                if(!line.trim().isEmpty())
+                    words+=line.trim().split("\\s+").length;
+            }
+
+            System.out.println("Lines = "+lines);
+            System.out.println("Words = "+words);
+            System.out.println("Characters = "+chars);
+
+        } catch(IOException e) {
+            System.out.println("Error: "+e.getMessage());
+        }
+    }
+}
+
+
+OUTPUT
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+Compilation Error:
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 does not exist
+import unit2.mypackage1.Addition;
+                       ^
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+        ^
+  symbol:   class Addition
+  location: class task12
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+                       ^
+  symbol:   class Addition
+  location: class task12
+3 errors
+
+
+
+
+===========================================================================
+                         TASK34
+===========================================================================
+
+SOURCE CODE
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+
+package unit2;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
+import java.util.*;
+public class task34 {
+    public static void main(String[] args) {
+		System.out.println("Name: Tharun-Kumaran");
+		System.out.println("Roll No: 2117250020478");
+        Scanner sc=new Scanner(System.in);
+        System.out.print("Number of subjects: ");
+        int n=sc.nextInt();
+
+        int total=0;
+        for(int i=0;i<n;i++)
+            total+=sc.nextInt();
+
+        double average=(double)total/n;
+
+        System.out.println("Total = "+total);
+        System.out.println("Average = "+average);
+    }
+}
+
+
+OUTPUT
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+Compilation Error:
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 does not exist
+import unit2.mypackage1.Addition;
+                       ^
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+        ^
+  symbol:   class Addition
+  location: class task12
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+                       ^
+  symbol:   class Addition
+  location: class task12
+3 errors
+
+
+
+
+===========================================================================
+                         TASK35
+===========================================================================
+
+SOURCE CODE
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+
+package unit2;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
+import java.io.*;
+public class task35 {
+    public static void main(String[] args) {
+		System.out.println("Name: Tharun-Kumaran");
+		System.out.println("Roll No: 2117250020478");
+        File file=new File("sample.txt");
+
+        try {
+            if(file.createNewFile())
+                System.out.println("File created");
+            else
+                System.out.println("File already exists");
+
+            System.out.println("Name: "+file.getName());
+            System.out.println("Path: "+file.getAbsolutePath());
+            System.out.println("Size: "+file.length()+" bytes");
+
+            if(file.delete())
+                System.out.println("File deleted");
+
+        } catch(IOException e) {
+            System.out.println("Error: "+e.getMessage());
+        }
+    }
+}
+
+
+OUTPUT
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+Compilation Error:
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 does not exist
+import unit2.mypackage1.Addition;
+                       ^
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+        ^
+  symbol:   class Addition
+  location: class task12
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+                       ^
+  symbol:   class Addition
+  location: class task12
+3 errors
+
+
+
+
+===========================================================================
+                         TASK36
+===========================================================================
+
+SOURCE CODE
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+
+package unit2;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
+import java.nio.file.*;
+import java.io.*;
+public class task36 {
+    public static void main(String[] args) {
+		System.out.println("Name: Tharun-Kumaran");
+		System.out.println("Roll No: 2117250020478");
+        Path source=Paths.get("source.txt");
+        Path destination=Paths.get("nio_copy.txt");
+
+        try {
+            Files.copy(source,destination,StandardCopyOption.REPLACE_EXISTING);
+            System.out.println("File copied using NIO");
+        } catch(IOException e) {
+            System.out.println("Error: "+e.getMessage());
+        }
+    }
+}
+
+
+OUTPUT
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+Compilation Error:
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 does not exist
+import unit2.mypackage1.Addition;
+                       ^
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+        ^
+  symbol:   class Addition
+  location: class task12
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+                       ^
+  symbol:   class Addition
+  location: class task12
+3 errors
+
+
+
+
+===========================================================================
+                         TASK37
+===========================================================================
+
+SOURCE CODE
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+
+package unit2;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
+import java.io.*;
+
+class StudentData implements Serializable {
+    String name;
+    int rollNo;
+    transient String password;
+
+    StudentData(String name,int rollNo,String password) {
+        this.name=name;
+        this.rollNo=rollNo;
+        this.password=password;
+    }
+}
+
+public class task37 {
+    public static void main(String[] args) {
+		System.out.println("Name: Tharun-Kumaran");
+		System.out.println("Roll No: 2117250020478");
+        StudentData s1=new StudentData("Kavya",101,"secret");
+
+        try {
+            ObjectOutputStream out=
+                new ObjectOutputStream(new FileOutputStream("student.ser"));
+            out.writeObject(s1);
+            out.close();
+
+            ObjectInputStream in=
+                new ObjectInputStream(new FileInputStream("student.ser"));
+            StudentData s2=(StudentData)in.readObject();
+            in.close();
+
+            System.out.println("Name: "+s2.name);
+            System.out.println("Roll No: "+s2.rollNo);
+            System.out.println("Password: "+s2.password);
+
+        } catch(IOException | ClassNotFoundException e) {
+            System.out.println("Error: "+e.getMessage());
+        }
+    }
+}
+
+
+OUTPUT
+---------------------------------------------------------------------------
+Name: Tharun-Kumaran
+Roll No: 2117250020478
+Compilation Error:
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 does not exist
+import unit2.mypackage1.Addition;
+                       ^
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+        ^
+  symbol:   class Addition
+  location: class task12
+/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol
+        Addition a=new Addition();
+                       ^
+  symbol:   class Addition
+  location: class task12
+3 errors
+
+

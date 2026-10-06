@@ -1,4 +1,7 @@
 package unit1;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
 /* Write a Java program to implement a user-defined copy constructor in a Mobile Store application.
 Create a mobile object with a brand and price, then create another object by copying the first object
 using the copy constructor. Display the details of both objects.*/
@@ -28,6 +31,8 @@ class Mobile2 {
 public class task22 {
 
 	public static void main(String[] args) {
+		System.out.println("Name: Tharun-Kumaran");
+		System.out.println("Roll No: 2117250020478");
 		// TODO Auto-generated method stub
         System.out.println("--- Mobile Store Application --- \n");
 

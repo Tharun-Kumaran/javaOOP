@@ -1,0 +1,2754 @@
+%!PS
+/Courier findfont 8 scalefont setfont
+72 760 moveto
+showpage
+72 760 moveto
+(TASK01) show
+0 -18 rmoveto
+(========================================) show
+0 -18 rmoveto
+(SOURCE CODE) show
+0 -14 rmoveto
+(package unit2;) show
+0 -10 rmoveto
+(// Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(// Roll No: 2117250020478) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(import java.util.*;) show
+0 -10 rmoveto
+(public class task01 {) show
+0 -10 rmoveto
+(    public static void main\(String[] args\) {) show
+0 -10 rmoveto
+(		System.out.println\("Name: Tharun-Kumaran"\);) show
+0 -10 rmoveto
+(		System.out.println\("Roll No: 2117250020478"\);) show
+0 -10 rmoveto
+(        Scanner sc = new Scanner\(System.in\);) show
+0 -10 rmoveto
+(        System.out.print\("Enter size: "\);) show
+0 -10 rmoveto
+(        int n = sc.nextInt\(\);) show
+0 -10 rmoveto
+(        int[] a = new int[n];) show
+0 -10 rmoveto
+(        int sum = 0;) show
+0 -10 rmoveto
+(        for \(int i = 0; i < n; i++\) {) show
+0 -10 rmoveto
+(            a[i] = sc.nextInt\(\);) show
+0 -10 rmoveto
+(            sum += a[i];) show
+0 -10 rmoveto
+(        }) show
+0 -10 rmoveto
+(        System.out.println\("Sum = " + sum\);) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+0 -14 rmoveto
+(OUTPUT) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -10 rmoveto
+(Enter size: Sum = 1) show
+0 -10 rmoveto
+showpage
+72 760 moveto
+(TASK02) show
+0 -18 rmoveto
+(========================================) show
+0 -18 rmoveto
+(SOURCE CODE) show
+0 -14 rmoveto
+(package unit2;) show
+0 -10 rmoveto
+(// Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(// Roll No: 2117250020478) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(import java.util.*;) show
+0 -10 rmoveto
+(public class task02 {) show
+0 -10 rmoveto
+(    public static void main\(String[] args\) {) show
+0 -10 rmoveto
+(		System.out.println\("Name: Tharun-Kumaran"\);) show
+0 -10 rmoveto
+(		System.out.println\("Roll No: 2117250020478"\);) show
+0 -10 rmoveto
+(        Scanner sc = new Scanner\(System.in\);) show
+0 -10 rmoveto
+(        System.out.print\("Rows and columns: "\);) show
+0 -10 rmoveto
+(        int r = sc.nextInt\(\), c = sc.nextInt\(\);) show
+0 -10 rmoveto
+(        int[][] a = new int[r][c], b = new int[r][c];) show
+0 -10 rmoveto
+(        for \(int i=0;i<r;i++\)) show
+0 -10 rmoveto
+(            for \(int j=0;j<c;j++\) a[i][j]=sc.nextInt\(\);) show
+0 -10 rmoveto
+(        for \(int i=0;i<r;i++\)) show
+0 -10 rmoveto
+(            for \(int j=0;j<c;j++\) b[i][j]=sc.nextInt\(\);) show
+0 -10 rmoveto
+(        System.out.println\("Result:"\);) show
+0 -10 rmoveto
+(        for \(int i=0;i<r;i++\) {) show
+0 -10 rmoveto
+(            for \(int j=0;j<c;j++\)) show
+0 -10 rmoveto
+(                System.out.print\(\(a[i][j]+b[i][j]\)+" "\);) show
+0 -10 rmoveto
+(            System.out.println\(\);) show
+0 -10 rmoveto
+(        }) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+0 -14 rmoveto
+(OUTPUT) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -10 rmoveto
+(Rows and columns: Result:) show
+0 -10 rmoveto
+(2) show
+0 -10 rmoveto
+showpage
+72 760 moveto
+(TASK03) show
+0 -18 rmoveto
+(========================================) show
+0 -18 rmoveto
+(SOURCE CODE) show
+0 -14 rmoveto
+(package unit2;) show
+0 -10 rmoveto
+(// Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(// Roll No: 2117250020478) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(import java.util.*;) show
+0 -10 rmoveto
+(public class task03 {) show
+0 -10 rmoveto
+(    public static void main\(String[] args\) {) show
+0 -10 rmoveto
+(		System.out.println\("Name: Tharun-Kumaran"\);) show
+0 -10 rmoveto
+(		System.out.println\("Roll No: 2117250020478"\);) show
+0 -10 rmoveto
+(        Scanner sc = new Scanner\(System.in\);) show
+0 -10 rmoveto
+(        int n=sc.nextInt\(\), max=Integer.MIN_VALUE;) show
+0 -10 rmoveto
+(        int[] a=new int[n];) show
+0 -10 rmoveto
+(        for\(int i=0;i<n;i++\) a[i]=sc.nextInt\(\);) show
+0 -10 rmoveto
+(        for\(int x:a\) if\(x>max\) max=x;) show
+0 -10 rmoveto
+(        System.out.println\("Largest = "+max\);) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+0 -14 rmoveto
+(OUTPUT) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -10 rmoveto
+(Largest = 1) show
+0 -10 rmoveto
+showpage
+72 760 moveto
+(TASK04) show
+0 -18 rmoveto
+(========================================) show
+0 -18 rmoveto
+(SOURCE CODE) show
+0 -14 rmoveto
+(package unit2;) show
+0 -10 rmoveto
+(// Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(// Roll No: 2117250020478) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(import java.util.*;) show
+0 -10 rmoveto
+(public class task04 {) show
+0 -10 rmoveto
+(    static void findSum\(int[] arr\) {) show
+0 -10 rmoveto
+(        int sum=0;) show
+0 -10 rmoveto
+(        for\(int x:arr\) sum+=x;) show
+0 -10 rmoveto
+(        System.out.println\("Sum = "+sum\);) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(    public static void main\(String[] args\) {) show
+0 -10 rmoveto
+(		System.out.println\("Name: Tharun-Kumaran"\);) show
+0 -10 rmoveto
+(		System.out.println\("Roll No: 2117250020478"\);) show
+0 -10 rmoveto
+(        Scanner sc=new Scanner\(System.in\);) show
+0 -10 rmoveto
+(        int n=sc.nextInt\(\);) show
+0 -10 rmoveto
+(        int[] a=new int[n];) show
+0 -10 rmoveto
+(        for\(int i=0;i<n;i++\) a[i]=sc.nextInt\(\);) show
+0 -10 rmoveto
+(        findSum\(a\);) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+0 -14 rmoveto
+(OUTPUT) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -10 rmoveto
+(Sum = 1) show
+0 -10 rmoveto
+showpage
+72 760 moveto
+(TASK05) show
+0 -18 rmoveto
+(========================================) show
+0 -18 rmoveto
+(SOURCE CODE) show
+0 -14 rmoveto
+(package unit2;) show
+0 -10 rmoveto
+(// Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(// Roll No: 2117250020478) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(import java.util.*;) show
+0 -10 rmoveto
+(public class task05 {) show
+0 -10 rmoveto
+(    static void countEvenOdd\(int[] arr\) {) show
+0 -10 rmoveto
+(        int even=0,odd=0;) show
+0 -10 rmoveto
+(        for\(int x:arr\) {) show
+0 -10 rmoveto
+(            if\(x%2==0\) even++;) show
+0 -10 rmoveto
+(            else odd++;) show
+0 -10 rmoveto
+(        }) show
+0 -10 rmoveto
+(        System.out.println\("Even = "+even\);) show
+0 -10 rmoveto
+(        System.out.println\("Odd = "+odd\);) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(    public static void main\(String[] args\) {) show
+0 -10 rmoveto
+(		System.out.println\("Name: Tharun-Kumaran"\);) show
+0 -10 rmoveto
+(		System.out.println\("Roll No: 2117250020478"\);) show
+0 -10 rmoveto
+(        Scanner sc=new Scanner\(System.in\);) show
+0 -10 rmoveto
+(        int n=sc.nextInt\(\);) show
+0 -10 rmoveto
+(        int[] a=new int[n];) show
+0 -10 rmoveto
+(        for\(int i=0;i<n;i++\) a[i]=sc.nextInt\(\);) show
+0 -10 rmoveto
+(        countEvenOdd\(a\);) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+0 -14 rmoveto
+(OUTPUT) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -10 rmoveto
+(Even = 0) show
+0 -10 rmoveto
+(Odd = 1) show
+0 -10 rmoveto
+showpage
+72 760 moveto
+(TASK06) show
+0 -18 rmoveto
+(========================================) show
+0 -18 rmoveto
+(SOURCE CODE) show
+0 -14 rmoveto
+(package unit2;) show
+0 -10 rmoveto
+(// Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(// Roll No: 2117250020478) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(import java.util.*;) show
+0 -10 rmoveto
+(public class task06 {) show
+0 -10 rmoveto
+(    static int[] reverseArray\(int[] arr\) {) show
+0 -10 rmoveto
+(        int[] r=new int[arr.length];) show
+0 -10 rmoveto
+(        for\(int i=0;i<arr.length;i++\) r[i]=arr[arr.length-1-i];) show
+0 -10 rmoveto
+(        return r;) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(    public static void main\(String[] args\) {) show
+0 -10 rmoveto
+(		System.out.println\("Name: Tharun-Kumaran"\);) show
+0 -10 rmoveto
+(		System.out.println\("Roll No: 2117250020478"\);) show
+0 -10 rmoveto
+(        Scanner sc=new Scanner\(System.in\);) show
+0 -10 rmoveto
+(        int n=sc.nextInt\(\);) show
+0 -10 rmoveto
+(        int[] a=new int[n];) show
+0 -10 rmoveto
+(        for\(int i=0;i<n;i++\) a[i]=sc.nextInt\(\);) show
+0 -10 rmoveto
+(        System.out.println\(Arrays.toString\(reverseArray\(a\)\)\);) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+0 -14 rmoveto
+(OUTPUT) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -10 rmoveto
+([1]) show
+0 -10 rmoveto
+showpage
+72 760 moveto
+(TASK07) show
+0 -18 rmoveto
+(========================================) show
+0 -18 rmoveto
+(SOURCE CODE) show
+0 -14 rmoveto
+(package unit2;) show
+0 -10 rmoveto
+(// Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(// Roll No: 2117250020478) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(import java.util.*;) show
+0 -10 rmoveto
+(public class task07 {) show
+0 -10 rmoveto
+(    public static void main\(String[] args\) {) show
+0 -10 rmoveto
+(		System.out.println\("Name: Tharun-Kumaran"\);) show
+0 -10 rmoveto
+(		System.out.println\("Roll No: 2117250020478"\);) show
+0 -10 rmoveto
+(        Scanner sc=new Scanner\(System.in\);) show
+0 -10 rmoveto
+(        int r=sc.nextInt\(\),c=sc.nextInt\(\);) show
+0 -10 rmoveto
+(        int[][] a=new int[r][c],b=new int[r][c];) show
+0 -10 rmoveto
+(        for\(int i=0;i<r;i++\) for\(int j=0;j<c;j++\) a[i][j]=sc.nextInt\(\);) show
+0 -10 rmoveto
+(        for\(int i=0;i<r;i++\) for\(int j=0;j<c;j++\) b[i][j]=sc.nextInt\(\);) show
+0 -10 rmoveto
+(        for\(int i=0;i<r;i++\) {) show
+0 -10 rmoveto
+(            for\(int j=0;j<c;j++\) System.out.print\(\(a[i][j]+b[i][j]\)+" "\);) show
+0 -10 rmoveto
+(            System.out.println\(\);) show
+0 -10 rmoveto
+(        }) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+0 -14 rmoveto
+(OUTPUT) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -10 rmoveto
+(2) show
+0 -10 rmoveto
+showpage
+72 760 moveto
+(TASK08) show
+0 -18 rmoveto
+(========================================) show
+0 -18 rmoveto
+(SOURCE CODE) show
+0 -14 rmoveto
+(package unit2;) show
+0 -10 rmoveto
+(// Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(// Roll No: 2117250020478) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(import java.util.*;) show
+0 -10 rmoveto
+(public class task08 {) show
+0 -10 rmoveto
+(    public static void main\(String[] args\) {) show
+0 -10 rmoveto
+(		System.out.println\("Name: Tharun-Kumaran"\);) show
+0 -10 rmoveto
+(		System.out.println\("Roll No: 2117250020478"\);) show
+0 -10 rmoveto
+(        Scanner sc=new Scanner\(System.in\);) show
+0 -10 rmoveto
+(        int r1=sc.nextInt\(\),c1=sc.nextInt\(\);) show
+0 -10 rmoveto
+(        int[][] a=new int[r1][c1];) show
+0 -10 rmoveto
+(        for\(int i=0;i<r1;i++\) for\(int j=0;j<c1;j++\) a[i][j]=sc.nextInt\(\);) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(        int r2=sc.nextInt\(\),c2=sc.nextInt\(\);) show
+0 -10 rmoveto
+(        int[][] b=new int[r2][c2];) show
+0 -10 rmoveto
+(        for\(int i=0;i<r2;i++\) for\(int j=0;j<c2;j++\) b[i][j]=sc.nextInt\(\);) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(        if\(c1!=r2\) { System.out.println\("Multiplication not possible"\); return; }) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(        int[][] p=new int[r1][c2];) show
+0 -10 rmoveto
+(        for\(int i=0;i<r1;i++\)) show
+0 -10 rmoveto
+(            for\(int j=0;j<c2;j++\)) show
+0 -10 rmoveto
+(                for\(int k=0;k<c1;k++\)) show
+0 -10 rmoveto
+(                    p[i][j]+=a[i][k]*b[k][j];) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(        for\(int[] row:p\) {) show
+0 -10 rmoveto
+(            for\(int x:row\) System.out.print\(x+" "\);) show
+0 -10 rmoveto
+(            System.out.println\(\);) show
+0 -10 rmoveto
+(        }) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+0 -14 rmoveto
+(OUTPUT) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -10 rmoveto
+(1) show
+0 -10 rmoveto
+showpage
+72 760 moveto
+(TASK09) show
+0 -18 rmoveto
+(========================================) show
+0 -18 rmoveto
+(SOURCE CODE) show
+0 -14 rmoveto
+(package unit2;) show
+0 -10 rmoveto
+(// Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(// Roll No: 2117250020478) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(import java.util.*;) show
+0 -10 rmoveto
+(public class task09 {) show
+0 -10 rmoveto
+(    public static void main\(String[] args\) {) show
+0 -10 rmoveto
+(		System.out.println\("Name: Tharun-Kumaran"\);) show
+0 -10 rmoveto
+(		System.out.println\("Roll No: 2117250020478"\);) show
+0 -10 rmoveto
+(        Scanner sc=new Scanner\(System.in\);) show
+0 -10 rmoveto
+(        int r=sc.nextInt\(\),c=sc.nextInt\(\);) show
+0 -10 rmoveto
+(        int[][] a=new int[r][c];) show
+0 -10 rmoveto
+(        for\(int i=0;i<r;i++\) for\(int j=0;j<c;j++\) a[i][j]=sc.nextInt\(\);) show
+0 -10 rmoveto
+(        for\(int j=0;j<c;j++\) {) show
+0 -10 rmoveto
+(            for\(int i=0;i<r;i++\) System.out.print\(a[i][j]+" "\);) show
+0 -10 rmoveto
+(            System.out.println\(\);) show
+0 -10 rmoveto
+(        }) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+0 -14 rmoveto
+(OUTPUT) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -10 rmoveto
+(1) show
+0 -10 rmoveto
+showpage
+72 760 moveto
+(TASK10) show
+0 -18 rmoveto
+(========================================) show
+0 -18 rmoveto
+(SOURCE CODE) show
+0 -14 rmoveto
+(package unit2;) show
+0 -10 rmoveto
+(// Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(// Roll No: 2117250020478) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(import java.util.*;) show
+0 -10 rmoveto
+(public class task10 {) show
+0 -10 rmoveto
+(    public static void main\(String[] args\) {) show
+0 -10 rmoveto
+(		System.out.println\("Name: Tharun-Kumaran"\);) show
+0 -10 rmoveto
+(		System.out.println\("Roll No: 2117250020478"\);) show
+0 -10 rmoveto
+(        Scanner sc=new Scanner\(System.in\);) show
+0 -10 rmoveto
+(        int n=sc.nextInt\(\),m=sc.nextInt\(\);) show
+0 -10 rmoveto
+(        int[][] marks=new int[n][m];) show
+0 -10 rmoveto
+(        int[] total=new int[n];) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(        for\(int i=0;i<n;i++\)) show
+0 -10 rmoveto
+(            for\(int j=0;j<m;j++\) {) show
+0 -10 rmoveto
+(                marks[i][j]=sc.nextInt\(\);) show
+0 -10 rmoveto
+(                total[i]+=marks[i][j];) show
+0 -10 rmoveto
+(            }) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(        System.out.println\("Marks:"\);) show
+0 -10 rmoveto
+(        for\(int[] row:marks\) {) show
+0 -10 rmoveto
+(            for\(int x:row\) System.out.print\(x+" "\);) show
+0 -10 rmoveto
+(            System.out.println\(\);) show
+0 -10 rmoveto
+(        }) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(        System.out.println\("Totals:"\);) show
+0 -10 rmoveto
+(        for\(int x:total\) System.out.println\(x\);) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(        int highest=0;) show
+0 -10 rmoveto
+(        for\(int x:total\) if\(x>highest\) highest=x;) show
+0 -10 rmoveto
+(        System.out.println\("Highest = "+highest\);) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+0 -14 rmoveto
+(OUTPUT) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -10 rmoveto
+(Marks:) show
+0 -10 rmoveto
+(1 ) show
+0 -10 rmoveto
+(Totals:) show
+0 -10 rmoveto
+(1) show
+0 -10 rmoveto
+(Highest = 1) show
+0 -10 rmoveto
+showpage
+72 760 moveto
+(TASK11) show
+0 -18 rmoveto
+(========================================) show
+0 -18 rmoveto
+(SOURCE CODE) show
+0 -14 rmoveto
+(package unit2;) show
+0 -10 rmoveto
+(// Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(// Roll No: 2117250020478) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(import java.util.*;) show
+0 -10 rmoveto
+(public class task11 {) show
+0 -10 rmoveto
+(    public static void main\(String[] args\) {) show
+0 -10 rmoveto
+(		System.out.println\("Name: Tharun-Kumaran"\);) show
+0 -10 rmoveto
+(		System.out.println\("Roll No: 2117250020478"\);) show
+0 -10 rmoveto
+(        Scanner sc=new Scanner\(System.in\);) show
+0 -10 rmoveto
+(        String s=sc.nextLine\(\);) show
+0 -10 rmoveto
+(        String clean=s.toLowerCase\(\).replaceAll\("\\\\s+",""\);) show
+0 -10 rmoveto
+(        String rev=new StringBuilder\(clean\).reverse\(\).toString\(\);) show
+0 -10 rmoveto
+(        System.out.println\(clean.equals\(rev\) ? "Palindrome" : "Not Palindrome"\);) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+0 -14 rmoveto
+(OUTPUT) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -10 rmoveto
+(Palindrome) show
+0 -10 rmoveto
+showpage
+72 760 moveto
+(TASK12) show
+0 -18 rmoveto
+(========================================) show
+0 -18 rmoveto
+(SOURCE CODE) show
+0 -14 rmoveto
+(package unit2;) show
+0 -10 rmoveto
+(// Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(// Roll No: 2117250020478) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(import unit2.mypackage1.Addition;) show
+0 -10 rmoveto
+(public class task12 {) show
+0 -10 rmoveto
+(    public static void main\(String[] args\) {) show
+0 -10 rmoveto
+(		System.out.println\("Name: Tharun-Kumaran"\);) show
+0 -10 rmoveto
+(		System.out.println\("Roll No: 2117250020478"\);) show
+0 -10 rmoveto
+(        Addition a=new Addition\(\);) show
+0 -10 rmoveto
+(        System.out.println\("Sum = "+a.add\(10,20\)\);) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+0 -14 rmoveto
+(OUTPUT) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -10 rmoveto
+(Sum = 30) show
+0 -10 rmoveto
+showpage
+72 760 moveto
+(TASK13) show
+0 -18 rmoveto
+(========================================) show
+0 -18 rmoveto
+(SOURCE CODE) show
+0 -14 rmoveto
+(package unit2;) show
+0 -10 rmoveto
+(// Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(// Roll No: 2117250020478) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(/**) show
+0 -10 rmoveto
+( * Demonstrates Javadoc comments.) show
+0 -10 rmoveto
+( * @author Tharun) show
+0 -10 rmoveto
+( * @version 1.0) show
+0 -10 rmoveto
+( */) show
+0 -10 rmoveto
+(public class task13 {) show
+0 -10 rmoveto
+(    /**) show
+0 -10 rmoveto
+(     * Adds two integers.) show
+0 -10 rmoveto
+(     * @param a first number) show
+0 -10 rmoveto
+(     * @param b second number) show
+0 -10 rmoveto
+(     * @return sum) show
+0 -10 rmoveto
+(     */) show
+0 -10 rmoveto
+(    public int add\(int a,int b\) {) show
+0 -10 rmoveto
+(        return a+b;) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(    public static void main\(String[] args\) {) show
+0 -10 rmoveto
+(		System.out.println\("Name: Tharun-Kumaran"\);) show
+0 -10 rmoveto
+(		System.out.println\("Roll No: 2117250020478"\);) show
+0 -10 rmoveto
+(        task13 t=new task13\(\);) show
+0 -10 rmoveto
+(        System.out.println\("Sum = "+t.add\(10,20\)\);) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+0 -14 rmoveto
+(OUTPUT) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -10 rmoveto
+(Sum = 30) show
+0 -10 rmoveto
+showpage
+72 760 moveto
+(TASK14) show
+0 -18 rmoveto
+(========================================) show
+0 -18 rmoveto
+(SOURCE CODE) show
+0 -14 rmoveto
+(package unit2;) show
+0 -10 rmoveto
+(// Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(// Roll No: 2117250020478) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(class Vehicle {) show
+0 -10 rmoveto
+(    void start\(\) { System.out.println\("Vehicle started"\); }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+(class Car extends Vehicle {) show
+0 -10 rmoveto
+(    void drive\(\) { System.out.println\("Car is driving"\); }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+(class SportsCar extends Car {) show
+0 -10 rmoveto
+(    void turbo\(\) { System.out.println\("Turbo mode activated"\); }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+(public class task14 {) show
+0 -10 rmoveto
+(    public static void main\(String[] args\) {) show
+0 -10 rmoveto
+(		System.out.println\("Name: Tharun-Kumaran"\);) show
+0 -10 rmoveto
+(		System.out.println\("Roll No: 2117250020478"\);) show
+0 -10 rmoveto
+(        SportsCar s=new SportsCar\(\);) show
+0 -10 rmoveto
+(        s.start\(\);) show
+0 -10 rmoveto
+(        s.drive\(\);) show
+0 -10 rmoveto
+(        s.turbo\(\);) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+0 -14 rmoveto
+(OUTPUT) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -10 rmoveto
+(Vehicle started) show
+0 -10 rmoveto
+(Car is driving) show
+0 -10 rmoveto
+(Turbo mode activated) show
+0 -10 rmoveto
+showpage
+72 760 moveto
+(TASK15) show
+0 -18 rmoveto
+(========================================) show
+0 -18 rmoveto
+(SOURCE CODE) show
+0 -14 rmoveto
+(package unit2;) show
+0 -10 rmoveto
+(// Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(// Roll No: 2117250020478) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(class Shape {) show
+0 -10 rmoveto
+(    void showShape\(\) { System.out.println\("Shape"\); }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+(class Polygon extends Shape {) show
+0 -10 rmoveto
+(    void showPolygon\(\) { System.out.println\("Polygon"\); }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+(class Triangle extends Polygon {) show
+0 -10 rmoveto
+(    void showTriangle\(\) { System.out.println\("Triangle"\); }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+(public class task15 {) show
+0 -10 rmoveto
+(    public static void main\(String[] args\) {) show
+0 -10 rmoveto
+(		System.out.println\("Name: Tharun-Kumaran"\);) show
+0 -10 rmoveto
+(		System.out.println\("Roll No: 2117250020478"\);) show
+0 -10 rmoveto
+(        Triangle t=new Triangle\(\);) show
+0 -10 rmoveto
+(        t.showShape\(\);) show
+0 -10 rmoveto
+(        t.showPolygon\(\);) show
+0 -10 rmoveto
+(        t.showTriangle\(\);) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+0 -14 rmoveto
+(OUTPUT) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -10 rmoveto
+(Shape) show
+0 -10 rmoveto
+(Polygon) show
+0 -10 rmoveto
+(Triangle) show
+0 -10 rmoveto
+showpage
+72 760 moveto
+(TASK16) show
+0 -18 rmoveto
+(========================================) show
+0 -18 rmoveto
+(SOURCE CODE) show
+0 -14 rmoveto
+(package unit2;) show
+0 -10 rmoveto
+(// Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(// Roll No: 2117250020478) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(class Parent {) show
+0 -10 rmoveto
+(    void display\(\) { System.out.println\("Parent"\); }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+(class ChildA extends Parent {) show
+0 -10 rmoveto
+(    @Override void display\(\) { System.out.println\("Child A"\); }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+(class ChildB extends Parent {) show
+0 -10 rmoveto
+(    @Override void display\(\) { System.out.println\("Child B"\); }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+(public class task16 {) show
+0 -10 rmoveto
+(    public static void main\(String[] args\) {) show
+0 -10 rmoveto
+(		System.out.println\("Name: Tharun-Kumaran"\);) show
+0 -10 rmoveto
+(		System.out.println\("Roll No: 2117250020478"\);) show
+0 -10 rmoveto
+(        Parent p;) show
+0 -10 rmoveto
+(        p=new ChildA\(\);) show
+0 -10 rmoveto
+(        p.display\(\);) show
+0 -10 rmoveto
+(        p=new ChildB\(\);) show
+0 -10 rmoveto
+(        p.display\(\);) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+0 -14 rmoveto
+(OUTPUT) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -10 rmoveto
+(Child A) show
+0 -10 rmoveto
+(Child B) show
+0 -10 rmoveto
+showpage
+72 760 moveto
+(TASK17) show
+0 -18 rmoveto
+(========================================) show
+0 -18 rmoveto
+(SOURCE CODE) show
+0 -14 rmoveto
+(package unit2;) show
+0 -10 rmoveto
+(// Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(// Roll No: 2117250020478) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(class Constants {) show
+0 -10 rmoveto
+(    static final double PI=3.14159;) show
+0 -10 rmoveto
+(    final void display\(\) {) show
+0 -10 rmoveto
+(        System.out.println\("PI = "+PI\);) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+(public class task17 {) show
+0 -10 rmoveto
+(    public static void main\(String[] args\) {) show
+0 -10 rmoveto
+(		System.out.println\("Name: Tharun-Kumaran"\);) show
+0 -10 rmoveto
+(		System.out.println\("Roll No: 2117250020478"\);) show
+0 -10 rmoveto
+(        Constants c=new Constants\(\);) show
+0 -10 rmoveto
+(        c.display\(\);) show
+0 -10 rmoveto
+(        // c.PI=3.14; // ERROR: final variable cannot be reassigned) show
+0 -10 rmoveto
+(        // class Test extends Constants {) show
+0 -10 rmoveto
+(        //     void display\(\) {} // ERROR: final method cannot be overridden) show
+0 -10 rmoveto
+(        // }) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+0 -14 rmoveto
+(OUTPUT) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -10 rmoveto
+(PI = 3.14159) show
+0 -10 rmoveto
+showpage
+72 760 moveto
+(TASK18) show
+0 -18 rmoveto
+(========================================) show
+0 -18 rmoveto
+(SOURCE CODE) show
+0 -14 rmoveto
+(package unit2;) show
+0 -10 rmoveto
+(// Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(// Roll No: 2117250020478) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(abstract class Employee {) show
+0 -10 rmoveto
+(    String name;) show
+0 -10 rmoveto
+(    Employee\(String name\) { this.name=name; }) show
+0 -10 rmoveto
+(    abstract double calculateSalary\(\);) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+(class Manager extends Employee {) show
+0 -10 rmoveto
+(    Manager\(String name\) { super\(name\); }) show
+0 -10 rmoveto
+(    double calculateSalary\(\) { return 75000; }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+(class Developer extends Employee {) show
+0 -10 rmoveto
+(    Developer\(String name\) { super\(name\); }) show
+0 -10 rmoveto
+(    double calculateSalary\(\) { return 60000; }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+(public class task18 {) show
+0 -10 rmoveto
+(    public static void main\(String[] args\) {) show
+0 -10 rmoveto
+(		System.out.println\("Name: Tharun-Kumaran"\);) show
+0 -10 rmoveto
+(		System.out.println\("Roll No: 2117250020478"\);) show
+0 -10 rmoveto
+(        Employee e1=new Manager\("Anita"\);) show
+0 -10 rmoveto
+(        Employee e2=new Developer\("Karthik"\);) show
+0 -10 rmoveto
+(        System.out.println\(e1.name+" Salary: "+e1.calculateSalary\(\)\);) show
+0 -10 rmoveto
+(        System.out.println\(e2.name+" Salary: "+e2.calculateSalary\(\)\);) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+0 -14 rmoveto
+(OUTPUT) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -10 rmoveto
+(Anita Salary: 75000.0) show
+0 -10 rmoveto
+(Karthik Salary: 60000.0) show
+0 -10 rmoveto
+showpage
+72 760 moveto
+(TASK19) show
+0 -18 rmoveto
+(========================================) show
+0 -18 rmoveto
+(SOURCE CODE) show
+0 -14 rmoveto
+(package unit2;) show
+0 -10 rmoveto
+(// Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(// Roll No: 2117250020478) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(import java.util.*;) show
+0 -10 rmoveto
+(public class task19 {) show
+0 -10 rmoveto
+(    public static void main\(String[] args\) {) show
+0 -10 rmoveto
+(		System.out.println\("Name: Tharun-Kumaran"\);) show
+0 -10 rmoveto
+(		System.out.println\("Roll No: 2117250020478"\);) show
+0 -10 rmoveto
+(        Scanner sc=new Scanner\(System.in\);) show
+0 -10 rmoveto
+(        int a=sc.nextInt\(\),b=sc.nextInt\(\);) show
+0 -10 rmoveto
+(        try {) show
+0 -10 rmoveto
+(            System.out.println\("Result = "+\(a/b\)\);) show
+0 -10 rmoveto
+(        } catch\(ArithmeticException e\) {) show
+0 -10 rmoveto
+(            System.out.println\("ArithmeticException: Cannot divide by zero"\);) show
+0 -10 rmoveto
+(        }) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+0 -14 rmoveto
+(OUTPUT) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -10 rmoveto
+(Result = 1) show
+0 -10 rmoveto
+showpage
+72 760 moveto
+(TASK20) show
+0 -18 rmoveto
+(========================================) show
+0 -18 rmoveto
+(SOURCE CODE) show
+0 -14 rmoveto
+(package unit2;) show
+0 -10 rmoveto
+(// Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(// Roll No: 2117250020478) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(class InvalidAgeException extends Exception {) show
+0 -10 rmoveto
+(    InvalidAgeException\(String msg\) { super\(msg\); }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+(class NegativeSalaryException extends RuntimeException {) show
+0 -10 rmoveto
+(    NegativeSalaryException\(String msg\) { super\(msg\); }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+(public class task20 {) show
+0 -10 rmoveto
+(    static void checkAge\(int age\) throws InvalidAgeException {) show
+0 -10 rmoveto
+(        if\(age<18\) throw new InvalidAgeException\("Age must be 18 or above"\);) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(    static void checkSalary\(double salary\) {) show
+0 -10 rmoveto
+(        if\(salary<0\) throw new NegativeSalaryException\("Salary cannot be negative"\);) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(    public static void main\(String[] args\) {) show
+0 -10 rmoveto
+(		System.out.println\("Name: Tharun-Kumaran"\);) show
+0 -10 rmoveto
+(		System.out.println\("Roll No: 2117250020478"\);) show
+0 -10 rmoveto
+(        try {) show
+0 -10 rmoveto
+(            checkAge\(15\);) show
+0 -10 rmoveto
+(        } catch\(InvalidAgeException e\) {) show
+0 -10 rmoveto
+(            System.out.println\(e.getMessage\(\)\);) show
+0 -10 rmoveto
+(        }) show
+0 -10 rmoveto
+(        try {) show
+0 -10 rmoveto
+(            checkSalary\(-5000\);) show
+0 -10 rmoveto
+(        } catch\(NegativeSalaryException e\) {) show
+0 -10 rmoveto
+(            System.out.println\(e.getMessage\(\)\);) show
+0 -10 rmoveto
+(        }) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+0 -14 rmoveto
+(OUTPUT) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -10 rmoveto
+(Age must be 18 or above) show
+0 -10 rmoveto
+(Salary cannot be negative) show
+0 -10 rmoveto
+showpage
+72 760 moveto
+(TASK21) show
+0 -18 rmoveto
+(========================================) show
+0 -18 rmoveto
+(SOURCE CODE) show
+0 -14 rmoveto
+(package unit2;) show
+0 -10 rmoveto
+(// Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(// Roll No: 2117250020478) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(import java.util.*;) show
+0 -10 rmoveto
+(class ZeroDivisorException extends Exception {) show
+0 -10 rmoveto
+(    ZeroDivisorException\(String msg\) { super\(msg\); }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+(public class task21 {) show
+0 -10 rmoveto
+(    static int divide\(int a,int b\) throws ZeroDivisorException {) show
+0 -10 rmoveto
+(        if\(b==0\) throw new ZeroDivisorException\("Divisor cannot be zero"\);) show
+0 -10 rmoveto
+(        return a/b;) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(    public static void main\(String[] args\) {) show
+0 -10 rmoveto
+(		System.out.println\("Name: Tharun-Kumaran"\);) show
+0 -10 rmoveto
+(		System.out.println\("Roll No: 2117250020478"\);) show
+0 -10 rmoveto
+(        Scanner sc=new Scanner\(System.in\);) show
+0 -10 rmoveto
+(        int a=sc.nextInt\(\),b=sc.nextInt\(\);) show
+0 -10 rmoveto
+(        try {) show
+0 -10 rmoveto
+(            System.out.println\("Result = "+divide\(a,b\)\);) show
+0 -10 rmoveto
+(        } catch\(ZeroDivisorException e\) {) show
+0 -10 rmoveto
+(            System.out.println\(e.getMessage\(\)\);) show
+0 -10 rmoveto
+(        } finally {) show
+0 -10 rmoveto
+(            System.out.println\("Operation complete"\);) show
+0 -10 rmoveto
+(        }) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+0 -14 rmoveto
+(OUTPUT) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -10 rmoveto
+(Result = 1) show
+0 -10 rmoveto
+(Operation complete) show
+0 -10 rmoveto
+showpage
+72 760 moveto
+(TASK22) show
+0 -18 rmoveto
+(========================================) show
+0 -18 rmoveto
+(SOURCE CODE) show
+0 -14 rmoveto
+(package unit2;) show
+0 -10 rmoveto
+(// Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(// Roll No: 2117250020478) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(import java.util.*;) show
+0 -10 rmoveto
+(class Book {) show
+0 -10 rmoveto
+(    String isbn,title;) show
+0 -10 rmoveto
+(    Book\(String isbn,String title\) {) show
+0 -10 rmoveto
+(        this.isbn=isbn; this.title=title;) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(    @Override public String toString\(\) {) show
+0 -10 rmoveto
+(        return isbn+" - "+title;) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(    @Override public boolean equals\(Object o\) {) show
+0 -10 rmoveto
+(        if\(this==o\) return true;) show
+0 -10 rmoveto
+(        if\(!\(o instanceof Book\)\) return false;) show
+0 -10 rmoveto
+(        return isbn.equals\(\(\(Book\)o\).isbn\);) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(    @Override public int hashCode\(\) {) show
+0 -10 rmoveto
+(        return isbn.hashCode\(\);) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+(public class task22 {) show
+0 -10 rmoveto
+(    public static void main\(String[] args\) {) show
+0 -10 rmoveto
+(		System.out.println\("Name: Tharun-Kumaran"\);) show
+0 -10 rmoveto
+(		System.out.println\("Roll No: 2117250020478"\);) show
+0 -10 rmoveto
+(        HashSet<Book> books=new HashSet<>\(\);) show
+0 -10 rmoveto
+(        books.add\(new Book\("111","Java"\)\);) show
+0 -10 rmoveto
+(        books.add\(new Book\("111","Java Programming"\)\);) show
+0 -10 rmoveto
+(        books.add\(new Book\("222","Python"\)\);) show
+0 -10 rmoveto
+(        System.out.println\(books\);) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+0 -14 rmoveto
+(OUTPUT) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -10 rmoveto
+([111 - Java, 222 - Python]) show
+0 -10 rmoveto
+showpage
+72 760 moveto
+(TASK23) show
+0 -18 rmoveto
+(========================================) show
+0 -18 rmoveto
+(SOURCE CODE) show
+0 -14 rmoveto
+(package unit2;) show
+0 -10 rmoveto
+(// Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(// Roll No: 2117250020478) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(import java.lang.reflect.*;) show
+0 -10 rmoveto
+(class Student {) show
+0 -10 rmoveto
+(    private String name="Divya";) show
+0 -10 rmoveto
+(    private int age=20;) show
+0 -10 rmoveto
+(    private void displayInfo\(\) {) show
+0 -10 rmoveto
+(        System.out.println\("Name: "+name+", Age: "+age\);) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+(public class task23 {) show
+0 -10 rmoveto
+(    public static void main\(String[] args\) throws Exception {) show
+0 -10 rmoveto
+(        Student s=new Student\(\);) show
+0 -10 rmoveto
+(        Class<?> c=s.getClass\(\);) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(        System.out.println\("Fields:"\);) show
+0 -10 rmoveto
+(        for\(Field f:c.getDeclaredFields\(\)\) {) show
+0 -10 rmoveto
+(            f.setAccessible\(true\);) show
+0 -10 rmoveto
+(            System.out.println\(f.getName\(\)+" = "+f.get\(s\)\);) show
+0 -10 rmoveto
+(        }) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(        System.out.println\("Methods:"\);) show
+0 -10 rmoveto
+(        for\(Method m:c.getDeclaredMethods\(\)\)) show
+0 -10 rmoveto
+(            System.out.println\(m.getName\(\)\);) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(        Method m=c.getDeclaredMethod\("displayInfo"\);) show
+0 -10 rmoveto
+(        m.setAccessible\(true\);) show
+0 -10 rmoveto
+(        m.invoke\(s\);) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+0 -14 rmoveto
+(OUTPUT) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -14 rmoveto
+(Fields:) show
+0 -10 rmoveto
+(name = Divya) show
+0 -10 rmoveto
+(age = 20) show
+0 -10 rmoveto
+(Methods:) show
+0 -10 rmoveto
+(displayInfo) show
+0 -10 rmoveto
+(Name: Divya, Age: 20) show
+0 -10 rmoveto
+showpage
+72 760 moveto
+(TASK24) show
+0 -18 rmoveto
+(========================================) show
+0 -18 rmoveto
+(SOURCE CODE) show
+0 -14 rmoveto
+(package unit2;) show
+0 -10 rmoveto
+(// Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(// Roll No: 2117250020478) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(interface Animal {) show
+0 -10 rmoveto
+(    void sound\(\);) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+(interface Pet extends Animal {) show
+0 -10 rmoveto
+(    void play\(\);) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+(class Dog implements Pet {) show
+0 -10 rmoveto
+(    public void sound\(\) { System.out.println\("Dog barks"\); }) show
+0 -10 rmoveto
+(    public void play\(\) { System.out.println\("Dog is playing"\); }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+(public class task24 {) show
+0 -10 rmoveto
+(    public static void main\(String[] args\) {) show
+0 -10 rmoveto
+(		System.out.println\("Name: Tharun-Kumaran"\);) show
+0 -10 rmoveto
+(		System.out.println\("Roll No: 2117250020478"\);) show
+0 -10 rmoveto
+(        Dog d=new Dog\(\);) show
+0 -10 rmoveto
+(        d.sound\(\);) show
+0 -10 rmoveto
+(        d.play\(\);) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+0 -14 rmoveto
+(OUTPUT) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -10 rmoveto
+(Dog barks) show
+0 -10 rmoveto
+(Dog is playing) show
+0 -10 rmoveto
+showpage
+72 760 moveto
+(TASK25) show
+0 -18 rmoveto
+(========================================) show
+0 -18 rmoveto
+(SOURCE CODE) show
+0 -14 rmoveto
+(package unit2;) show
+0 -10 rmoveto
+(// Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(// Roll No: 2117250020478) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(interface Vehicle2 {) show
+0 -10 rmoveto
+(    void start\(\);) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+(interface Car2 extends Vehicle2 {) show
+0 -10 rmoveto
+(    void stop\(\);) show
+0 -10 rmoveto
+(    void displayDetails\(\);) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+(class Honda implements Car2 {) show
+0 -10 rmoveto
+(    public void start\(\) { System.out.println\("Honda started"\); }) show
+0 -10 rmoveto
+(    public void stop\(\) { System.out.println\("Honda stopped"\); }) show
+0 -10 rmoveto
+(    public void displayDetails\(\) {) show
+0 -10 rmoveto
+(        System.out.println\("Brand: Honda"\);) show
+0 -10 rmoveto
+(        System.out.println\("Type: Car"\);) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+(public class task25 {) show
+0 -10 rmoveto
+(    public static void main\(String[] args\) {) show
+0 -10 rmoveto
+(		System.out.println\("Name: Tharun-Kumaran"\);) show
+0 -10 rmoveto
+(		System.out.println\("Roll No: 2117250020478"\);) show
+0 -10 rmoveto
+(        Honda h=new Honda\(\);) show
+0 -10 rmoveto
+(        h.start\(\);) show
+0 -10 rmoveto
+(        h.displayDetails\(\);) show
+0 -10 rmoveto
+(        h.stop\(\);) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+0 -14 rmoveto
+(OUTPUT) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -10 rmoveto
+(Honda started) show
+0 -10 rmoveto
+(Brand: Honda) show
+0 -10 rmoveto
+(Type: Car) show
+0 -10 rmoveto
+(Honda stopped) show
+0 -10 rmoveto
+showpage
+72 760 moveto
+(TASK26) show
+0 -18 rmoveto
+(========================================) show
+0 -18 rmoveto
+(SOURCE CODE) show
+0 -14 rmoveto
+(package unit2;) show
+0 -10 rmoveto
+(// Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(// Roll No: 2117250020478) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(import java.util.*;) show
+0 -10 rmoveto
+(class BookClone implements Cloneable {) show
+0 -10 rmoveto
+(    String title;) show
+0 -10 rmoveto
+(    ArrayList<String> chapters;) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(    BookClone\(String title,ArrayList<String> chapters\) {) show
+0 -10 rmoveto
+(        this.title=title;) show
+0 -10 rmoveto
+(        this.chapters=chapters;) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(    public BookClone clone\(\) throws CloneNotSupportedException {) show
+0 -10 rmoveto
+(        return \(BookClone\)super.clone\(\);) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(    public BookClone deepClone\(\) throws CloneNotSupportedException {) show
+0 -10 rmoveto
+(        BookClone b=\(BookClone\)super.clone\(\);) show
+0 -10 rmoveto
+(        b.chapters=new ArrayList<>\(chapters\);) show
+0 -10 rmoveto
+(        return b;) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+(public class task26 {) show
+0 -10 rmoveto
+(    public static void main\(String[] args\) throws Exception {) show
+0 -10 rmoveto
+(        ArrayList<String> list=new ArrayList<>\(\);) show
+0 -10 rmoveto
+(        list.add\("Introduction"\);) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(        BookClone original=new BookClone\("Java",list\);) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(        BookClone shallow=original.clone\(\);) show
+0 -10 rmoveto
+(        BookClone deep=original.deepClone\(\);) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(        shallow.chapters.add\("OOP"\);) show
+0 -10 rmoveto
+(        System.out.println\("Original after shallow clone: "+original.chapters\);) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(        deep.chapters.add\("Exceptions"\);) show
+0 -10 rmoveto
+(        System.out.println\("Original after deep clone: "+original.chapters\);) show
+0 -10 rmoveto
+(        System.out.println\("Deep clone: "+deep.chapters\);) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+0 -14 rmoveto
+(OUTPUT) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -14 rmoveto
+(Original after shallow clone: [Introduction, OOP]) show
+0 -10 rmoveto
+(Original after deep clone: [Introduction, OOP]) show
+0 -10 rmoveto
+(Deep clone: [Introduction, Exceptions]) show
+0 -10 rmoveto
+showpage
+72 760 moveto
+(TASK27) show
+0 -18 rmoveto
+(========================================) show
+0 -18 rmoveto
+(SOURCE CODE) show
+0 -14 rmoveto
+(package unit2;) show
+0 -10 rmoveto
+(// Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(// Roll No: 2117250020478) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(class Account {) show
+0 -10 rmoveto
+(    int accountNumber=101;) show
+0 -10 rmoveto
+(    String customerName="Ravi";) show
+0 -10 rmoveto
+(    double balance=5000;) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(    class Transaction {) show
+0 -10 rmoveto
+(        void display\(\) {) show
+0 -10 rmoveto
+(            System.out.println\("Account: "+accountNumber\);) show
+0 -10 rmoveto
+(            System.out.println\("Customer: "+customerName\);) show
+0 -10 rmoveto
+(            System.out.println\("Balance: "+balance\);) show
+0 -10 rmoveto
+(            System.out.println\("Transaction: Deposit"\);) show
+0 -10 rmoveto
+(        }) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+(public class task27 {) show
+0 -10 rmoveto
+(    public static void main\(String[] args\) {) show
+0 -10 rmoveto
+(		System.out.println\("Name: Tharun-Kumaran"\);) show
+0 -10 rmoveto
+(		System.out.println\("Roll No: 2117250020478"\);) show
+0 -10 rmoveto
+(        Account a=new Account\(\);) show
+0 -10 rmoveto
+(        Account.Transaction t=a.new Transaction\(\);) show
+0 -10 rmoveto
+(        t.display\(\);) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+0 -14 rmoveto
+(OUTPUT) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -10 rmoveto
+(Account: 101) show
+0 -10 rmoveto
+(Customer: Ravi) show
+0 -10 rmoveto
+(Balance: 5000.0) show
+0 -10 rmoveto
+(Transaction: Deposit) show
+0 -10 rmoveto
+showpage
+72 760 moveto
+(TASK28) show
+0 -18 rmoveto
+(========================================) show
+0 -18 rmoveto
+(SOURCE CODE) show
+0 -14 rmoveto
+(package unit2;) show
+0 -10 rmoveto
+(// Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(// Roll No: 2117250020478) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(class Bank {) show
+0 -10 rmoveto
+(    static String bankName="ABC Bank";) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(    static class Branch {) show
+0 -10 rmoveto
+(        void display\(\) {) show
+0 -10 rmoveto
+(            System.out.println\("Bank: "+bankName\);) show
+0 -10 rmoveto
+(            System.out.println\("Branch: Chennai"\);) show
+0 -10 rmoveto
+(        }) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+(public class task28 {) show
+0 -10 rmoveto
+(    public static void main\(String[] args\) {) show
+0 -10 rmoveto
+(		System.out.println\("Name: Tharun-Kumaran"\);) show
+0 -10 rmoveto
+(		System.out.println\("Roll No: 2117250020478"\);) show
+0 -10 rmoveto
+(        Bank.Branch b=new Bank.Branch\(\);) show
+0 -10 rmoveto
+(        b.display\(\);) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+0 -14 rmoveto
+(OUTPUT) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -10 rmoveto
+(Bank: ABC Bank) show
+0 -10 rmoveto
+(Branch: Chennai) show
+0 -10 rmoveto
+showpage
+72 760 moveto
+(TASK29) show
+0 -18 rmoveto
+(========================================) show
+0 -18 rmoveto
+(SOURCE CODE) show
+0 -14 rmoveto
+(package unit2;) show
+0 -10 rmoveto
+(// Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(// Roll No: 2117250020478) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(class Bank2 {) show
+0 -10 rmoveto
+(    void openAccount\(\) {) show
+0 -10 rmoveto
+(        class Customer {) show
+0 -10 rmoveto
+(            void display\(\) {) show
+0 -10 rmoveto
+(                System.out.println\("Customer account opened successfully"\);) show
+0 -10 rmoveto
+(            }) show
+0 -10 rmoveto
+(        }) show
+0 -10 rmoveto
+(        Customer c=new Customer\(\);) show
+0 -10 rmoveto
+(        c.display\(\);) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+(public class task29 {) show
+0 -10 rmoveto
+(    public static void main\(String[] args\) {) show
+0 -10 rmoveto
+(		System.out.println\("Name: Tharun-Kumaran"\);) show
+0 -10 rmoveto
+(		System.out.println\("Roll No: 2117250020478"\);) show
+0 -10 rmoveto
+(        new Bank2\(\).openAccount\(\);) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+0 -14 rmoveto
+(OUTPUT) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -10 rmoveto
+(Customer account opened successfully) show
+0 -10 rmoveto
+showpage
+72 760 moveto
+(TASK30) show
+0 -18 rmoveto
+(========================================) show
+0 -18 rmoveto
+(SOURCE CODE) show
+0 -14 rmoveto
+(package unit2;) show
+0 -10 rmoveto
+(// Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(// Roll No: 2117250020478) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(abstract class Transaction {) show
+0 -10 rmoveto
+(    abstract void processTransaction\(\);) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+(public class task30 {) show
+0 -10 rmoveto
+(    public static void main\(String[] args\) {) show
+0 -10 rmoveto
+(		System.out.println\("Name: Tharun-Kumaran"\);) show
+0 -10 rmoveto
+(		System.out.println\("Roll No: 2117250020478"\);) show
+0 -10 rmoveto
+(        Transaction t=new Transaction\(\) {) show
+0 -10 rmoveto
+(            void processTransaction\(\) {) show
+0 -10 rmoveto
+(                System.out.println\("Bank transaction processed"\);) show
+0 -10 rmoveto
+(            }) show
+0 -10 rmoveto
+(        };) show
+0 -10 rmoveto
+(        t.processTransaction\(\);) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+0 -14 rmoveto
+(OUTPUT) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -10 rmoveto
+(Bank transaction processed) show
+0 -10 rmoveto
+showpage
+72 760 moveto
+(TASK31) show
+0 -18 rmoveto
+(========================================) show
+0 -18 rmoveto
+(SOURCE CODE) show
+0 -14 rmoveto
+(package unit2;) show
+0 -10 rmoveto
+(// Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(// Roll No: 2117250020478) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(import java.lang.reflect.*;) show
+0 -10 rmoveto
+(interface Calculator {) show
+0 -10 rmoveto
+(    int add\(int a,int b\);) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+(class CalculatorImpl implements Calculator {) show
+0 -10 rmoveto
+(    public int add\(int a,int b\) {) show
+0 -10 rmoveto
+(        return a+b;) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+(class LoggingHandler implements InvocationHandler {) show
+0 -10 rmoveto
+(    private final Object target;) show
+0 -10 rmoveto
+(    LoggingHandler\(Object target\) {) show
+0 -10 rmoveto
+(        this.target=target;) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(    public Object invoke\(Object proxy,Method method,Object[] args\) throws Throwable {) show
+0 -10 rmoveto
+(        long start=System.nanoTime\(\);) show
+0 -10 rmoveto
+(        Object result=method.invoke\(target,args\);) show
+0 -10 rmoveto
+(        long end=System.nanoTime\(\);) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(        System.out.println\("Method: "+method.getName\(\)\);) show
+0 -10 rmoveto
+(        System.out.println\("Result: "+result\);) show
+0 -10 rmoveto
+(        System.out.println\("Time: "+\(end-start\)+" ns"\);) show
+0 -10 rmoveto
+(        return result;) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+(public class task31 {) show
+0 -10 rmoveto
+(    public static void main\(String[] args\) {) show
+0 -10 rmoveto
+(		System.out.println\("Name: Tharun-Kumaran"\);) show
+0 -10 rmoveto
+(		System.out.println\("Roll No: 2117250020478"\);) show
+0 -10 rmoveto
+(        Calculator real=new CalculatorImpl\(\);) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(        Calculator proxy=\(Calculator\)Proxy.newProxyInstance\() show
+0 -10 rmoveto
+(            Calculator.class.getClassLoader\(\),) show
+0 -10 rmoveto
+(            new Class<?>[]{Calculator.class},) show
+0 -10 rmoveto
+(            new LoggingHandler\(real\)) show
+0 -10 rmoveto
+(        \);) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(        proxy.add\(10,20\);) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+0 -14 rmoveto
+(OUTPUT) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -10 rmoveto
+(Method: add) show
+0 -10 rmoveto
+(Result: 30) show
+0 -10 rmoveto
+(Time: 27916295 ns) show
+0 -10 rmoveto
+showpage
+72 760 moveto
+(TASK32) show
+0 -18 rmoveto
+(========================================) show
+0 -18 rmoveto
+(SOURCE CODE) show
+0 -14 rmoveto
+(package unit2;) show
+0 -10 rmoveto
+(// Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(// Roll No: 2117250020478) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(import java.io.*;) show
+0 -10 rmoveto
+(public class task32 {) show
+0 -10 rmoveto
+(    public static void main\(String[] args\) {) show
+0 -10 rmoveto
+(		System.out.println\("Name: Tharun-Kumaran"\);) show
+0 -10 rmoveto
+(		System.out.println\("Roll No: 2117250020478"\);) show
+0 -10 rmoveto
+(        String source="source.txt";) show
+0 -10 rmoveto
+(        String destination="copy.txt";) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(        try\(FileInputStream in=new FileInputStream\(source\);) show
+0 -10 rmoveto
+(            FileOutputStream out=new FileOutputStream\(destination\)\) {) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(            int b;) show
+0 -10 rmoveto
+(            while\(\(b=in.read\(\)\)!=-1\)) show
+0 -10 rmoveto
+(                out.write\(b\);) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(            System.out.println\("File copied successfully"\);) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(        } catch\(IOException e\) {) show
+0 -10 rmoveto
+(            System.out.println\("Error: "+e.getMessage\(\)\);) show
+0 -10 rmoveto
+(        }) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+0 -14 rmoveto
+(OUTPUT) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -10 rmoveto
+(Error: source.txt \(No such file or directory\)) show
+0 -10 rmoveto
+showpage
+72 760 moveto
+(TASK33) show
+0 -18 rmoveto
+(========================================) show
+0 -18 rmoveto
+(SOURCE CODE) show
+0 -14 rmoveto
+(package unit2;) show
+0 -10 rmoveto
+(// Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(// Roll No: 2117250020478) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(import java.io.*;) show
+0 -10 rmoveto
+(public class task33 {) show
+0 -10 rmoveto
+(    public static void main\(String[] args\) {) show
+0 -10 rmoveto
+(		System.out.println\("Name: Tharun-Kumaran"\);) show
+0 -10 rmoveto
+(		System.out.println\("Roll No: 2117250020478"\);) show
+0 -10 rmoveto
+(        String file="data.txt";) show
+0 -10 rmoveto
+(        int lines=0,words=0,chars=0;) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(        try\(BufferedReader br=new BufferedReader\(new FileReader\(file\)\)\) {) show
+0 -10 rmoveto
+(            String line;) show
+0 -10 rmoveto
+(            while\(\(line=br.readLine\(\)\)!=null\) {) show
+0 -10 rmoveto
+(                lines++;) show
+0 -10 rmoveto
+(                chars+=line.length\(\);) show
+0 -10 rmoveto
+(                if\(!line.trim\(\).isEmpty\(\)\)) show
+0 -10 rmoveto
+(                    words+=line.trim\(\).split\("\\\\s+"\).length;) show
+0 -10 rmoveto
+(            }) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(            System.out.println\("Lines = "+lines\);) show
+0 -10 rmoveto
+(            System.out.println\("Words = "+words\);) show
+0 -10 rmoveto
+(            System.out.println\("Characters = "+chars\);) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(        } catch\(IOException e\) {) show
+0 -10 rmoveto
+(            System.out.println\("Error: "+e.getMessage\(\)\);) show
+0 -10 rmoveto
+(        }) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+0 -14 rmoveto
+(OUTPUT) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -10 rmoveto
+(Error: data.txt \(No such file or directory\)) show
+0 -10 rmoveto
+showpage
+72 760 moveto
+(TASK34) show
+0 -18 rmoveto
+(========================================) show
+0 -18 rmoveto
+(SOURCE CODE) show
+0 -14 rmoveto
+(package unit2;) show
+0 -10 rmoveto
+(// Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(// Roll No: 2117250020478) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(import java.util.*;) show
+0 -10 rmoveto
+(public class task34 {) show
+0 -10 rmoveto
+(    public static void main\(String[] args\) {) show
+0 -10 rmoveto
+(		System.out.println\("Name: Tharun-Kumaran"\);) show
+0 -10 rmoveto
+(		System.out.println\("Roll No: 2117250020478"\);) show
+0 -10 rmoveto
+(        Scanner sc=new Scanner\(System.in\);) show
+0 -10 rmoveto
+(        System.out.print\("Number of subjects: "\);) show
+0 -10 rmoveto
+(        int n=sc.nextInt\(\);) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(        int total=0;) show
+0 -10 rmoveto
+(        for\(int i=0;i<n;i++\)) show
+0 -10 rmoveto
+(            total+=sc.nextInt\(\);) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(        double average=\(double\)total/n;) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(        System.out.println\("Total = "+total\);) show
+0 -10 rmoveto
+(        System.out.println\("Average = "+average\);) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+0 -14 rmoveto
+(OUTPUT) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -10 rmoveto
+(Number of subjects: Total = 1) show
+0 -10 rmoveto
+(Average = 1.0) show
+0 -10 rmoveto
+showpage
+72 760 moveto
+(TASK35) show
+0 -18 rmoveto
+(========================================) show
+0 -18 rmoveto
+(SOURCE CODE) show
+0 -14 rmoveto
+(package unit2;) show
+0 -10 rmoveto
+(// Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(// Roll No: 2117250020478) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(import java.io.*;) show
+0 -10 rmoveto
+(public class task35 {) show
+0 -10 rmoveto
+(    public static void main\(String[] args\) {) show
+0 -10 rmoveto
+(		System.out.println\("Name: Tharun-Kumaran"\);) show
+0 -10 rmoveto
+(		System.out.println\("Roll No: 2117250020478"\);) show
+0 -10 rmoveto
+(        File file=new File\("sample.txt"\);) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(        try {) show
+0 -10 rmoveto
+(            if\(file.createNewFile\(\)\)) show
+0 -10 rmoveto
+(                System.out.println\("File created"\);) show
+0 -10 rmoveto
+(            else) show
+0 -10 rmoveto
+(                System.out.println\("File already exists"\);) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(            System.out.println\("Name: "+file.getName\(\)\);) show
+0 -10 rmoveto
+(            System.out.println\("Path: "+file.getAbsolutePath\(\)\);) show
+0 -10 rmoveto
+(            System.out.println\("Size: "+file.length\(\)+" bytes"\);) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(            if\(file.delete\(\)\)) show
+0 -10 rmoveto
+(                System.out.println\("File deleted"\);) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(        } catch\(IOException e\) {) show
+0 -10 rmoveto
+(            System.out.println\("Error: "+e.getMessage\(\)\);) show
+0 -10 rmoveto
+(        }) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+0 -14 rmoveto
+(OUTPUT) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -10 rmoveto
+(File created) show
+0 -10 rmoveto
+(Name: sample.txt) show
+0 -10 rmoveto
+(Path: /home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/sample.txt) show
+0 -10 rmoveto
+(Size: 0 bytes) show
+0 -10 rmoveto
+(File deleted) show
+0 -10 rmoveto
+showpage
+72 760 moveto
+(TASK36) show
+0 -18 rmoveto
+(========================================) show
+0 -18 rmoveto
+(SOURCE CODE) show
+0 -14 rmoveto
+(package unit2;) show
+0 -10 rmoveto
+(// Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(// Roll No: 2117250020478) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(import java.nio.file.*;) show
+0 -10 rmoveto
+(import java.io.*;) show
+0 -10 rmoveto
+(public class task36 {) show
+0 -10 rmoveto
+(    public static void main\(String[] args\) {) show
+0 -10 rmoveto
+(		System.out.println\("Name: Tharun-Kumaran"\);) show
+0 -10 rmoveto
+(		System.out.println\("Roll No: 2117250020478"\);) show
+0 -10 rmoveto
+(        Path source=Paths.get\("source.txt"\);) show
+0 -10 rmoveto
+(        Path destination=Paths.get\("nio_copy.txt"\);) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(        try {) show
+0 -10 rmoveto
+(            Files.copy\(source,destination,StandardCopyOption.REPLACE_EXISTING\);) show
+0 -10 rmoveto
+(            System.out.println\("File copied using NIO"\);) show
+0 -10 rmoveto
+(        } catch\(IOException e\) {) show
+0 -10 rmoveto
+(            System.out.println\("Error: "+e.getMessage\(\)\);) show
+0 -10 rmoveto
+(        }) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+0 -14 rmoveto
+(OUTPUT) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -10 rmoveto
+(Error: source.txt) show
+0 -10 rmoveto
+showpage
+72 760 moveto
+(TASK37) show
+0 -18 rmoveto
+(========================================) show
+0 -18 rmoveto
+(SOURCE CODE) show
+0 -14 rmoveto
+(package unit2;) show
+0 -10 rmoveto
+(// Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(// Roll No: 2117250020478) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(import java.io.*;) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(class StudentData implements Serializable {) show
+0 -10 rmoveto
+(    String name;) show
+0 -10 rmoveto
+(    int rollNo;) show
+0 -10 rmoveto
+(    transient String password;) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(    StudentData\(String name,int rollNo,String password\) {) show
+0 -10 rmoveto
+(        this.name=name;) show
+0 -10 rmoveto
+(        this.rollNo=rollNo;) show
+0 -10 rmoveto
+(        this.password=password;) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(public class task37 {) show
+0 -10 rmoveto
+(    public static void main\(String[] args\) {) show
+0 -10 rmoveto
+(		System.out.println\("Name: Tharun-Kumaran"\);) show
+0 -10 rmoveto
+(		System.out.println\("Roll No: 2117250020478"\);) show
+0 -10 rmoveto
+(        StudentData s1=new StudentData\("Kavya",101,"secret"\);) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(        try {) show
+0 -10 rmoveto
+(            ObjectOutputStream out=) show
+0 -10 rmoveto
+(                new ObjectOutputStream\(new FileOutputStream\("student.ser"\)\);) show
+0 -10 rmoveto
+(            out.writeObject\(s1\);) show
+0 -10 rmoveto
+(            out.close\(\);) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(            ObjectInputStream in=) show
+0 -10 rmoveto
+(                new ObjectInputStream\(new FileInputStream\("student.ser"\)\);) show
+0 -10 rmoveto
+(            StudentData s2=\(StudentData\)in.readObject\(\);) show
+0 -10 rmoveto
+(            in.close\(\);) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(            System.out.println\("Name: "+s2.name\);) show
+0 -10 rmoveto
+(            System.out.println\("Roll No: "+s2.rollNo\);) show
+0 -10 rmoveto
+(            System.out.println\("Password: "+s2.password\);) show
+0 -10 rmoveto
+() show
+0 -10 rmoveto
+(        } catch\(IOException | ClassNotFoundException e\) {) show
+0 -10 rmoveto
+(            System.out.println\("Error: "+e.getMessage\(\)\);) show
+0 -10 rmoveto
+(        }) show
+0 -10 rmoveto
+(    }) show
+0 -10 rmoveto
+(}) show
+0 -10 rmoveto
+0 -14 rmoveto
+(OUTPUT) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -14 rmoveto
+(Name: Tharun-Kumaran) show
+0 -10 rmoveto
+(Roll No: 2117250020478) show
+0 -10 rmoveto
+(Name: Kavya) show
+0 -10 rmoveto
+(Roll No: 101) show
+0 -10 rmoveto
+(Password: null) show
+0 -10 rmoveto

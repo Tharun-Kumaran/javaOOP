@@ -1,0 +1,3443 @@
+%!PS-Adobe-3.0
+%%BoundingBox: 18 36 594 756
+%%Title: Enscript Output
+%%Creator: GNU Enscript 1.6.5.90
+%%CreationDate: Tue Oct  6 10:17:30 2026
+%%Orientation: Portrait
+%%Pages: (atend)
+%%DocumentMedia: Letter 612 792 0 () ()
+%%DocumentNeededResources: (atend)
+%%EndComments
+%%BeginProlog
+%%BeginResource: procset Enscript-Prolog 1.6.5 90
+%
+% Procedures.
+%
+
+/_S {	% save current state
+  /_s save def
+} def
+/_R {	% restore from saved state
+  _s restore
+} def
+
+/S {	% showpage protecting gstate
+  gsave
+  showpage
+  grestore
+} bind def
+
+/MF {	% fontname newfontname -> -	make a new encoded font
+  /newfontname exch def
+  /fontname exch def
+
+  /fontdict fontname findfont def
+  /newfont fontdict maxlength dict def
+
+  fontdict {
+    exch
+    dup /FID eq {
+      % skip FID pair
+      pop pop
+    } {
+      % copy to the new font dictionary
+      exch newfont 3 1 roll put
+    } ifelse
+  } forall
+
+  newfont /FontName newfontname put
+
+  % insert only valid encoding vectors
+  encoding_vector length 256 eq {
+    newfont /Encoding encoding_vector put
+  } if
+
+  newfontname newfont definefont pop
+} def
+
+/MF_PS { % fontname newfontname -> -	make a new font preserving its enc
+  /newfontname exch def
+  /fontname exch def
+
+  /fontdict fontname findfont def
+  /newfont fontdict maxlength dict def
+
+  fontdict {
+    exch
+    dup /FID eq {
+      % skip FID pair
+      pop pop
+    } {
+      % copy to the new font dictionary
+      exch newfont 3 1 roll put
+    } ifelse
+  } forall
+
+  newfont /FontName newfontname put
+
+  newfontname newfont definefont pop
+} def
+
+/SF { % fontname width height -> -	set a new font
+  /height exch def
+  /width exch def
+
+  findfont
+  [width 0 0 height 0 0] makefont setfont
+} def
+
+/SUF { % fontname width height -> -	set a new user font
+  /height exch def
+  /width exch def
+
+  /F-gs-user-font MF
+  /F-gs-user-font width height SF
+} def
+
+/SUF_PS { % fontname width height -> -	set a new user font preserving its enc
+  /height exch def
+  /width exch def
+
+  /F-gs-user-font MF_PS
+  /F-gs-user-font width height SF
+} def
+
+/M {moveto} bind def
+/s {show} bind def
+
+/Box {	% x y w h -> -			define box path
+  /d_h exch def /d_w exch def /d_y exch def /d_x exch def
+  d_x d_y  moveto
+  d_w 0 rlineto
+  0 d_h rlineto
+  d_w neg 0 rlineto
+  closepath
+} def
+
+/bgs {	% x y height blskip gray str -> -	show string with bg color
+  /str exch def
+  /gray exch def
+  /blskip exch def
+  /height exch def
+  /y exch def
+  /x exch def
+
+  gsave
+    x y blskip sub str stringwidth pop height Box
+    gray setgray
+    fill
+  grestore
+  x y M str s
+} def
+
+/bgcs { % x y height blskip red green blue str -> -  show string with bg color
+  /str exch def
+  /blue exch def
+  /green exch def
+  /red exch def
+  /blskip exch def
+  /height exch def
+  /y exch def
+  /x exch def
+
+  gsave
+    x y blskip sub str stringwidth pop height Box
+    red green blue setrgbcolor
+    fill
+  grestore
+  x y M str s
+} def
+
+% Highlight bars.
+/highlight_bars {	% nlines lineheight output_y_margin gray -> -
+  gsave
+    setgray
+    /ymarg exch def
+    /lineheight exch def
+    /nlines exch def
+
+    % This 2 is just a magic number to sync highlight lines to text.
+    0 d_header_y ymarg sub 2 sub translate
+
+    /cw d_output_w cols div def
+    /nrows d_output_h ymarg 2 mul sub lineheight div cvi def
+
+    % for each column
+    0 1 cols 1 sub {
+      cw mul /xp exch def
+
+      % for each rows
+      0 1 nrows 1 sub {
+        /rn exch def
+        rn lineheight mul neg /yp exch def
+        rn nlines idiv 2 mod 0 eq {
+	  % Draw highlight bar.  4 is just a magic indentation.
+	  xp 4 add yp cw 8 sub lineheight neg Box fill
+	} if
+      } for
+    } for
+
+  grestore
+} def
+
+% Line highlight bar.
+/line_highlight {	% x y width height gray -> -
+  gsave
+    /gray exch def
+    Box gray setgray fill
+  grestore
+} def
+
+% Column separator lines.
+/column_lines {
+  gsave
+    .1 setlinewidth
+    0 d_footer_h translate
+    /cw d_output_w cols div def
+    1 1 cols 1 sub {
+      cw mul 0 moveto
+      0 d_output_h rlineto stroke
+    } for
+  grestore
+} def
+
+% Column borders.
+/column_borders {
+  gsave
+    .1 setlinewidth
+    0 d_footer_h moveto
+    0 d_output_h rlineto
+    d_output_w 0 rlineto
+    0 d_output_h neg rlineto
+    closepath stroke
+  grestore
+} def
+
+% Do the actual underlay drawing
+/draw_underlay {
+  ul_style 0 eq {
+    ul_str true charpath stroke
+  } {
+    ul_str show
+  } ifelse
+} def
+
+% Underlay
+/underlay {	% - -> -
+  gsave
+    0 d_page_h translate
+    d_page_h neg d_page_w atan rotate
+
+    ul_gray setgray
+    ul_font setfont
+    /dw d_page_h dup mul d_page_w dup mul add sqrt def
+    ul_str stringwidth pop dw exch sub 2 div ul_h_ptsize -2 div moveto
+    draw_underlay
+  grestore
+} def
+
+/user_underlay {	% - -> -
+  gsave
+    ul_x ul_y translate
+    ul_angle rotate
+    ul_gray setgray
+    ul_font setfont
+    0 0 ul_h_ptsize 2 div sub moveto
+    draw_underlay
+  grestore
+} def
+
+% Page prefeed
+/page_prefeed {		% bool -> -
+  statusdict /prefeed known {
+    statusdict exch /prefeed exch put
+  } {
+    pop
+  } ifelse
+} def
+
+% Wrapped line markers
+/wrapped_line_mark {	% x y charwith charheight type -> -
+  /type exch def
+  /h exch def
+  /w exch def
+  /y exch def
+  /x exch def
+
+  type 2 eq {
+    % Black boxes (like TeX does)
+    gsave
+      0 setlinewidth
+      x w 4 div add y M
+      0 h rlineto w 2 div 0 rlineto 0 h neg rlineto
+      closepath fill
+    grestore
+  } {
+    type 3 eq {
+      % Small arrows
+      gsave
+        .2 setlinewidth
+        x w 2 div add y h 2 div add M
+        w 4 div 0 rlineto
+        x w 4 div add y lineto stroke
+
+        x w 4 div add w 8 div add y h 4 div add M
+        x w 4 div add y lineto
+	w 4 div h 8 div rlineto stroke
+      grestore
+    } {
+      % do nothing
+    } ifelse
+  } ifelse
+} def
+
+% EPSF import.
+
+/BeginEPSF {
+  /b4_Inc_state save def    		% Save state for cleanup
+  /dict_count countdictstack def	% Count objects on dict stack
+  /op_count count 1 sub def		% Count objects on operand stack
+  userdict begin
+  /showpage { } def
+  0 setgray 0 setlinecap
+  1 setlinewidth 0 setlinejoin
+  10 setmiterlimit [ ] 0 setdash newpath
+  /languagelevel where {
+    pop languagelevel
+    1 ne {
+      false setstrokeadjust false setoverprint
+    } if
+  } if
+} bind def
+
+/EndEPSF {
+  count op_count sub { pos } repeat	% Clean up stacks
+  countdictstack dict_count sub { end } repeat
+  b4_Inc_state restore
+} bind def
+
+% Check PostScript language level.
+/languagelevel where {
+  pop /gs_languagelevel languagelevel def
+} {
+  /gs_languagelevel 1 def
+} ifelse
+%%EndResource
+%%BeginResource: procset Enscript-Encoding-88591 1.6.5 90
+/encoding_vector [
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/space        	/exclam       	/quotedbl     	/numbersign   	
+/dollar       	/percent      	/ampersand    	/quoteright   	
+/parenleft    	/parenright   	/asterisk     	/plus         	
+/comma        	/hyphen       	/period       	/slash        	
+/zero         	/one          	/two          	/three        	
+/four         	/five         	/six          	/seven        	
+/eight        	/nine         	/colon        	/semicolon    	
+/less         	/equal        	/greater      	/question     	
+/at           	/A            	/B            	/C            	
+/D            	/E            	/F            	/G            	
+/H            	/I            	/J            	/K            	
+/L            	/M            	/N            	/O            	
+/P            	/Q            	/R            	/S            	
+/T            	/U            	/V            	/W            	
+/X            	/Y            	/Z            	/bracketleft  	
+/backslash    	/bracketright 	/asciicircum  	/underscore   	
+/quoteleft    	/a            	/b            	/c            	
+/d            	/e            	/f            	/g            	
+/h            	/i            	/j            	/k            	
+/l            	/m            	/n            	/o            	
+/p            	/q            	/r            	/s            	
+/t            	/u            	/v            	/w            	
+/x            	/y            	/z            	/braceleft    	
+/bar          	/braceright   	/tilde        	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/space        	/exclamdown   	/cent         	/sterling     	
+/currency     	/yen          	/brokenbar    	/section      	
+/dieresis     	/copyright    	/ordfeminine  	/guillemotleft	
+/logicalnot   	/hyphen       	/registered   	/macron       	
+/degree       	/plusminus    	/twosuperior  	/threesuperior	
+/acute        	/mu           	/paragraph    	/bullet       	
+/cedilla      	/onesuperior  	/ordmasculine 	/guillemotright	
+/onequarter   	/onehalf      	/threequarters	/questiondown 	
+/Agrave       	/Aacute       	/Acircumflex  	/Atilde       	
+/Adieresis    	/Aring        	/AE           	/Ccedilla     	
+/Egrave       	/Eacute       	/Ecircumflex  	/Edieresis    	
+/Igrave       	/Iacute       	/Icircumflex  	/Idieresis    	
+/Eth          	/Ntilde       	/Ograve       	/Oacute       	
+/Ocircumflex  	/Otilde       	/Odieresis    	/multiply     	
+/Oslash       	/Ugrave       	/Uacute       	/Ucircumflex  	
+/Udieresis    	/Yacute       	/Thorn        	/germandbls   	
+/agrave       	/aacute       	/acircumflex  	/atilde       	
+/adieresis    	/aring        	/ae           	/ccedilla     	
+/egrave       	/eacute       	/ecircumflex  	/edieresis    	
+/igrave       	/iacute       	/icircumflex  	/idieresis    	
+/eth          	/ntilde       	/ograve       	/oacute       	
+/ocircumflex  	/otilde       	/odieresis    	/divide       	
+/oslash       	/ugrave       	/uacute       	/ucircumflex  	
+/udieresis    	/yacute       	/thorn        	/ydieresis    	
+] def
+%%EndResource
+%%EndProlog
+%%BeginSetup
+%%IncludeResource: font Courier-Bold
+%%IncludeResource: font Courier
+/HFpt_w 10 def
+/HFpt_h 10 def
+/Courier-Bold /HF-gs-font MF
+/HF /HF-gs-font findfont [HFpt_w 0 0 HFpt_h 0 0] makefont def
+/Courier /F-gs-font MF
+/F-gs-font 8 8 SF
+/#copies 1 def
+% Pagedevice definitions:
+gs_languagelevel 1 gt {
+  <<
+    /PageSize [612 792] 
+  >> setpagedevice
+} if
+/d_page_w 576 def
+/d_page_h 720 def
+/d_header_x 0 def
+/d_header_y 720 def
+/d_header_w 576 def
+/d_header_h 0 def
+/d_footer_x 0 def
+/d_footer_y 0 def
+/d_footer_w 576 def
+/d_footer_h 0 def
+/d_output_w 576 def
+/d_output_h 720 def
+/cols 1 def
+%%EndSetup
+%%Page: (1) 1
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 1 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit1_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit1_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 691 M
+(===========================================================================) s
+5 682 M
+(                         TASK01) s
+5 673 M
+(===========================================================================) s
+5 655 M
+(SOURCE CODE) s
+5 646 M
+(---------------------------------------------------------------------------) s
+5 637 M
+(Name: Tharun-Kumaran) s
+5 628 M
+(Roll No: 2117250020478) s
+5 610 M
+(package unit1;) s
+5 601 M
+(// Name: Tharun-Kumaran) s
+5 592 M
+(// Roll No: 2117250020478) s
+5 574 M
+(/*Write a Java program that creates two boolean variables to represent whether it is) s
+5 565 M
+(currently the weekend and whether it is raining. Then, print both values to the console.*/) s
+5 547 M
+(public class task01 {) s
+5 529 M
+(        public static void main\(String[] args\) {) s
+5 520 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 511 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 502 M
+(                // TODO Auto-generated method stub) s
+5 493 M
+(                boolean whetherRaining=false;) s
+5 484 M
+(                boolean weekend=true;) s
+5 475 M
+(                System.out.println\("Is whether raining?"+ whetherRaining +"\\nIs weekend ?" + weekend\);  ) s
+5 457 M
+(        }) s
+5 439 M
+(}) s
+5 412 M
+(OUTPUT) s
+5 403 M
+(---------------------------------------------------------------------------) s
+5 394 M
+(Name: Tharun-Kumaran) s
+5 385 M
+(Roll No: 2117250020478) s
+5 376 M
+(Name: Tharun-Kumaran) s
+5 367 M
+(Roll No: 2117250020478) s
+5 358 M
+(Is whether raining?false) s
+5 349 M
+(Is weekend ?true) s
+5 313 M
+(===========================================================================) s
+5 304 M
+(                         TASK02) s
+5 295 M
+(===========================================================================) s
+5 277 M
+(SOURCE CODE) s
+5 268 M
+(---------------------------------------------------------------------------) s
+5 259 M
+(Name: Tharun-Kumaran) s
+5 250 M
+(Roll No: 2117250020478) s
+5 232 M
+(package unit1;) s
+5 223 M
+(// Name: Tharun-Kumaran) s
+5 214 M
+(// Roll No: 2117250020478) s
+5 196 M
+(/*Write a Java program that uses byte variables to store small numbers representing a) s
+5 187 M
+(smartphone's battery level and the day of the month.*/) s
+5 178 M
+(public class task02 {) s
+5 160 M
+(        public static void main\(String[] args\) {) s
+5 151 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 142 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 133 M
+(                // TODO Auto-generated method stub) s
+5 124 M
+(                byte batteryLevel=90;) s
+5 115 M
+(                System.out.println\("Your battery level is:" + batteryLevel\);) s
+5 97 M
+(        }) s
+5 79 M
+(}) s
+5 52 M
+(OUTPUT) s
+5 43 M
+(---------------------------------------------------------------------------) s
+5 34 M
+(Name: Tharun-Kumaran) s
+5 25 M
+(Roll No: 2117250020478) s
+5 16 M
+(Name: Tharun-Kumaran) s
+5 7 M
+(Roll No: 2117250020478) s
+_R
+S
+%%Page: (2) 2
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 2 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit1_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit1_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(Your battery level is:90) s
+5 673 M
+(===========================================================================) s
+5 664 M
+(                         TASK03) s
+5 655 M
+(===========================================================================) s
+5 637 M
+(SOURCE CODE) s
+5 628 M
+(---------------------------------------------------------------------------) s
+5 619 M
+(Name: Tharun-Kumaran) s
+5 610 M
+(Roll No: 2117250020478) s
+5 592 M
+(package unit1;) s
+5 583 M
+(// Name: Tharun-Kumaran) s
+5 574 M
+(// Roll No: 2117250020478) s
+5 556 M
+(/*Write a Java program that uses short variables to store moderate-sized numbers representing) s
+5 547 M
+(geographic elevations \(above and below sea level\)*/) s
+5 538 M
+(public class task03 {) s
+5 520 M
+(        public static void main\(String[] args\) {) s
+5 511 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 502 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 493 M
+(                // TODO Auto-generated method stub) s
+5 484 M
+(                short mtEverest = 8848;) s
+5 475 M
+(                short marianaTrench = -10994;) s
+5 466 M
+(                System.out.println\("--Geographical locations--"\);) s
+5 457 M
+(                System.out.println\(" Mount Everest: " + mtEverest\);) s
+5 448 M
+(                System.out.println\(" Marina Trench" + marianaTrench\);) s
+5 439 M
+(                ) s
+5 421 M
+(        }) s
+5 403 M
+(}) s
+5 376 M
+(OUTPUT) s
+5 367 M
+(---------------------------------------------------------------------------) s
+5 358 M
+(Name: Tharun-Kumaran) s
+5 349 M
+(Roll No: 2117250020478) s
+5 340 M
+(Name: Tharun-Kumaran) s
+5 331 M
+(Roll No: 2117250020478) s
+5 322 M
+(--Geographical locations--) s
+5 313 M
+( Mount Everest: 8848) s
+5 304 M
+( Marina Trench-10994) s
+5 268 M
+(===========================================================================) s
+5 259 M
+(                         TASK04) s
+5 250 M
+(===========================================================================) s
+5 232 M
+(SOURCE CODE) s
+5 223 M
+(---------------------------------------------------------------------------) s
+5 214 M
+(Name: Tharun-Kumaran) s
+5 205 M
+(Roll No: 2117250020478) s
+5 187 M
+(package unit1;) s
+5 178 M
+(// Name: Tharun-Kumaran) s
+5 169 M
+(// Roll No: 2117250020478) s
+5 151 M
+(/*Write a Java program that uses int variables to track a player's high score and their total) s
+5 142 M
+(daily steps walked in a fitness mini-game.*/) s
+5 133 M
+(public class task04 {) s
+5 115 M
+(        public static void main\(String[] args\) {) s
+5 106 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 97 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 88 M
+(                // TODO Auto-generated method stub) s
+5 79 M
+(                int dailySteps=4500;) s
+5 70 M
+(                int highScore=7000;) s
+5 61 M
+(                ) s
+5 52 M
+(                System.out.println\("Your Steps Today: "+ dailySteps+"\\nYour HighScore: "+highScore\);) s
+5 43 M
+(        }) s
+5 25 M
+(}) s
+_R
+S
+%%Page: (3) 3
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 3 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit1_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit1_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(OUTPUT) s
+5 700 M
+(---------------------------------------------------------------------------) s
+5 691 M
+(Name: Tharun-Kumaran) s
+5 682 M
+(Roll No: 2117250020478) s
+5 673 M
+(Name: Tharun-Kumaran) s
+5 664 M
+(Roll No: 2117250020478) s
+5 655 M
+(Your Steps Today: 4500) s
+5 646 M
+(Your HighScore: 7000) s
+5 610 M
+(===========================================================================) s
+5 601 M
+(                         TASK05) s
+5 592 M
+(===========================================================================) s
+5 574 M
+(SOURCE CODE) s
+5 565 M
+(---------------------------------------------------------------------------) s
+5 556 M
+(Name: Tharun-Kumaran) s
+5 547 M
+(Roll No: 2117250020478) s
+5 529 M
+(package unit1;) s
+5 520 M
+(// Name: Tharun-Kumaran) s
+5 511 M
+(// Roll No: 2117250020478) s
+5 493 M
+(/*Create a class named Student with the following attributes:) s
+5 484 M
+(\342\\200\242 Roll Number) s
+5 475 M
+(\342\\200\242 Name) s
+5 466 M
+(\342\\200\242 Department) s
+5 457 M
+(\342\\200\242 CGPA) s
+5 448 M
+(Create a constructor to initialize the values and display the student details using a method.*/) s
+5 430 M
+(class Student{) s
+5 421 M
+(        int rollNumber;) s
+5 412 M
+(        String name;) s
+5 403 M
+(        String department;) s
+5 394 M
+(        float cgpa;) s
+5 385 M
+(        ) s
+5 376 M
+(        public Student\(int rollNumber,String name,String department,float cgpa\) {) s
+5 367 M
+(                this.rollNumber=rollNumber;) s
+5 358 M
+(                this.name=name;) s
+5 349 M
+(                this.department=department;) s
+5 340 M
+(                this.cgpa=cgpa;) s
+5 331 M
+(        }) s
+5 322 M
+(        public int printRollNumber\(\) {) s
+5 313 M
+(                return rollNumber;) s
+5 304 M
+(        }) s
+5 295 M
+(        public String printName\(\) {) s
+5 286 M
+(                return name;) s
+5 277 M
+(        }) s
+5 268 M
+(        public String printDepartment\(\) {) s
+5 259 M
+(                return department;) s
+5 250 M
+(        }) s
+5 241 M
+(        public float printCgpa\(\) {) s
+5 232 M
+(                return cgpa;) s
+5 223 M
+(        }) s
+5 196 M
+(@Override) s
+5 187 M
+(public String toString\(\) {) s
+5 178 M
+(        return "Name is: " + name) s
+5 169 M
+(                        + "\\nAge, Department and CGPA are: ") s
+5 160 M
+(                        + rollNumber + " " + department + " " + cgpa;) s
+5 151 M
+(}) s
+5 142 M
+(}) s
+5 133 M
+(public class task05 {) s
+5 115 M
+(        public static void main\(String[] args\) {) s
+5 106 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 97 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 88 M
+(                // TODO Auto-generated method stub) s
+5 79 M
+(                Student s1= new Student\(01,"Ram","CSE",9.0f\);) s
+5 70 M
+(                System.out.println\(s1\);) s
+5 61 M
+(                ) s
+5 43 M
+(        }) s
+5 25 M
+(}) s
+_R
+S
+%%Page: (4) 4
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 4 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit1_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit1_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(OUTPUT) s
+5 700 M
+(---------------------------------------------------------------------------) s
+5 691 M
+(Name: Tharun-Kumaran) s
+5 682 M
+(Roll No: 2117250020478) s
+5 673 M
+(Name: Tharun-Kumaran) s
+5 664 M
+(Roll No: 2117250020478) s
+5 655 M
+(Name is: Ram) s
+5 646 M
+(Age, Department and CGPA are: 1 CSE 9.0) s
+5 610 M
+(===========================================================================) s
+5 601 M
+(                         TASK06) s
+5 592 M
+(===========================================================================) s
+5 574 M
+(SOURCE CODE) s
+5 565 M
+(---------------------------------------------------------------------------) s
+5 556 M
+(Name: Tharun-Kumaran) s
+5 547 M
+(Roll No: 2117250020478) s
+5 529 M
+(package unit1;) s
+5 520 M
+(// Name: Tharun-Kumaran) s
+5 511 M
+(// Roll No: 2117250020478) s
+5 493 M
+(/*Create a Student class with attributes:) s
+5 484 M
+(Roll Number , Name , Department) s
+5 475 M
+(Create a method displayDetails\(\) and invoke it using an object*/) s
+5 457 M
+(class Student1{) s
+5 448 M
+(        int rollNumber;) s
+5 439 M
+(        String name;) s
+5 430 M
+(        String department;) s
+5 421 M
+(        ) s
+5 412 M
+(        public Student1\(int rollNumber,String name,String department\) {) s
+5 403 M
+(                this.rollNumber=rollNumber;) s
+5 394 M
+(                this.name=name;) s
+5 385 M
+(                this.department=department;) s
+5 376 M
+(        }) s
+5 367 M
+(        public void displayDetails\(\) {) s
+5 358 M
+(                System.out.println\("--Student Details"\);) s
+5 349 M
+(                System.out.println\("Roll Number: "+rollNumber\);) s
+5 340 M
+(                System.out.println\("Name: "+name\);) s
+5 331 M
+(                System.out.println\("Department: "+department\);) s
+5 322 M
+(                ) s
+5 313 M
+(        }) s
+5 304 M
+(        ) s
+5 295 M
+(}) s
+5 277 M
+(public class task06 {) s
+5 259 M
+(        public static void main\(String[] args\) {) s
+5 250 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 241 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 232 M
+(                // TODO Auto-generated method stub) s
+5 223 M
+(                Student1 s1=new Student1\(01,"Ram","CSE"\);) s
+5 214 M
+(                s1.displayDetails\(\);) s
+5 196 M
+(        }) s
+5 178 M
+(}) s
+5 151 M
+(OUTPUT) s
+5 142 M
+(---------------------------------------------------------------------------) s
+5 133 M
+(Name: Tharun-Kumaran) s
+5 124 M
+(Roll No: 2117250020478) s
+5 115 M
+(Name: Tharun-Kumaran) s
+5 106 M
+(Roll No: 2117250020478) s
+5 97 M
+(--Student Details) s
+5 88 M
+(Roll Number: 1) s
+5 79 M
+(Name: Ram) s
+5 70 M
+(Department: CSE) s
+5 34 M
+(===========================================================================) s
+5 25 M
+(                         TASK07) s
+5 16 M
+(===========================================================================) s
+_R
+S
+%%Page: (5) 5
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 5 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit1_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit1_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(SOURCE CODE) s
+5 700 M
+(---------------------------------------------------------------------------) s
+5 691 M
+(Name: Tharun-Kumaran) s
+5 682 M
+(Roll No: 2117250020478) s
+5 664 M
+(package unit1;) s
+5 655 M
+(// Name: Tharun-Kumaran) s
+5 646 M
+(// Roll No: 2117250020478) s
+5 628 M
+(/* Employee Salary) s
+5 619 M
+(Create an Employee class with:) s
+5 610 M
+(Employee ID, Employee Name, Salary) s
+5 601 M
+(Create a method showSalary\(\) and call it using an object.*/) s
+5 583 M
+(class Employee{) s
+5 574 M
+(        int employeeID;) s
+5 565 M
+(        String employeeName;) s
+5 556 M
+(        String salary;) s
+5 547 M
+(        ) s
+5 538 M
+(        public Employee\(int employeeID,String employeeName,String salary\) {) s
+5 529 M
+(                this.employeeID=employeeID;) s
+5 520 M
+(                this.employeeName=employeeName;) s
+5 511 M
+(                this.salary=salary;) s
+5 502 M
+(        }) s
+5 493 M
+(        ) s
+5 484 M
+(        public void showSalary\(\) {) s
+5 475 M
+(                System.out.println\("--Employee Details--"\);) s
+5 466 M
+(                System.out.println\("Employee ID: "+employeeID\);) s
+5 457 M
+(                System.out.println\("Employee Name: "+ employeeName\);) s
+5 448 M
+(                System.out.println\("Salary: "+salary\);) s
+5 439 M
+(        }) s
+5 430 M
+(        ) s
+5 421 M
+(}) s
+5 403 M
+(public class task07 {) s
+5 385 M
+(        public static void main\(String[] args\) {) s
+5 376 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 367 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 358 M
+(                // TODO Auto-generated method stub) s
+5 349 M
+(                Employee e1= new Employee\(01,"Ram","600000"\);) s
+5 340 M
+(                e1.showSalary\(\);) s
+5 331 M
+(        }) s
+5 313 M
+(}) s
+5 286 M
+(OUTPUT) s
+5 277 M
+(---------------------------------------------------------------------------) s
+5 268 M
+(Name: Tharun-Kumaran) s
+5 259 M
+(Roll No: 2117250020478) s
+5 250 M
+(Name: Tharun-Kumaran) s
+5 241 M
+(Roll No: 2117250020478) s
+5 232 M
+(--Employee Details--) s
+5 223 M
+(Employee ID: 1) s
+5 214 M
+(Employee Name: Ram) s
+5 205 M
+(Salary: 600000) s
+5 169 M
+(===========================================================================) s
+5 160 M
+(                         TASK08) s
+5 151 M
+(===========================================================================) s
+5 133 M
+(SOURCE CODE) s
+5 124 M
+(---------------------------------------------------------------------------) s
+5 115 M
+(Name: Tharun-Kumaran) s
+5 106 M
+(Roll No: 2117250020478) s
+5 88 M
+(package unit1;) s
+5 79 M
+(// Name: Tharun-Kumaran) s
+5 70 M
+(// Roll No: 2117250020478) s
+5 52 M
+(/*Create an abstract class Shape with an abstract method area\(\).) s
+5 43 M
+(Create:) s
+5 34 M
+(\342\\200\242 Rectangle) s
+5 25 M
+(\342\\200\242 Circle) s
+5 16 M
+(Implement the area\(\) method in both classes and display the area*/) s
+_R
+S
+%%Page: (6) 6
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 6 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit1_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit1_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(abstract class Shape{) s
+5 700 M
+(        public abstract double area\(\);) s
+5 691 M
+(}) s
+5 673 M
+(class Rectangle extends Shape{) s
+5 664 M
+(        private double length;) s
+5 655 M
+(        private double width;) s
+5 646 M
+(        ) s
+5 637 M
+(        public Rectangle\(double length,double width\) {) s
+5 628 M
+(                this.length=length;) s
+5 619 M
+(                this.width=width;) s
+5 610 M
+(        }) s
+5 601 M
+(        @Override) s
+5 592 M
+(        public double area\(\) {) s
+5 583 M
+(                return length*width;) s
+5 574 M
+(        }) s
+5 565 M
+(}) s
+5 556 M
+(class Circle extends Shape{) s
+5 547 M
+(        private double r;) s
+5 538 M
+(        ) s
+5 529 M
+(        public  Circle\(double r\) {) s
+5 520 M
+(                this.r=r;) s
+5 511 M
+(        }) s
+5 502 M
+(        @Override) s
+5 493 M
+(        public double area\(\) {) s
+5 484 M
+(                return Math.PI*r*r;) s
+5 475 M
+(        }) s
+5 466 M
+(}) s
+5 448 M
+(public class task08 {) s
+5 439 M
+(        public static void main\(String[] argss\) {) s
+5 430 M
+(                Shape rectangle1=new Rectangle\(1.1,2.2\);) s
+5 421 M
+(                Shape circle1=new Circle\(2.0\);) s
+5 412 M
+(                ) s
+5 403 M
+(                System.out.printf\("Area of the Rectangle: %.2f\\n", rectangle1.area\(\)\);) s
+5 394 M
+(        System.out.printf\("Area of the Circle: %.2f\\n", circle1.area\(\)\);) s
+5 376 M
+(                ) s
+5 367 M
+(                ) s
+5 358 M
+(        }) s
+5 349 M
+(}) s
+5 313 M
+(OUTPUT) s
+5 304 M
+(---------------------------------------------------------------------------) s
+5 295 M
+(Name: Tharun-Kumaran) s
+5 286 M
+(Roll No: 2117250020478) s
+5 277 M
+(Area of the Rectangle: 2.42) s
+5 268 M
+(Area of the Circle: 12.57) s
+5 232 M
+(===========================================================================) s
+5 223 M
+(                         TASK09) s
+5 214 M
+(===========================================================================) s
+5 196 M
+(SOURCE CODE) s
+5 187 M
+(---------------------------------------------------------------------------) s
+5 178 M
+(Name: Tharun-Kumaran) s
+5 169 M
+(Roll No: 2117250020478) s
+5 151 M
+(package unit1;) s
+5 142 M
+(// Name: Tharun-Kumaran) s
+5 133 M
+(// Roll No: 2117250020478) s
+5 115 M
+(/*Create an abstract class Employee with an abstract method calculateSalary\(\).) s
+5 106 M
+(Create:) s
+5 97 M
+(\342\\200\242 Manager) s
+5 88 M
+(\342\\200\242 Developer) s
+5 79 M
+(Implement the salary calculation and display the salary*/) s
+5 52 M
+(//Abstract base class) s
+5 43 M
+(abstract class Employee3 {) s
+5 34 M
+( private String name;) s
+5 25 M
+( private int id;) s
+5 7 M
+( // Constructor) s
+_R
+S
+%%Page: (7) 7
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 7 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit1_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit1_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+( public Employee3\(String name, int id\) {) s
+5 700 M
+(     this.name = name;) s
+5 691 M
+(     this.id = id;) s
+5 682 M
+( }) s
+5 664 M
+( // Getters) s
+5 655 M
+( public String getName\(\) {) s
+5 646 M
+(     return name;) s
+5 637 M
+( }) s
+5 619 M
+( public int getId\(\) {) s
+5 610 M
+(     return id;) s
+5 601 M
+( }) s
+5 583 M
+( // Abstract method to be implemented by subclasses) s
+5 574 M
+( public abstract double calculateSalary\(\);) s
+5 556 M
+( // Concrete method to display employee details) s
+5 547 M
+( public void displayEmployeeDetails\(\) {) s
+5 538 M
+(     System.out.println\("----------------------------------------"\);) s
+5 529 M
+(     System.out.println\("Employee ID   : " + id\);) s
+5 520 M
+(     System.out.println\("Employee Name : " + name\);) s
+5 511 M
+(     System.out.printf\("Calculated Pay: $%.2f%n", calculateSalary\(\)\);) s
+5 502 M
+( }) s
+5 493 M
+(}) s
+5 475 M
+(//Subclass Manager extending Employee) s
+5 466 M
+(class Manager extends Employee3 {) s
+5 457 M
+( private double baseSalary;) s
+5 448 M
+( private double performanceBonus;) s
+5 430 M
+( public Manager\(String name, int id, double baseSalary, double performanceBonus\) {) s
+5 421 M
+(     super\(name, id\);) s
+5 412 M
+(     this.baseSalary = baseSalary;) s
+5 403 M
+(     this.performanceBonus = performanceBonus;) s
+5 394 M
+( }) s
+5 376 M
+( // Implementing the abstract method) s
+5 367 M
+( @Override) s
+5 358 M
+( public double calculateSalary\(\) {) s
+5 349 M
+(     // Managers receive a base salary plus a performance bonus) s
+5 340 M
+(     return baseSalary + performanceBonus;) s
+5 331 M
+( }) s
+5 322 M
+(}) s
+5 304 M
+(//Subclass Developer extending Employee) s
+5 295 M
+(class Developer extends Employee3 {) s
+5 286 M
+( private double hourlyRate;) s
+5 277 M
+( private int hoursWorked;) s
+5 259 M
+( public Developer\(String name, int id, double hourlyRate, int hoursWorked\) {) s
+5 250 M
+(     super\(name, id\);) s
+5 241 M
+(     this.hourlyRate = hourlyRate;) s
+5 232 M
+(     this.hoursWorked = hoursWorked;) s
+5 223 M
+( }) s
+5 205 M
+( // Implementing the abstract method) s
+5 196 M
+( @Override) s
+5 187 M
+( public double calculateSalary\(\) {) s
+5 178 M
+(     // Developers are paid based on hourly rate and hours worked) s
+5 169 M
+(     return hourlyRate * hoursWorked;) s
+5 160 M
+( }) s
+5 151 M
+(}) s
+5 142 M
+(public class task09 {) s
+5 124 M
+(        public static void main\(String[] args\) {) s
+5 115 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 106 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 97 M
+(                // TODO Auto-generated method stub) s
+5 88 M
+(                Employee3 manager = new Manager\("Alice Johnson", 101, 7500.00, 1500.00\);) s
+5 79 M
+(        Employee3 developer = new Developer\("Bob Smith", 102, 55.00, 160\);) s
+5 61 M
+(        // Displaying details and calculated salaries) s
+5 52 M
+(        System.out.println\("### Employee Payroll Breakdown ###"\);) s
+5 43 M
+(        manager.displayEmployeeDetails\(\);) s
+5 34 M
+(        developer.displayEmployeeDetails\(\);) s
+5 16 M
+(        }) s
+_R
+S
+%%Page: (8) 8
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 8 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit1_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit1_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(}) s
+5 682 M
+(OUTPUT) s
+5 673 M
+(---------------------------------------------------------------------------) s
+5 664 M
+(Name: Tharun-Kumaran) s
+5 655 M
+(Roll No: 2117250020478) s
+5 646 M
+(Name: Tharun-Kumaran) s
+5 637 M
+(Roll No: 2117250020478) s
+5 628 M
+(### Employee Payroll Breakdown ###) s
+5 619 M
+(----------------------------------------) s
+5 610 M
+(Employee ID   : 101) s
+5 601 M
+(Employee Name : Alice Johnson) s
+5 592 M
+(Calculated Pay: $9000.00) s
+5 583 M
+(----------------------------------------) s
+5 574 M
+(Employee ID   : 102) s
+5 565 M
+(Employee Name : Bob Smith) s
+5 556 M
+(Calculated Pay: $8800.00) s
+5 520 M
+(===========================================================================) s
+5 511 M
+(                         TASK10) s
+5 502 M
+(===========================================================================) s
+5 484 M
+(SOURCE CODE) s
+5 475 M
+(---------------------------------------------------------------------------) s
+5 466 M
+(Name: Tharun-Kumaran) s
+5 457 M
+(Roll No: 2117250020478) s
+5 439 M
+(package unit1;) s
+5 430 M
+(// Name: Tharun-Kumaran) s
+5 421 M
+(// Roll No: 2117250020478) s
+5 403 M
+(/*Create an abstract class Animal with an abstract method sound\(\).) s
+5 394 M
+(Create:) s
+5 385 M
+(\342\\200\242 Dog) s
+5 376 M
+(\342\\200\242 Cat) s
+5 367 M
+(Display the sounds produced by each animal*/) s
+5 349 M
+(//Define the abstract class Animal) s
+5 331 M
+(abstract class Animal {) s
+5 322 M
+( // Abstract method \(does not have a body\)) s
+5 313 M
+( public abstract void sound\(\);) s
+5 304 M
+(}) s
+5 286 M
+(//Dog subclass extending Animal) s
+5 277 M
+(class Dog extends Animal {) s
+5 268 M
+( @Override) s
+5 259 M
+( public void sound\(\) {) s
+5 250 M
+(     System.out.println\("Bark"\);) s
+5 241 M
+( }) s
+5 232 M
+(}) s
+5 214 M
+(//Cat subclass extending Animal) s
+5 205 M
+(class Cat extends Animal {) s
+5 196 M
+( @Override) s
+5 187 M
+( public void sound\(\) {) s
+5 178 M
+(     System.out.println\("Meow"\);) s
+5 169 M
+( }) s
+5 160 M
+(}) s
+5 151 M
+(public class task10 {) s
+5 142 M
+(        public static void main\(String[] args\) {) s
+5 133 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 124 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 115 M
+(        // Create objects of Dog and Cat using Animal references) s
+5 106 M
+(        Animal myDog = new Dog\(\);) s
+5 97 M
+(        Animal myCat = new Cat\(\);) s
+5 79 M
+(        // Display the sounds produced by each animal) s
+5 70 M
+(        System.out.print\("Dog says: "\);) s
+5 61 M
+(        myDog.sound\(\);) s
+5 43 M
+(        System.out.print\("Cat says: "\);) s
+5 34 M
+(        myCat.sound\(\);) s
+5 25 M
+(    }) s
+5 16 M
+(}) s
+_R
+S
+%%Page: (9) 9
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 9 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit1_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit1_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 700 M
+(OUTPUT) s
+5 691 M
+(---------------------------------------------------------------------------) s
+5 682 M
+(Name: Tharun-Kumaran) s
+5 673 M
+(Roll No: 2117250020478) s
+5 664 M
+(Name: Tharun-Kumaran) s
+5 655 M
+(Roll No: 2117250020478) s
+5 646 M
+(Dog says: Bark) s
+5 637 M
+(Cat says: Meow) s
+5 601 M
+(===========================================================================) s
+5 592 M
+(                         TASK11) s
+5 583 M
+(===========================================================================) s
+5 565 M
+(SOURCE CODE) s
+5 556 M
+(---------------------------------------------------------------------------) s
+5 547 M
+(Name: Tharun-Kumaran) s
+5 538 M
+(Roll No: 2117250020478) s
+5 520 M
+(package unit1;) s
+5 511 M
+(// Name: Tharun-Kumaran) s
+5 502 M
+(// Roll No: 2117250020478) s
+5 475 M
+(/*Create a class BankAccount with private variables:) s
+5 466 M
+(\342\\200\242 accountNumber) s
+5 457 M
+(\342\\200\242 balance) s
+5 448 M
+(Create getters and setters to access the data.*/) s
+5 430 M
+(public class task11 {) s
+5 421 M
+(    // Private variables \(Data Hiding\)) s
+5 412 M
+(    private String accountNumber;) s
+5 403 M
+(    private double balance;) s
+5 385 M
+(    // Optional: Constructor to initialize the object) s
+5 376 M
+(    public task11\(String accountNumber, double initialBalance\) {) s
+5 367 M
+(        this.accountNumber = accountNumber;) s
+5 358 M
+(        this.balance = initialBalance;) s
+5 349 M
+(    }) s
+5 331 M
+(    // Getter for accountNumber) s
+5 322 M
+(    public String getAccountNumber\(\) {) s
+5 313 M
+(        return accountNumber;) s
+5 304 M
+(    }) s
+5 286 M
+(    // Setter for accountNumber) s
+5 277 M
+(    public void setAccountNumber\(String accountNumber\) {) s
+5 268 M
+(        this.accountNumber = accountNumber;) s
+5 259 M
+(    }) s
+5 241 M
+(    // Getter for balance) s
+5 232 M
+(    public double getBalance\(\) {) s
+5 223 M
+(        return balance;) s
+5 214 M
+(    }) s
+5 196 M
+(    // Setter for balance) s
+5 187 M
+(    public void setBalance\(double balance\) {) s
+5 178 M
+(        // You can add validation logic here \(e.g., balance cannot be negative\)) s
+5 169 M
+(        if \(balance >= 0\) {) s
+5 160 M
+(            this.balance = balance;) s
+5 151 M
+(        } else {) s
+5 142 M
+(            System.out.println\("Error: Balance cannot be negative."\);) s
+5 133 M
+(        }) s
+5 124 M
+(    }) s
+5 115 M
+(}) s
+5 88 M
+(OUTPUT) s
+5 79 M
+(---------------------------------------------------------------------------) s
+5 70 M
+(Name: Tharun-Kumaran) s
+5 61 M
+(Roll No: 2117250020478) s
+5 52 M
+(No console output.) s
+5 16 M
+(===========================================================================) s
+5 7 M
+(                         TASK12) s
+_R
+S
+%%Page: (10) 10
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 10 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit1_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit1_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(===========================================================================) s
+5 691 M
+(SOURCE CODE) s
+5 682 M
+(---------------------------------------------------------------------------) s
+5 673 M
+(Name: Tharun-Kumaran) s
+5 664 M
+(Roll No: 2117250020478) s
+5 646 M
+(package unit1;) s
+5 637 M
+(// Name: Tharun-Kumaran) s
+5 628 M
+(// Roll No: 2117250020478) s
+5 610 M
+(/*Create a class Employee with private variables:) s
+5 601 M
+(\342\\200\242 employeeId) s
+5 592 M
+(\342\\200\242 employeeName) s
+5 583 M
+(\342\\200\242 salary) s
+5 574 M
+(Use getter and setter methods to display the details.*/) s
+5 556 M
+(class Employee4{) s
+5 547 M
+(        private String employeeID;) s
+5 538 M
+(        private String employeeName;) s
+5 529 M
+(        private double salary;) s
+5 520 M
+(        ) s
+5 511 M
+(        public Employee4\(String employeeID,String employeeName,double salary\) {) s
+5 502 M
+(                this.employeeID=employeeID;) s
+5 493 M
+(                this.employeeName=employeeName;) s
+5 484 M
+(                this.salary=salary;) s
+5 475 M
+(        }) s
+5 466 M
+(        public String getEmployeeID\(\) {) s
+5 457 M
+(                return employeeID;) s
+5 448 M
+(        }) s
+5 439 M
+(        public String getEmployeeName\(\) {) s
+5 430 M
+(                return employeeName;) s
+5 421 M
+(        }) s
+5 412 M
+(        public double getSalary\(\) {) s
+5 403 M
+(                return salary;) s
+5 394 M
+(        }) s
+5 385 M
+(        ) s
+5 376 M
+(        public void setEmployeeID\(String employeeID\) {) s
+5 367 M
+(                this.employeeID=employeeID;) s
+5 358 M
+(        }) s
+5 349 M
+(        public void setEmployeeName\(String employeeName\) {) s
+5 340 M
+(                this.employeeName=employeeName;) s
+5 331 M
+(        }) s
+5 322 M
+(        public void setSalary\(double salary\) {) s
+5 313 M
+(                this.salary=salary;) s
+5 304 M
+(        }) s
+5 277 M
+(public class task12 {) s
+5 259 M
+(        public static void main\(String[] args\) {) s
+5 250 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 241 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 232 M
+(                // TODO Auto-generated method stub) s
+5 223 M
+(                Employee4 e1=new Employee4\("01","Ramu",60000\);) s
+5 214 M
+(                System.out.println\("Employee ID: "+e1.employeeID+" Employee Name: "+e1.employeeName+" Employee Salary) s
+5 205 M
+(: "+e1.salary\);) s
+5 196 M
+(                e1.setSalary\(80000\);) s
+5 187 M
+(                System.out.println\("Employee ID: "+e1.employeeID+" Employee Name: "+e1.employeeName+" Employee Salary) s
+5 178 M
+(: "+e1.salary\);) s
+5 169 M
+(                ) s
+5 160 M
+(                ) s
+5 151 M
+(                ) s
+5 133 M
+(        }) s
+5 115 M
+(}}) s
+5 88 M
+(OUTPUT) s
+5 79 M
+(---------------------------------------------------------------------------) s
+5 70 M
+(Name: Tharun-Kumaran) s
+5 61 M
+(Roll No: 2117250020478) s
+5 52 M
+(No console output.) s
+5 16 M
+(===========================================================================) s
+5 7 M
+(                         TASK13) s
+_R
+S
+%%Page: (11) 11
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 11 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit1_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit1_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(===========================================================================) s
+5 691 M
+(SOURCE CODE) s
+5 682 M
+(---------------------------------------------------------------------------) s
+5 673 M
+(Name: Tharun-Kumaran) s
+5 664 M
+(Roll No: 2117250020478) s
+5 646 M
+(package unit1;) s
+5 637 M
+(// Name: Tharun-Kumaran) s
+5 628 M
+(// Roll No: 2117250020478) s
+5 610 M
+(/*Create:) s
+5 601 M
+(\342\\200\242 Parent Class: Vehicle) s
+5 592 M
+(\342\\200\242 Child Class: Bike) s
+5 583 M
+(Methods:) s
+5 574 M
+(\342\\200\242 start\(\)) s
+5 565 M
+(\342\\200\242 ride\(\)) s
+5 556 M
+(Display both methods using inheritance.*/) s
+5 529 M
+(abstract class Vehicle{) s
+5 520 M
+(         void start\(\) {) s
+5 511 M
+(                 System.out.println\("Starting....."\);) s
+5 502 M
+(         }) s
+5 493 M
+(        abstract void ride\(\);) s
+5 484 M
+(}) s
+5 475 M
+(class Bike extends Vehicle{) s
+5 466 M
+(        ) s
+5 457 M
+(        @Override) s
+5 448 M
+(        void ride\(\) {) s
+5 439 M
+(                System.out.println\("Riding....."\);) s
+5 430 M
+(        }) s
+5 421 M
+(}) s
+5 412 M
+(public class task13 {) s
+5 394 M
+(        public static void main\(String[] args\) {) s
+5 385 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 376 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 367 M
+(                // TODO Auto-generated method stub) s
+5 358 M
+(                Vehicle v1=new Bike\(\);) s
+5 349 M
+(                v1.start\(\);) s
+5 340 M
+(                v1.ride\(\);) s
+5 322 M
+(        }) s
+5 304 M
+(}) s
+5 277 M
+(OUTPUT) s
+5 268 M
+(---------------------------------------------------------------------------) s
+5 259 M
+(Name: Tharun-Kumaran) s
+5 250 M
+(Roll No: 2117250020478) s
+5 241 M
+(Name: Tharun-Kumaran) s
+5 232 M
+(Roll No: 2117250020478) s
+5 223 M
+(Starting.....) s
+5 214 M
+(Riding.....) s
+5 178 M
+(===========================================================================) s
+5 169 M
+(                         TASK14) s
+5 160 M
+(===========================================================================) s
+5 142 M
+(SOURCE CODE) s
+5 133 M
+(---------------------------------------------------------------------------) s
+5 124 M
+(Name: Tharun-Kumaran) s
+5 115 M
+(Roll No: 2117250020478) s
+5 97 M
+(package unit1;) s
+5 88 M
+(// Name: Tharun-Kumaran) s
+5 79 M
+(// Roll No: 2117250020478) s
+5 61 M
+(/*Create an abstract class Vehicle with:) s
+5 52 M
+(Abstract Method) s
+5 43 M
+(start\(\)) s
+5 34 M
+(Subclasses) s
+5 25 M
+(\342\\200\242 Car) s
+5 16 M
+(\342\\200\242 Bike) s
+5 7 M
+(Display how each vehicle starts.*/) s
+_R
+S
+%%Page: (12) 12
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 12 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit1_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit1_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 700 M
+(abstract class Vehicle1 {) s
+5 691 M
+(    // Abstract method \(has no body\)) s
+5 682 M
+(    abstract void start\(\);) s
+5 673 M
+(}) s
+5 655 M
+(// Subclass Car extending Vehicle) s
+5 646 M
+(class Car extends Vehicle1 {) s
+5 637 M
+(    @Override) s
+5 628 M
+(    void start\(\) {) s
+5 619 M
+(        System.out.println\("The car starts with a push-button ignition or turn-key."\);) s
+5 610 M
+(    }) s
+5 601 M
+(}) s
+5 583 M
+(// Subclass Bike extending Vehicle) s
+5 574 M
+(class Bike1 extends Vehicle1 {) s
+5 565 M
+(    @Override) s
+5 556 M
+(    void start\(\) {) s
+5 547 M
+(        System.out.println\("The bike starts with a kick-start or an electric button."\);) s
+5 538 M
+(    }) s
+5 529 M
+(}) s
+5 511 M
+(public class task14 {) s
+5 493 M
+(        public static void main\(String[] args\) {) s
+5 484 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 475 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 466 M
+(                // TODO Auto-generated method stub) s
+5 457 M
+(                Vehicle1 myCar = new Car\(\);) s
+5 448 M
+(        Vehicle1 myBike = new Bike1\(\);) s
+5 430 M
+(        // Display how each vehicle starts) s
+5 421 M
+(        myCar.start\(\);) s
+5 412 M
+(        myBike.start\(\);) s
+5 394 M
+(        }) s
+5 376 M
+(}) s
+5 349 M
+(OUTPUT) s
+5 340 M
+(---------------------------------------------------------------------------) s
+5 331 M
+(Name: Tharun-Kumaran) s
+5 322 M
+(Roll No: 2117250020478) s
+5 313 M
+(Name: Tharun-Kumaran) s
+5 304 M
+(Roll No: 2117250020478) s
+5 295 M
+(The car starts with a push-button ignition or turn-key.) s
+5 286 M
+(The bike starts with a kick-start or an electric button.) s
+5 250 M
+(===========================================================================) s
+5 241 M
+(                         TASK15) s
+5 232 M
+(===========================================================================) s
+5 214 M
+(SOURCE CODE) s
+5 205 M
+(---------------------------------------------------------------------------) s
+5 196 M
+(Name: Tharun-Kumaran) s
+5 187 M
+(Roll No: 2117250020478) s
+5 169 M
+(package unit1;) s
+5 160 M
+(// Name: Tharun-Kumaran) s
+5 151 M
+(// Roll No: 2117250020478) s
+5 124 M
+(/*Create a class Book with:) s
+5 115 M
+(\342\\200\242 Book ID) s
+5 106 M
+(\342\\200\242 Title) s
+5 97 M
+(\342\\200\242 Author) s
+5 88 M
+(Create an object and display the book details.*/) s
+5 70 M
+(class Book {) s
+5 61 M
+(    // Attributes \(Instance Variables\)) s
+5 52 M
+(    private int bookId;) s
+5 43 M
+(    private String title;) s
+5 34 M
+(    private String author;) s
+5 16 M
+(    // Parameterized Constructor to initialize the attributes) s
+5 7 M
+(    public Book\(int bookId, String title, String author\) {) s
+_R
+S
+%%Page: (13) 13
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 13 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit1_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit1_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(        this.bookId = bookId;) s
+5 700 M
+(        this.title = title;) s
+5 691 M
+(        this.author = author;) s
+5 682 M
+(    }) s
+5 664 M
+(    // Method to display the book details) s
+5 655 M
+(    public void displayDetails\(\) {) s
+5 646 M
+(        System.out.println\("--- Book Details ---"\);) s
+5 637 M
+(        System.out.println\("Book ID : " + bookId\);) s
+5 628 M
+(        System.out.println\("Title   : " + title\);) s
+5 619 M
+(        System.out.println\("Author  : " + author\);) s
+5 610 M
+(    }) s
+5 601 M
+(}) s
+5 592 M
+(public class task15 {) s
+5 574 M
+(        public static void main\(String[] args\) {) s
+5 565 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 556 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 547 M
+(                // TODO Auto-generated method stub) s
+5 538 M
+(                Book myBook = new Book\(101, "Effective Java", "Joshua Bloch"\);) s
+5 520 M
+(        // Display the book details) s
+5 511 M
+(        myBook.displayDetails\(\);) s
+5 493 M
+(        }) s
+5 475 M
+(}) s
+5 448 M
+(OUTPUT) s
+5 439 M
+(---------------------------------------------------------------------------) s
+5 430 M
+(Name: Tharun-Kumaran) s
+5 421 M
+(Roll No: 2117250020478) s
+5 412 M
+(Name: Tharun-Kumaran) s
+5 403 M
+(Roll No: 2117250020478) s
+5 394 M
+(--- Book Details ---) s
+5 385 M
+(Book ID : 101) s
+5 376 M
+(Title   : Effective Java) s
+5 367 M
+(Author  : Joshua Bloch) s
+5 331 M
+(===========================================================================) s
+5 322 M
+(                         TASK16) s
+5 313 M
+(===========================================================================) s
+5 295 M
+(SOURCE CODE) s
+5 286 M
+(---------------------------------------------------------------------------) s
+5 277 M
+(Name: Tharun-Kumaran) s
+5 268 M
+(Roll No: 2117250020478) s
+5 250 M
+(package unit1;) s
+5 241 M
+(// Name: Tharun-Kumaran) s
+5 232 M
+(// Roll No: 2117250020478) s
+5 214 M
+(/*Create an object for an Employee class and display:) s
+5 205 M
+(\342\\200\242 Employee ID) s
+5 196 M
+(\342\\200\242 Employee Name) s
+5 187 M
+(\342\\200\242 Salary*/) s
+5 169 M
+(class Employee5 {) s
+5 160 M
+(    // Instance variables \(Attributes\)) s
+5 151 M
+(    private int employeeId;) s
+5 142 M
+(    private String employeeName;) s
+5 133 M
+(    private double salary;) s
+5 115 M
+(    // Parameterized constructor to initialize the variables) s
+5 106 M
+(    public Employee5\(int employeeId, String employeeName, double salary\) {) s
+5 97 M
+(        this.employeeId = employeeId;) s
+5 88 M
+(        this.employeeName = employeeName;) s
+5 79 M
+(        this.salary = salary;) s
+5 70 M
+(    }) s
+5 52 M
+(    // Method to display the employee details) s
+5 43 M
+(    public void displayEmployeeInfo\(\) {) s
+5 34 M
+(        System.out.println\("--- Employee Details ---"\);) s
+5 25 M
+(        System.out.println\("Employee ID   : " + employeeId\);) s
+5 16 M
+(        System.out.println\("Employee Name : " + employeeName\);) s
+5 7 M
+(        System.out.println\("Salary        : $" + salary\);) s
+_R
+S
+%%Page: (14) 14
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 14 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit1_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit1_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(    }) s
+5 700 M
+(}) s
+5 682 M
+(public class task16 {) s
+5 664 M
+(        public static void main\(String[] args\) {) s
+5 655 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 646 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 637 M
+(                // TODO Auto-generated method stub) s
+5 628 M
+(                Employee5 emp = new Employee5\(101, "Alice Smith", 75000.50\);) s
+5 610 M
+(        // Display the details of the created object) s
+5 601 M
+(        emp.displayEmployeeInfo\(\);) s
+5 592 M
+(        }) s
+5 574 M
+(}) s
+5 547 M
+(OUTPUT) s
+5 538 M
+(---------------------------------------------------------------------------) s
+5 529 M
+(Name: Tharun-Kumaran) s
+5 520 M
+(Roll No: 2117250020478) s
+5 511 M
+(Name: Tharun-Kumaran) s
+5 502 M
+(Roll No: 2117250020478) s
+5 493 M
+(--- Employee Details ---) s
+5 484 M
+(Employee ID   : 101) s
+5 475 M
+(Employee Name : Alice Smith) s
+5 466 M
+(Salary        : $75000.5) s
+5 430 M
+(===========================================================================) s
+5 421 M
+(                         TASK17) s
+5 412 M
+(===========================================================================) s
+5 394 M
+(SOURCE CODE) s
+5 385 M
+(---------------------------------------------------------------------------) s
+5 376 M
+(Name: Tharun-Kumaran) s
+5 367 M
+(Roll No: 2117250020478) s
+5 349 M
+(package unit1;) s
+5 340 M
+(// Name: Tharun-Kumaran) s
+5 331 M
+(// Roll No: 2117250020478) s
+5 313 M
+(/*Create methods:) s
+5 304 M
+(\342\\200\242 add\(\)) s
+5 295 M
+(\342\\200\242 subtract\(\)) s
+5 286 M
+(\342\\200\242 multiply\(\)) s
+5 277 M
+(Display the results using an object.*/) s
+5 259 M
+(class Calculator {) s
+5 250 M
+(    // Methods returning the results) s
+5 241 M
+(    public double add\(double a, double b\) {) s
+5 232 M
+(        return a + b;) s
+5 223 M
+(    }) s
+5 205 M
+(    public double subtract\(double a, double b\) {) s
+5 196 M
+(        return a - b;) s
+5 187 M
+(    }) s
+5 169 M
+(    public double multiply\(double a, double b\) {) s
+5 160 M
+(        return a * b;) s
+5 151 M
+(    }) s
+5 142 M
+(}) s
+5 124 M
+(public class task17 {) s
+5 106 M
+(        public static void main\(String[] args\) {) s
+5 97 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 88 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 79 M
+(                // TODO Auto-generated method stub) s
+5 70 M
+(                Calculator calc = new Calculator\(\);) s
+5 52 M
+(        // Define input numbers) s
+5 43 M
+(        double num1 = 20.0;) s
+5 34 M
+(        double num2 = 5.0;) s
+5 16 M
+(        // Display the results using the object) s
+5 7 M
+(        System.out.println\("Addition: " + calc.add\(num1, num2\)\);) s
+_R
+S
+%%Page: (15) 15
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 15 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit1_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit1_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(        System.out.println\("Subtraction: " + calc.subtract\(num1, num2\)\);) s
+5 700 M
+(        System.out.println\("Multiplication: " + calc.multiply\(num1, num2\)\);) s
+5 682 M
+(        }) s
+5 664 M
+(}) s
+5 637 M
+(OUTPUT) s
+5 628 M
+(---------------------------------------------------------------------------) s
+5 619 M
+(Name: Tharun-Kumaran) s
+5 610 M
+(Roll No: 2117250020478) s
+5 601 M
+(Name: Tharun-Kumaran) s
+5 592 M
+(Roll No: 2117250020478) s
+5 583 M
+(Addition: 25.0) s
+5 574 M
+(Subtraction: 15.0) s
+5 565 M
+(Multiplication: 100.0) s
+5 529 M
+(===========================================================================) s
+5 520 M
+(                         TASK18) s
+5 511 M
+(===========================================================================) s
+5 493 M
+(SOURCE CODE) s
+5 484 M
+(---------------------------------------------------------------------------) s
+5 475 M
+(Name: Tharun-Kumaran) s
+5 466 M
+(Roll No: 2117250020478) s
+5 448 M
+(package unit1;) s
+5 439 M
+(// Name: Tharun-Kumaran) s
+5 430 M
+(// Roll No: 2117250020478) s
+5 403 M
+(/*Write a Java Program to demonstrate all four access specifiers using two classes in two differen*/) s
+5 376 M
+(// Helper class within the same package to hold different access levels) s
+5 367 M
+(class DataHolder {) s
+5 358 M
+(    // 1. Public: Accessible from anywhere) s
+5 349 M
+(    public String publicVar = "Public Variable: Accessible everywhere.";) s
+5 331 M
+(    // 2. Protected: Accessible within the same package and by subclasses) s
+5 322 M
+(    protected String protectedVar = "Protected Variable: Accessible in same package.";) s
+5 304 M
+(    // 3. Default \(No keyword\): Accessible only within the same package) s
+5 295 M
+(    String defaultVar = "Default Variable: Accessible within the package.";) s
+5 277 M
+(    // 4. Private: Accessible ONLY inside this class) s
+5 268 M
+(    private String privateVar = "Private Variable: Restrictive, inside DataHolder only.";) s
+5 250 M
+(    // Public method to show all variables inside their own class) s
+5 241 M
+(    public void displayAll\(\) {) s
+5 232 M
+(        System.out.println\("--- Inside DataHolder Class ---"\);) s
+5 223 M
+(        System.out.println\(publicVar\);) s
+5 214 M
+(        System.out.println\(protectedVar\);) s
+5 205 M
+(        System.out.println\(defaultVar\);) s
+5 196 M
+(        System.out.println\(privateVar\); // Fully accessible here) s
+5 187 M
+(    }) s
+5 169 M
+(    // Getter method to allow controlled access to the private variable outside) s
+5 160 M
+(    public String getPrivateVar\(\) {) s
+5 151 M
+(        return privateVar;) s
+5 142 M
+(    }) s
+5 133 M
+(}) s
+5 115 M
+(public class task18 {) s
+5 97 M
+(        public static void main\(String[] args\) {) s
+5 88 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 79 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 70 M
+(                // Instantiate the helper class) s
+5 61 M
+(                DataHolder holder = new DataHolder\(\);) s
+5 52 M
+(                ) s
+5 43 M
+(                // Display access from within the helper class itself) s
+5 34 M
+(                holder.displayAll\(\);) s
+5 25 M
+(                System.out.println\(\);) s
+5 7 M
+(                // Demonstrate access from a separate class \(task18\) in the same package) s
+_R
+S
+%%Page: (16) 16
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 16 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit1_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit1_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(                System.out.println\("--- Accessing from task18 Class ---"\);) s
+5 700 M
+(                ) s
+5 691 M
+(                // Accessing public, protected, and default variables directly) s
+5 682 M
+(                System.out.println\(holder.publicVar\);) s
+5 673 M
+(                System.out.println\(holder.protectedVar\);) s
+5 664 M
+(                System.out.println\(holder.defaultVar\);) s
+5 655 M
+(                ) s
+5 646 M
+(                // CRITICAL: Un-commenting the line below will throw a compile-time error) s
+5 637 M
+(                // System.out.println\(holder.privateVar\); ) s
+5 628 M
+(                ) s
+5 619 M
+(                // Accessing the private variable safely using a public getter method) s
+5 610 M
+(                System.out.println\("Indirectly: " + holder.getPrivateVar\(\)\);) s
+5 601 M
+(        }) s
+5 583 M
+(}) s
+5 556 M
+(OUTPUT) s
+5 547 M
+(---------------------------------------------------------------------------) s
+5 538 M
+(Name: Tharun-Kumaran) s
+5 529 M
+(Roll No: 2117250020478) s
+5 520 M
+(Name: Tharun-Kumaran) s
+5 511 M
+(Roll No: 2117250020478) s
+5 502 M
+(--- Inside DataHolder Class ---) s
+5 493 M
+(Public Variable: Accessible everywhere.) s
+5 484 M
+(Protected Variable: Accessible in same package.) s
+5 475 M
+(Default Variable: Accessible within the package.) s
+5 466 M
+(Private Variable: Restrictive, inside DataHolder only.) s
+5 448 M
+(--- Accessing from task18 Class ---) s
+5 439 M
+(Public Variable: Accessible everywhere.) s
+5 430 M
+(Protected Variable: Accessible in same package.) s
+5 421 M
+(Default Variable: Accessible within the package.) s
+5 412 M
+(Indirectly: Private Variable: Restrictive, inside DataHolder only.) s
+5 376 M
+(===========================================================================) s
+5 367 M
+(                         TASK19) s
+5 358 M
+(===========================================================================) s
+5 340 M
+(SOURCE CODE) s
+5 331 M
+(---------------------------------------------------------------------------) s
+5 322 M
+(Name: Tharun-Kumaran) s
+5 313 M
+(Roll No: 2117250020478) s
+5 295 M
+(package unit1;) s
+5 286 M
+(// Name: Tharun-Kumaran) s
+5 277 M
+(// Roll No: 2117250020478) s
+5 259 M
+(/*Create a class Student with:) s
+5 250 M
+(\342\\200\242 Roll Number) s
+5 241 M
+(\342\\200\242 Name) s
+5 232 M
+(\342\\200\242 Static variable college) s
+5 223 M
+(Create two student objects and display their details.*/) s
+5 214 M
+(class Student6 {) s
+5 205 M
+(    // Instance variables \(unique to each object\)) s
+5 196 M
+(    int rollNo;) s
+5 187 M
+(    String name;) s
+5 169 M
+(    // Static variable \(shared among all objects\)) s
+5 160 M
+(    static String college = "RIT";) s
+5 142 M
+(    // Constructor to initialize instance variables) s
+5 133 M
+(    public Student6\(int rollNo, String name\) {) s
+5 124 M
+(        this.rollNo = rollNo;) s
+5 115 M
+(        this.name = name;) s
+5 106 M
+(    }) s
+5 88 M
+(    // Method to display student details) s
+5 79 M
+(    public void displayDetails\(\) {) s
+5 70 M
+(        System.out.println\("Roll Number: " + rollNo\);) s
+5 61 M
+(        System.out.println\("Name: " + name\);) s
+5 52 M
+(        System.out.println\("College: " + college\);) s
+5 43 M
+(        System.out.println\("---------------------------"\);) s
+5 34 M
+(    }) s
+5 25 M
+(}) s
+5 7 M
+(public class task19 {) s
+_R
+S
+%%Page: (17) 17
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 17 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit1_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit1_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 700 M
+(        public static void main\(String[] args\) {) s
+5 691 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 682 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 673 M
+(                // TODO Auto-generated method stub) s
+5 664 M
+(                Student6 student1 = new Student6\(101, "Alice"\);) s
+5 655 M
+(        Student6 student2 = new Student6\(102, "Bob"\);) s
+5 637 M
+(        // Displaying details of both students) s
+5 628 M
+(        System.out.println\("--- Student 1 Details ---"\);) s
+5 619 M
+(        student1.displayDetails\(\);) s
+5 601 M
+(        System.out.println\("--- Student 2 Details ---"\);) s
+5 592 M
+(        student2.displayDetails\(\);) s
+5 583 M
+(                ) s
+5 565 M
+(        }) s
+5 547 M
+(}) s
+5 520 M
+(OUTPUT) s
+5 511 M
+(---------------------------------------------------------------------------) s
+5 502 M
+(Name: Tharun-Kumaran) s
+5 493 M
+(Roll No: 2117250020478) s
+5 484 M
+(Name: Tharun-Kumaran) s
+5 475 M
+(Roll No: 2117250020478) s
+5 466 M
+(--- Student 1 Details ---) s
+5 457 M
+(Roll Number: 101) s
+5 448 M
+(Name: Alice) s
+5 439 M
+(College: RIT) s
+5 430 M
+(---------------------------) s
+5 421 M
+(--- Student 2 Details ---) s
+5 412 M
+(Roll Number: 102) s
+5 403 M
+(Name: Bob) s
+5 394 M
+(College: RIT) s
+5 385 M
+(---------------------------) s
+5 349 M
+(===========================================================================) s
+5 340 M
+(                         TASK20) s
+5 331 M
+(===========================================================================) s
+5 313 M
+(SOURCE CODE) s
+5 304 M
+(---------------------------------------------------------------------------) s
+5 295 M
+(Name: Tharun-Kumaran) s
+5 286 M
+(Roll No: 2117250020478) s
+5 268 M
+(package unit1;) s
+5 259 M
+(// Name: Tharun-Kumaran) s
+5 250 M
+(// Roll No: 2117250020478) s
+5 232 M
+(/*Write a Java program to implement a Mobile Store using a default constructor. Create a Mobile class) s
+5 223 M
+(with the attributes brand and price. The default constructor should display a welcome message when) s
+5 214 M
+(a mobile object is created. Display the mobile details after object creation.*/) s
+5 205 M
+(class Mobile {) s
+5 196 M
+(    // Attributes) s
+5 187 M
+(    String brand;) s
+5 178 M
+(    double price;) s
+5 160 M
+(    // Default constructor \(no-argument constructor\)) s
+5 151 M
+(    Mobile\(\) {) s
+5 142 M
+(        System.out.println\("Welcome to the Mobile Store!"\);) s
+5 133 M
+(        brand = "Samsung";) s
+5 124 M
+(        price = 75000.0;) s
+5 115 M
+(    }) s
+5 97 M
+(    // Method to display mobile details) s
+5 88 M
+(    void displayDetails\(\) {) s
+5 79 M
+(        System.out.println\("Mobile Brand: " + brand\);) s
+5 70 M
+(        System.out.println\("Mobile Price: \342\\202\271" + price\);) s
+5 61 M
+(    }) s
+5 52 M
+(}) s
+5 43 M
+(public class task20 {) s
+5 25 M
+(        public static void main\(String[] args\) {) s
+5 16 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 7 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+_R
+S
+%%Page: (18) 18
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 18 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit1_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit1_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(                // TODO Auto-generated method stub) s
+5 700 M
+(                Mobile myMobile = new Mobile\(\);) s
+5 691 M
+(        ) s
+5 682 M
+(        System.out.println\("\\nDisplaying Mobile Details After Creation:"\);) s
+5 673 M
+(        myMobile.displayDetails\(\);) s
+5 655 M
+(        }) s
+5 637 M
+(}) s
+5 610 M
+(OUTPUT) s
+5 601 M
+(---------------------------------------------------------------------------) s
+5 592 M
+(Name: Tharun-Kumaran) s
+5 583 M
+(Roll No: 2117250020478) s
+5 574 M
+(Name: Tharun-Kumaran) s
+5 565 M
+(Roll No: 2117250020478) s
+5 556 M
+(Welcome to the Mobile Store!) s
+5 538 M
+(Displaying Mobile Details After Creation:) s
+5 529 M
+(Mobile Brand: Samsung) s
+5 520 M
+(Mobile Price: \342\\202\27175000.0) s
+5 484 M
+(===========================================================================) s
+5 475 M
+(                         TASK21) s
+5 466 M
+(===========================================================================) s
+5 448 M
+(SOURCE CODE) s
+5 439 M
+(---------------------------------------------------------------------------) s
+5 430 M
+(Name: Tharun-Kumaran) s
+5 421 M
+(Roll No: 2117250020478) s
+5 403 M
+(package unit1;) s
+5 394 M
+(// Name: Tharun-Kumaran) s
+5 385 M
+(// Roll No: 2117250020478) s
+5 367 M
+(/*Write a Java program to implement a Mobile Store using a parameterized constructor. Create) s
+5 358 M
+(a Mobile class with the attributes brand and price. Accept the values through the constructor and) s
+5 349 M
+(display the details of two different mobile objects.*/) s
+5 322 M
+(class Mobile1 {) s
+5 313 M
+(    String brand;) s
+5 304 M
+(    double price;) s
+5 286 M
+(    // Parameterized constructor to initialize brand and price) s
+5 277 M
+(    Mobile1\(String brand, double price\) {) s
+5 268 M
+(        this.brand = brand;) s
+5 259 M
+(        this.price = price;) s
+5 250 M
+(    }) s
+5 232 M
+(    // Method to display mobile details) s
+5 223 M
+(    void displayDetails\(\) {) s
+5 214 M
+(        System.out.println\("Brand: " + brand\);) s
+5 205 M
+(        System.out.println\("Price: Rs " + price\);) s
+5 196 M
+(        System.out.println\("--------------------------"\);) s
+5 187 M
+(    }) s
+5 178 M
+(}) s
+5 160 M
+(public class task21 {) s
+5 142 M
+(        public static void main\(String[] args\) {) s
+5 133 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 124 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 115 M
+(                // TODO Auto-generated method stub) s
+5 106 M
+(                System.out.println\("=== Welcome to the Mobile Store ==="\);) s
+5 97 M
+(        ) s
+5 88 M
+(        // Creating two different mobile objects using the parameterized constructor) s
+5 79 M
+(        Mobile1 mobile1 = new Mobile1\("Apple", 999.99\);) s
+5 70 M
+(        Mobile1 mobile2 = new Mobile1\("Samsung", 799.50\);) s
+5 52 M
+(        // Displaying the details of both mobile objects) s
+5 43 M
+(        mobile1.displayDetails\(\);) s
+5 34 M
+(        mobile2.displayDetails\(\);) s
+5 16 M
+(        }) s
+_R
+S
+%%Page: (19) 19
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 19 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit1_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit1_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(}) s
+5 682 M
+(OUTPUT) s
+5 673 M
+(---------------------------------------------------------------------------) s
+5 664 M
+(Name: Tharun-Kumaran) s
+5 655 M
+(Roll No: 2117250020478) s
+5 646 M
+(Name: Tharun-Kumaran) s
+5 637 M
+(Roll No: 2117250020478) s
+5 628 M
+(=== Welcome to the Mobile Store ===) s
+5 619 M
+(Brand: Apple) s
+5 610 M
+(Price: Rs 999.99) s
+5 601 M
+(--------------------------) s
+5 592 M
+(Brand: Samsung) s
+5 583 M
+(Price: Rs 799.5) s
+5 574 M
+(--------------------------) s
+5 538 M
+(===========================================================================) s
+5 529 M
+(                         TASK22) s
+5 520 M
+(===========================================================================) s
+5 502 M
+(SOURCE CODE) s
+5 493 M
+(---------------------------------------------------------------------------) s
+5 484 M
+(Name: Tharun-Kumaran) s
+5 475 M
+(Roll No: 2117250020478) s
+5 457 M
+(package unit1;) s
+5 448 M
+(// Name: Tharun-Kumaran) s
+5 439 M
+(// Roll No: 2117250020478) s
+5 421 M
+(/* Write a Java program to implement a user-defined copy constructor in a Mobile Store application.) s
+5 412 M
+(Create a mobile object with a brand and price, then create another object by copying the first object) s
+5 403 M
+(using the copy constructor. Display the details of both objects.*/) s
+5 385 M
+(class Mobile2 {) s
+5 376 M
+(    private String brand;) s
+5 367 M
+(    private double price;) s
+5 349 M
+(    // Parameterized constructor to initialize the first mobile object) s
+5 340 M
+(    public Mobile2\(String brand, double price\) {) s
+5 331 M
+(        this.brand = brand;) s
+5 322 M
+(        this.price = price;) s
+5 313 M
+(    }) s
+5 295 M
+(    // User-defined copy constructor) s
+5 286 M
+(    // It accepts an object of the same class as a parameter) s
+5 277 M
+(    public Mobile2\(Mobile2 otherMobile\) {) s
+5 268 M
+(        this.brand = otherMobile.brand; // Copying the brand) s
+5 259 M
+(        this.price = otherMobile.price; // Copying the price) s
+5 250 M
+(    }) s
+5 232 M
+(    // Method to display mobile details) s
+5 223 M
+(    public void displayDetails\(String objectLabel\) {) s
+5 214 M
+(        System.out.println\(objectLabel + " -> Brand: " + brand + ", Price: $" + price\);) s
+5 205 M
+(    }) s
+5 196 M
+(}) s
+5 187 M
+(public class task22 {) s
+5 169 M
+(        public static void main\(String[] args\) {) s
+5 160 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 151 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 142 M
+(                // TODO Auto-generated method stub) s
+5 133 M
+(        System.out.println\("--- Mobile Store Application --- \\n"\);) s
+5 115 M
+(        // 1. Create the original mobile object using the parameterized constructor) s
+5 106 M
+(        Mobile2 originalMobile = new Mobile2\("Apple iPhone 15", 799.99\);) s
+5 88 M
+(        // 2. Create a duplicate object by passing the original object into the copy constructor) s
+5 79 M
+(        Mobile2 copiedMobile = new Mobile2\(originalMobile\);) s
+5 61 M
+(        // 3. Display the details of both objects to verify they match) s
+5 52 M
+(        originalMobile.displayDetails\("Original Mobile"\);) s
+5 43 M
+(        copiedMobile.displayDetails\("Copied Mobile  "\);) s
+5 25 M
+(        }) s
+5 7 M
+(}) s
+_R
+S
+%%Page: (20) 20
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 20 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit1_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit1_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 691 M
+(OUTPUT) s
+5 682 M
+(---------------------------------------------------------------------------) s
+5 673 M
+(Name: Tharun-Kumaran) s
+5 664 M
+(Roll No: 2117250020478) s
+5 655 M
+(Name: Tharun-Kumaran) s
+5 646 M
+(Roll No: 2117250020478) s
+5 637 M
+(--- Mobile Store Application --- ) s
+5 619 M
+(Original Mobile -> Brand: Apple iPhone 15, Price: $799.99) s
+5 610 M
+(Copied Mobile   -> Brand: Apple iPhone 15, Price: $799.99) s
+5 574 M
+(===========================================================================) s
+5 565 M
+(                         TASK23) s
+5 556 M
+(===========================================================================) s
+5 538 M
+(SOURCE CODE) s
+5 529 M
+(---------------------------------------------------------------------------) s
+5 520 M
+(Name: Tharun-Kumaran) s
+5 511 M
+(Roll No: 2117250020478) s
+5 493 M
+(package unit1;) s
+5 484 M
+(// Name: Tharun-Kumaran) s
+5 475 M
+(// Roll No: 2117250020478) s
+5 457 M
+(/*Write a Java program to demonstrate a no-argument constructor using a Mobile Store application.) s
+5 448 M
+(Initialize the mobile details inside the constructor and display the details using a member function.*/) s
+5 430 M
+(class Mobile3 {) s
+5 421 M
+(    // Instance variables \(Mobile details\)) s
+5 412 M
+(    String brand;) s
+5 403 M
+(    String model;) s
+5 394 M
+(    double price;) s
+5 385 M
+(    int ramSize; // in GB) s
+5 367 M
+(    // No-argument constructor to initialize mobile details) s
+5 358 M
+(    Mobile3\(\) {) s
+5 349 M
+(        brand = "Samsung";) s
+5 340 M
+(        model = "Galaxy S24";) s
+5 331 M
+(        price = 79999.00;) s
+5 322 M
+(        ramSize = 8;) s
+5 313 M
+(    }) s
+5 295 M
+(    // Member function to display mobile details) s
+5 286 M
+(    void displayDetails\(\) {) s
+5 277 M
+(        System.out.println\("--- Mobile Store Item Details ---"\);) s
+5 268 M
+(        System.out.println\("Brand: " + brand\);) s
+5 259 M
+(        System.out.println\("Model: " + model\);) s
+5 250 M
+(        System.out.println\("Price: \342\\202\271" + price\);) s
+5 241 M
+(        System.out.println\("RAM: " + ramSize + " GB"\);) s
+5 232 M
+(    }) s
+5 223 M
+(}) s
+5 214 M
+(public class task23 {) s
+5 196 M
+(        public static void main\(String[] args\) {) s
+5 187 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 178 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 169 M
+(                // TODO Auto-generated method stub) s
+5 160 M
+(                Mobile3 myMobile = new Mobile3\(\);) s
+5 142 M
+(        // Calling the member function to display the initialized details) s
+5 133 M
+(        myMobile.displayDetails\(\);) s
+5 115 M
+(        }) s
+5 97 M
+(}) s
+5 70 M
+(OUTPUT) s
+5 61 M
+(---------------------------------------------------------------------------) s
+5 52 M
+(Name: Tharun-Kumaran) s
+5 43 M
+(Roll No: 2117250020478) s
+5 34 M
+(Name: Tharun-Kumaran) s
+5 25 M
+(Roll No: 2117250020478) s
+5 16 M
+(--- Mobile Store Item Details ---) s
+5 7 M
+(Brand: Samsung) s
+_R
+S
+%%Page: (21) 21
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 21 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit1_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit1_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(Model: Galaxy S24) s
+5 700 M
+(Price: \342\\202\27179999.0) s
+5 691 M
+(RAM: 8 GB) s
+5 655 M
+(===========================================================================) s
+5 646 M
+(                         TASK24) s
+5 637 M
+(===========================================================================) s
+5 619 M
+(SOURCE CODE) s
+5 610 M
+(---------------------------------------------------------------------------) s
+5 601 M
+(Name: Tharun-Kumaran) s
+5 592 M
+(Roll No: 2117250020478) s
+5 574 M
+(package unit1;) s
+5 565 M
+(// Name: Tharun-Kumaran) s
+5 556 M
+(// Roll No: 2117250020478) s
+5 538 M
+(/*Write a Java program to demonstrate constructor overloading in a Mobile Store) s
+5 529 M
+(application. Create a Mobile class with three constructors:) s
+5 520 M
+(\342\\227\\217 A default constructor) s
+5 511 M
+(\342\\227\\217 A constructor that accepts only the mobile brand) s
+5 502 M
+(\342\\227\\217 A constructor that accepts both the mobile brand and price) s
+5 493 M
+(Create objects using all three constructors and display their details.*/) s
+5 475 M
+(class Mobile4 {) s
+5 466 M
+(    // Instance variables) s
+5 457 M
+(    private String brand;) s
+5 448 M
+(    private double price;) s
+5 430 M
+(    // 1. Default constructor) s
+5 421 M
+(    public Mobile4\(\) {) s
+5 412 M
+(        this.brand = "Unknown Brand";) s
+5 403 M
+(        this.price = 0.0;) s
+5 394 M
+(    }) s
+5 376 M
+(    // 2. Constructor that accepts only the mobile brand) s
+5 367 M
+(    public Mobile4\(String brand\) {) s
+5 358 M
+(        this.brand = brand;) s
+5 349 M
+(        this.price = 0.0; // Default price when not specified) s
+5 340 M
+(    }) s
+5 322 M
+(    // 3. Constructor that accepts both the mobile brand and price) s
+5 313 M
+(    public Mobile4\(String brand, double price\) {) s
+5 304 M
+(        this.brand = brand;) s
+5 295 M
+(        this.price = price;) s
+5 286 M
+(    }) s
+5 268 M
+(    // Method to display the details of the mobile object) s
+5 259 M
+(    public void displayDetails\(\) {) s
+5 250 M
+(        System.out.println\("Mobile Brand: " + brand + " | Price: $" + price\);) s
+5 241 M
+(    }) s
+5 232 M
+(}) s
+5 214 M
+(public class task24 {) s
+5 196 M
+(        public static void main\(String[] args\) {) s
+5 187 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 178 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 169 M
+(                // TODO Auto-generated method stub) s
+5 160 M
+(                System.out.println\("--- Welcome to the Mobile Store --- \\n"\);) s
+5 142 M
+(        // Creating an object using the default constructor) s
+5 133 M
+(        Mobile4 mobile1 = new Mobile4\(\);) s
+5 124 M
+(        ) s
+5 115 M
+(        // Creating an object using the brand-only constructor) s
+5 106 M
+(        Mobile4 mobile2 = new Mobile4\("Apple iPhone"\);) s
+5 97 M
+(        ) s
+5 88 M
+(        // Creating an object using the brand and price constructor) s
+5 79 M
+(        Mobile4 mobile3 = new Mobile4\("Samsung Galaxy", 1199.99\);) s
+5 61 M
+(        // Displaying details of all created objects) s
+5 52 M
+(        System.out.println\("Object 1 Details \(Default\):"\);) s
+5 43 M
+(        mobile1.displayDetails\(\);) s
+5 34 M
+(        ) s
+5 25 M
+(        System.out.println\("\\nObject 2 Details \(Brand Only\):"\);) s
+5 16 M
+(        mobile2.displayDetails\(\);) s
+5 7 M
+(        ) s
+_R
+S
+%%Page: (22) 22
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 22 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit1_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit1_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(        System.out.println\("\\nObject 3 Details \(Brand and Price\):"\);) s
+5 700 M
+(        mobile3.displayDetails\(\);) s
+5 691 M
+(                ) s
+5 673 M
+(        }) s
+5 655 M
+(}) s
+5 628 M
+(OUTPUT) s
+5 619 M
+(---------------------------------------------------------------------------) s
+5 610 M
+(Name: Tharun-Kumaran) s
+5 601 M
+(Roll No: 2117250020478) s
+5 592 M
+(Name: Tharun-Kumaran) s
+5 583 M
+(Roll No: 2117250020478) s
+5 574 M
+(--- Welcome to the Mobile Store --- ) s
+5 556 M
+(Object 1 Details \(Default\):) s
+5 547 M
+(Mobile Brand: Unknown Brand | Price: $0.0) s
+5 529 M
+(Object 2 Details \(Brand Only\):) s
+5 520 M
+(Mobile Brand: Apple iPhone | Price: $0.0) s
+5 502 M
+(Object 3 Details \(Brand and Price\):) s
+5 493 M
+(Mobile Brand: Samsung Galaxy | Price: $1199.99) s
+5 457 M
+(===========================================================================) s
+5 448 M
+(                         TASK25) s
+5 439 M
+(===========================================================================) s
+5 421 M
+(SOURCE CODE) s
+5 412 M
+(---------------------------------------------------------------------------) s
+5 403 M
+(Name: Tharun-Kumaran) s
+5 394 M
+(Roll No: 2117250020478) s
+5 376 M
+(package unit1;) s
+5 367 M
+(// Name: Tharun-Kumaran) s
+5 358 M
+(// Roll No: 2117250020478) s
+5 331 M
+(/*Write a Java program that uses long variables to store massive numbers representing) s
+5 322 M
+(galactic distances and global web searches.*/) s
+5 286 M
+(public class task25 {) s
+5 268 M
+(        public static void main\(String[] args\) {) s
+5 259 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 250 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 241 M
+(                // TODO Auto-generated method stub) s
+5 232 M
+(                ) s
+5 223 M
+(                long distanceToAndromedaKm = 2400000000000000000L; ) s
+5 205 M
+(        // Global web searches: Estimated total Google searches per year worldwide) s
+5 196 M
+(        long annualGlobalWebSearches = 2000000000000L; ) s
+5 178 M
+(        // Print the values with descriptive text) s
+5 169 M
+(        System.out.println\("--- Galactic Distances ---"\);) s
+5 160 M
+(        System.out.println\("Distance to the Andromeda Galaxy: " + distanceToAndromedaKm + " km"\);) s
+5 142 M
+(        System.out.println\("\\n--- Global Web Metrics ---"\);) s
+5 133 M
+(        System.out.println\("Estimated annual global web searches: " + annualGlobalWebSearches\);) s
+5 124 M
+(    ) s
+5 106 M
+(        }) s
+5 88 M
+(}) s
+5 61 M
+(OUTPUT) s
+5 52 M
+(---------------------------------------------------------------------------) s
+5 43 M
+(Name: Tharun-Kumaran) s
+5 34 M
+(Roll No: 2117250020478) s
+5 25 M
+(Name: Tharun-Kumaran) s
+5 16 M
+(Roll No: 2117250020478) s
+5 7 M
+(--- Galactic Distances ---) s
+_R
+S
+%%Page: (23) 23
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 23 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit1_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit1_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(Distance to the Andromeda Galaxy: 2400000000000000000 km) s
+5 691 M
+(--- Global Web Metrics ---) s
+5 682 M
+(Estimated annual global web searches: 2000000000000) s
+_R
+S
+%%Trailer
+%%Pages: 23
+%%DocumentNeededResources: font Courier-Bold Courier 
+%%EOF

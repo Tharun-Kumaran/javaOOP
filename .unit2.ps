@@ -1,0 +1,4543 @@
+%!PS-Adobe-3.0
+%%BoundingBox: 18 36 594 756
+%%Title: Enscript Output
+%%Creator: GNU Enscript 1.6.5.90
+%%CreationDate: Tue Oct  6 10:18:27 2026
+%%Orientation: Portrait
+%%Pages: (atend)
+%%DocumentMedia: Letter 612 792 0 () ()
+%%DocumentNeededResources: (atend)
+%%EndComments
+%%BeginProlog
+%%BeginResource: procset Enscript-Prolog 1.6.5 90
+%
+% Procedures.
+%
+
+/_S {	% save current state
+  /_s save def
+} def
+/_R {	% restore from saved state
+  _s restore
+} def
+
+/S {	% showpage protecting gstate
+  gsave
+  showpage
+  grestore
+} bind def
+
+/MF {	% fontname newfontname -> -	make a new encoded font
+  /newfontname exch def
+  /fontname exch def
+
+  /fontdict fontname findfont def
+  /newfont fontdict maxlength dict def
+
+  fontdict {
+    exch
+    dup /FID eq {
+      % skip FID pair
+      pop pop
+    } {
+      % copy to the new font dictionary
+      exch newfont 3 1 roll put
+    } ifelse
+  } forall
+
+  newfont /FontName newfontname put
+
+  % insert only valid encoding vectors
+  encoding_vector length 256 eq {
+    newfont /Encoding encoding_vector put
+  } if
+
+  newfontname newfont definefont pop
+} def
+
+/MF_PS { % fontname newfontname -> -	make a new font preserving its enc
+  /newfontname exch def
+  /fontname exch def
+
+  /fontdict fontname findfont def
+  /newfont fontdict maxlength dict def
+
+  fontdict {
+    exch
+    dup /FID eq {
+      % skip FID pair
+      pop pop
+    } {
+      % copy to the new font dictionary
+      exch newfont 3 1 roll put
+    } ifelse
+  } forall
+
+  newfont /FontName newfontname put
+
+  newfontname newfont definefont pop
+} def
+
+/SF { % fontname width height -> -	set a new font
+  /height exch def
+  /width exch def
+
+  findfont
+  [width 0 0 height 0 0] makefont setfont
+} def
+
+/SUF { % fontname width height -> -	set a new user font
+  /height exch def
+  /width exch def
+
+  /F-gs-user-font MF
+  /F-gs-user-font width height SF
+} def
+
+/SUF_PS { % fontname width height -> -	set a new user font preserving its enc
+  /height exch def
+  /width exch def
+
+  /F-gs-user-font MF_PS
+  /F-gs-user-font width height SF
+} def
+
+/M {moveto} bind def
+/s {show} bind def
+
+/Box {	% x y w h -> -			define box path
+  /d_h exch def /d_w exch def /d_y exch def /d_x exch def
+  d_x d_y  moveto
+  d_w 0 rlineto
+  0 d_h rlineto
+  d_w neg 0 rlineto
+  closepath
+} def
+
+/bgs {	% x y height blskip gray str -> -	show string with bg color
+  /str exch def
+  /gray exch def
+  /blskip exch def
+  /height exch def
+  /y exch def
+  /x exch def
+
+  gsave
+    x y blskip sub str stringwidth pop height Box
+    gray setgray
+    fill
+  grestore
+  x y M str s
+} def
+
+/bgcs { % x y height blskip red green blue str -> -  show string with bg color
+  /str exch def
+  /blue exch def
+  /green exch def
+  /red exch def
+  /blskip exch def
+  /height exch def
+  /y exch def
+  /x exch def
+
+  gsave
+    x y blskip sub str stringwidth pop height Box
+    red green blue setrgbcolor
+    fill
+  grestore
+  x y M str s
+} def
+
+% Highlight bars.
+/highlight_bars {	% nlines lineheight output_y_margin gray -> -
+  gsave
+    setgray
+    /ymarg exch def
+    /lineheight exch def
+    /nlines exch def
+
+    % This 2 is just a magic number to sync highlight lines to text.
+    0 d_header_y ymarg sub 2 sub translate
+
+    /cw d_output_w cols div def
+    /nrows d_output_h ymarg 2 mul sub lineheight div cvi def
+
+    % for each column
+    0 1 cols 1 sub {
+      cw mul /xp exch def
+
+      % for each rows
+      0 1 nrows 1 sub {
+        /rn exch def
+        rn lineheight mul neg /yp exch def
+        rn nlines idiv 2 mod 0 eq {
+	  % Draw highlight bar.  4 is just a magic indentation.
+	  xp 4 add yp cw 8 sub lineheight neg Box fill
+	} if
+      } for
+    } for
+
+  grestore
+} def
+
+% Line highlight bar.
+/line_highlight {	% x y width height gray -> -
+  gsave
+    /gray exch def
+    Box gray setgray fill
+  grestore
+} def
+
+% Column separator lines.
+/column_lines {
+  gsave
+    .1 setlinewidth
+    0 d_footer_h translate
+    /cw d_output_w cols div def
+    1 1 cols 1 sub {
+      cw mul 0 moveto
+      0 d_output_h rlineto stroke
+    } for
+  grestore
+} def
+
+% Column borders.
+/column_borders {
+  gsave
+    .1 setlinewidth
+    0 d_footer_h moveto
+    0 d_output_h rlineto
+    d_output_w 0 rlineto
+    0 d_output_h neg rlineto
+    closepath stroke
+  grestore
+} def
+
+% Do the actual underlay drawing
+/draw_underlay {
+  ul_style 0 eq {
+    ul_str true charpath stroke
+  } {
+    ul_str show
+  } ifelse
+} def
+
+% Underlay
+/underlay {	% - -> -
+  gsave
+    0 d_page_h translate
+    d_page_h neg d_page_w atan rotate
+
+    ul_gray setgray
+    ul_font setfont
+    /dw d_page_h dup mul d_page_w dup mul add sqrt def
+    ul_str stringwidth pop dw exch sub 2 div ul_h_ptsize -2 div moveto
+    draw_underlay
+  grestore
+} def
+
+/user_underlay {	% - -> -
+  gsave
+    ul_x ul_y translate
+    ul_angle rotate
+    ul_gray setgray
+    ul_font setfont
+    0 0 ul_h_ptsize 2 div sub moveto
+    draw_underlay
+  grestore
+} def
+
+% Page prefeed
+/page_prefeed {		% bool -> -
+  statusdict /prefeed known {
+    statusdict exch /prefeed exch put
+  } {
+    pop
+  } ifelse
+} def
+
+% Wrapped line markers
+/wrapped_line_mark {	% x y charwith charheight type -> -
+  /type exch def
+  /h exch def
+  /w exch def
+  /y exch def
+  /x exch def
+
+  type 2 eq {
+    % Black boxes (like TeX does)
+    gsave
+      0 setlinewidth
+      x w 4 div add y M
+      0 h rlineto w 2 div 0 rlineto 0 h neg rlineto
+      closepath fill
+    grestore
+  } {
+    type 3 eq {
+      % Small arrows
+      gsave
+        .2 setlinewidth
+        x w 2 div add y h 2 div add M
+        w 4 div 0 rlineto
+        x w 4 div add y lineto stroke
+
+        x w 4 div add w 8 div add y h 4 div add M
+        x w 4 div add y lineto
+	w 4 div h 8 div rlineto stroke
+      grestore
+    } {
+      % do nothing
+    } ifelse
+  } ifelse
+} def
+
+% EPSF import.
+
+/BeginEPSF {
+  /b4_Inc_state save def    		% Save state for cleanup
+  /dict_count countdictstack def	% Count objects on dict stack
+  /op_count count 1 sub def		% Count objects on operand stack
+  userdict begin
+  /showpage { } def
+  0 setgray 0 setlinecap
+  1 setlinewidth 0 setlinejoin
+  10 setmiterlimit [ ] 0 setdash newpath
+  /languagelevel where {
+    pop languagelevel
+    1 ne {
+      false setstrokeadjust false setoverprint
+    } if
+  } if
+} bind def
+
+/EndEPSF {
+  count op_count sub { pos } repeat	% Clean up stacks
+  countdictstack dict_count sub { end } repeat
+  b4_Inc_state restore
+} bind def
+
+% Check PostScript language level.
+/languagelevel where {
+  pop /gs_languagelevel languagelevel def
+} {
+  /gs_languagelevel 1 def
+} ifelse
+%%EndResource
+%%BeginResource: procset Enscript-Encoding-88591 1.6.5 90
+/encoding_vector [
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/space        	/exclam       	/quotedbl     	/numbersign   	
+/dollar       	/percent      	/ampersand    	/quoteright   	
+/parenleft    	/parenright   	/asterisk     	/plus         	
+/comma        	/hyphen       	/period       	/slash        	
+/zero         	/one          	/two          	/three        	
+/four         	/five         	/six          	/seven        	
+/eight        	/nine         	/colon        	/semicolon    	
+/less         	/equal        	/greater      	/question     	
+/at           	/A            	/B            	/C            	
+/D            	/E            	/F            	/G            	
+/H            	/I            	/J            	/K            	
+/L            	/M            	/N            	/O            	
+/P            	/Q            	/R            	/S            	
+/T            	/U            	/V            	/W            	
+/X            	/Y            	/Z            	/bracketleft  	
+/backslash    	/bracketright 	/asciicircum  	/underscore   	
+/quoteleft    	/a            	/b            	/c            	
+/d            	/e            	/f            	/g            	
+/h            	/i            	/j            	/k            	
+/l            	/m            	/n            	/o            	
+/p            	/q            	/r            	/s            	
+/t            	/u            	/v            	/w            	
+/x            	/y            	/z            	/braceleft    	
+/bar          	/braceright   	/tilde        	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/space        	/exclamdown   	/cent         	/sterling     	
+/currency     	/yen          	/brokenbar    	/section      	
+/dieresis     	/copyright    	/ordfeminine  	/guillemotleft	
+/logicalnot   	/hyphen       	/registered   	/macron       	
+/degree       	/plusminus    	/twosuperior  	/threesuperior	
+/acute        	/mu           	/paragraph    	/bullet       	
+/cedilla      	/onesuperior  	/ordmasculine 	/guillemotright	
+/onequarter   	/onehalf      	/threequarters	/questiondown 	
+/Agrave       	/Aacute       	/Acircumflex  	/Atilde       	
+/Adieresis    	/Aring        	/AE           	/Ccedilla     	
+/Egrave       	/Eacute       	/Ecircumflex  	/Edieresis    	
+/Igrave       	/Iacute       	/Icircumflex  	/Idieresis    	
+/Eth          	/Ntilde       	/Ograve       	/Oacute       	
+/Ocircumflex  	/Otilde       	/Odieresis    	/multiply     	
+/Oslash       	/Ugrave       	/Uacute       	/Ucircumflex  	
+/Udieresis    	/Yacute       	/Thorn        	/germandbls   	
+/agrave       	/aacute       	/acircumflex  	/atilde       	
+/adieresis    	/aring        	/ae           	/ccedilla     	
+/egrave       	/eacute       	/ecircumflex  	/edieresis    	
+/igrave       	/iacute       	/icircumflex  	/idieresis    	
+/eth          	/ntilde       	/ograve       	/oacute       	
+/ocircumflex  	/otilde       	/odieresis    	/divide       	
+/oslash       	/ugrave       	/uacute       	/ucircumflex  	
+/udieresis    	/yacute       	/thorn        	/ydieresis    	
+] def
+%%EndResource
+%%EndProlog
+%%BeginSetup
+%%IncludeResource: font Courier-Bold
+%%IncludeResource: font Courier
+/HFpt_w 10 def
+/HFpt_h 10 def
+/Courier-Bold /HF-gs-font MF
+/HF /HF-gs-font findfont [HFpt_w 0 0 HFpt_h 0 0] makefont def
+/Courier /F-gs-font MF
+/F-gs-font 8 8 SF
+/#copies 1 def
+% Pagedevice definitions:
+gs_languagelevel 1 gt {
+  <<
+    /PageSize [612 792] 
+  >> setpagedevice
+} if
+/d_page_w 576 def
+/d_page_h 720 def
+/d_header_x 0 def
+/d_header_y 720 def
+/d_header_w 576 def
+/d_header_h 0 def
+/d_footer_x 0 def
+/d_footer_y 0 def
+/d_footer_w 576 def
+/d_footer_h 0 def
+/d_output_w 576 def
+/d_output_h 720 def
+/cols 1 def
+%%EndSetup
+%%Page: (1) 1
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 1 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit2_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit2_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 691 M
+(===========================================================================) s
+5 682 M
+(                         TASK01) s
+5 673 M
+(===========================================================================) s
+5 655 M
+(SOURCE CODE) s
+5 646 M
+(---------------------------------------------------------------------------) s
+5 637 M
+(Name: Tharun-Kumaran) s
+5 628 M
+(Roll No: 2117250020478) s
+5 610 M
+(package unit2;) s
+5 601 M
+(// Name: Tharun-Kumaran) s
+5 592 M
+(// Roll No: 2117250020478) s
+5 574 M
+(import java.util.*;) s
+5 565 M
+(public class task01 {) s
+5 556 M
+(    public static void main\(String[] args\) {) s
+5 547 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 538 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 529 M
+(        Scanner sc = new Scanner\(System.in\);) s
+5 520 M
+(        System.out.print\("Enter size: "\);) s
+5 511 M
+(        int n = sc.nextInt\(\);) s
+5 502 M
+(        int[] a = new int[n];) s
+5 493 M
+(        int sum = 0;) s
+5 484 M
+(        for \(int i = 0; i < n; i++\) {) s
+5 475 M
+(            a[i] = sc.nextInt\(\);) s
+5 466 M
+(            sum += a[i];) s
+5 457 M
+(        }) s
+5 448 M
+(        System.out.println\("Sum = " + sum\);) s
+5 439 M
+(    }) s
+5 430 M
+(}) s
+5 403 M
+(OUTPUT) s
+5 394 M
+(---------------------------------------------------------------------------) s
+5 385 M
+(Name: Tharun-Kumaran) s
+5 376 M
+(Roll No: 2117250020478) s
+5 367 M
+(Compilation Error:) s
+5 358 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 d) s
+5 349 M
+(oes not exist) s
+5 340 M
+(import unit2.mypackage1.Addition;) s
+5 331 M
+(                       ^) s
+5 322 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 313 M
+(        Addition a=new Addition\(\);) s
+5 304 M
+(        ^) s
+5 295 M
+(  symbol:   class Addition) s
+5 286 M
+(  location: class task12) s
+5 277 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 268 M
+(        Addition a=new Addition\(\);) s
+5 259 M
+(                       ^) s
+5 250 M
+(  symbol:   class Addition) s
+5 241 M
+(  location: class task12) s
+5 232 M
+(3 errors) s
+5 187 M
+(===========================================================================) s
+5 178 M
+(                         TASK02) s
+5 169 M
+(===========================================================================) s
+5 151 M
+(SOURCE CODE) s
+5 142 M
+(---------------------------------------------------------------------------) s
+5 133 M
+(Name: Tharun-Kumaran) s
+5 124 M
+(Roll No: 2117250020478) s
+5 106 M
+(package unit2;) s
+5 97 M
+(// Name: Tharun-Kumaran) s
+5 88 M
+(// Roll No: 2117250020478) s
+5 70 M
+(import java.util.*;) s
+5 61 M
+(public class task02 {) s
+5 52 M
+(    public static void main\(String[] args\) {) s
+5 43 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 34 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 25 M
+(        Scanner sc = new Scanner\(System.in\);) s
+5 16 M
+(        System.out.print\("Rows and columns: "\);) s
+5 7 M
+(        int r = sc.nextInt\(\), c = sc.nextInt\(\);) s
+_R
+S
+%%Page: (2) 2
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 2 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit2_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit2_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(        int[][] a = new int[r][c], b = new int[r][c];) s
+5 700 M
+(        for \(int i=0;i<r;i++\)) s
+5 691 M
+(            for \(int j=0;j<c;j++\) a[i][j]=sc.nextInt\(\);) s
+5 682 M
+(        for \(int i=0;i<r;i++\)) s
+5 673 M
+(            for \(int j=0;j<c;j++\) b[i][j]=sc.nextInt\(\);) s
+5 664 M
+(        System.out.println\("Result:"\);) s
+5 655 M
+(        for \(int i=0;i<r;i++\) {) s
+5 646 M
+(            for \(int j=0;j<c;j++\)) s
+5 637 M
+(                System.out.print\(\(a[i][j]+b[i][j]\)+" "\);) s
+5 628 M
+(            System.out.println\(\);) s
+5 619 M
+(        }) s
+5 610 M
+(    }) s
+5 601 M
+(}) s
+5 574 M
+(OUTPUT) s
+5 565 M
+(---------------------------------------------------------------------------) s
+5 556 M
+(Name: Tharun-Kumaran) s
+5 547 M
+(Roll No: 2117250020478) s
+5 538 M
+(Compilation Error:) s
+5 529 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 d) s
+5 520 M
+(oes not exist) s
+5 511 M
+(import unit2.mypackage1.Addition;) s
+5 502 M
+(                       ^) s
+5 493 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 484 M
+(        Addition a=new Addition\(\);) s
+5 475 M
+(        ^) s
+5 466 M
+(  symbol:   class Addition) s
+5 457 M
+(  location: class task12) s
+5 448 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 439 M
+(        Addition a=new Addition\(\);) s
+5 430 M
+(                       ^) s
+5 421 M
+(  symbol:   class Addition) s
+5 412 M
+(  location: class task12) s
+5 403 M
+(3 errors) s
+5 358 M
+(===========================================================================) s
+5 349 M
+(                         TASK03) s
+5 340 M
+(===========================================================================) s
+5 322 M
+(SOURCE CODE) s
+5 313 M
+(---------------------------------------------------------------------------) s
+5 304 M
+(Name: Tharun-Kumaran) s
+5 295 M
+(Roll No: 2117250020478) s
+5 277 M
+(package unit2;) s
+5 268 M
+(// Name: Tharun-Kumaran) s
+5 259 M
+(// Roll No: 2117250020478) s
+5 241 M
+(import java.util.*;) s
+5 232 M
+(public class task03 {) s
+5 223 M
+(    public static void main\(String[] args\) {) s
+5 214 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 205 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 196 M
+(        Scanner sc = new Scanner\(System.in\);) s
+5 187 M
+(        int n=sc.nextInt\(\), max=Integer.MIN_VALUE;) s
+5 178 M
+(        int[] a=new int[n];) s
+5 169 M
+(        for\(int i=0;i<n;i++\) a[i]=sc.nextInt\(\);) s
+5 160 M
+(        for\(int x:a\) if\(x>max\) max=x;) s
+5 151 M
+(        System.out.println\("Largest = "+max\);) s
+5 142 M
+(    }) s
+5 133 M
+(}) s
+5 106 M
+(OUTPUT) s
+5 97 M
+(---------------------------------------------------------------------------) s
+5 88 M
+(Name: Tharun-Kumaran) s
+5 79 M
+(Roll No: 2117250020478) s
+5 70 M
+(Compilation Error:) s
+5 61 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 d) s
+5 52 M
+(oes not exist) s
+5 43 M
+(import unit2.mypackage1.Addition;) s
+5 34 M
+(                       ^) s
+5 25 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 16 M
+(        Addition a=new Addition\(\);) s
+5 7 M
+(        ^) s
+_R
+S
+%%Page: (3) 3
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 3 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit2_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit2_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(  symbol:   class Addition) s
+5 700 M
+(  location: class task12) s
+5 691 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 682 M
+(        Addition a=new Addition\(\);) s
+5 673 M
+(                       ^) s
+5 664 M
+(  symbol:   class Addition) s
+5 655 M
+(  location: class task12) s
+5 646 M
+(3 errors) s
+5 601 M
+(===========================================================================) s
+5 592 M
+(                         TASK04) s
+5 583 M
+(===========================================================================) s
+5 565 M
+(SOURCE CODE) s
+5 556 M
+(---------------------------------------------------------------------------) s
+5 547 M
+(Name: Tharun-Kumaran) s
+5 538 M
+(Roll No: 2117250020478) s
+5 520 M
+(package unit2;) s
+5 511 M
+(// Name: Tharun-Kumaran) s
+5 502 M
+(// Roll No: 2117250020478) s
+5 484 M
+(import java.util.*;) s
+5 475 M
+(public class task04 {) s
+5 466 M
+(    static void findSum\(int[] arr\) {) s
+5 457 M
+(        int sum=0;) s
+5 448 M
+(        for\(int x:arr\) sum+=x;) s
+5 439 M
+(        System.out.println\("Sum = "+sum\);) s
+5 430 M
+(    }) s
+5 421 M
+(    public static void main\(String[] args\) {) s
+5 412 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 403 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 394 M
+(        Scanner sc=new Scanner\(System.in\);) s
+5 385 M
+(        int n=sc.nextInt\(\);) s
+5 376 M
+(        int[] a=new int[n];) s
+5 367 M
+(        for\(int i=0;i<n;i++\) a[i]=sc.nextInt\(\);) s
+5 358 M
+(        findSum\(a\);) s
+5 349 M
+(    }) s
+5 340 M
+(}) s
+5 313 M
+(OUTPUT) s
+5 304 M
+(---------------------------------------------------------------------------) s
+5 295 M
+(Name: Tharun-Kumaran) s
+5 286 M
+(Roll No: 2117250020478) s
+5 277 M
+(Compilation Error:) s
+5 268 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 d) s
+5 259 M
+(oes not exist) s
+5 250 M
+(import unit2.mypackage1.Addition;) s
+5 241 M
+(                       ^) s
+5 232 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 223 M
+(        Addition a=new Addition\(\);) s
+5 214 M
+(        ^) s
+5 205 M
+(  symbol:   class Addition) s
+5 196 M
+(  location: class task12) s
+5 187 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 178 M
+(        Addition a=new Addition\(\);) s
+5 169 M
+(                       ^) s
+5 160 M
+(  symbol:   class Addition) s
+5 151 M
+(  location: class task12) s
+5 142 M
+(3 errors) s
+5 97 M
+(===========================================================================) s
+5 88 M
+(                         TASK05) s
+5 79 M
+(===========================================================================) s
+5 61 M
+(SOURCE CODE) s
+5 52 M
+(---------------------------------------------------------------------------) s
+5 43 M
+(Name: Tharun-Kumaran) s
+5 34 M
+(Roll No: 2117250020478) s
+5 16 M
+(package unit2;) s
+5 7 M
+(// Name: Tharun-Kumaran) s
+_R
+S
+%%Page: (4) 4
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 4 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit2_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit2_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(// Roll No: 2117250020478) s
+5 691 M
+(import java.util.*;) s
+5 682 M
+(public class task05 {) s
+5 673 M
+(    static void countEvenOdd\(int[] arr\) {) s
+5 664 M
+(        int even=0,odd=0;) s
+5 655 M
+(        for\(int x:arr\) {) s
+5 646 M
+(            if\(x%2==0\) even++;) s
+5 637 M
+(            else odd++;) s
+5 628 M
+(        }) s
+5 619 M
+(        System.out.println\("Even = "+even\);) s
+5 610 M
+(        System.out.println\("Odd = "+odd\);) s
+5 601 M
+(    }) s
+5 592 M
+(    public static void main\(String[] args\) {) s
+5 583 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 574 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 565 M
+(        Scanner sc=new Scanner\(System.in\);) s
+5 556 M
+(        int n=sc.nextInt\(\);) s
+5 547 M
+(        int[] a=new int[n];) s
+5 538 M
+(        for\(int i=0;i<n;i++\) a[i]=sc.nextInt\(\);) s
+5 529 M
+(        countEvenOdd\(a\);) s
+5 520 M
+(    }) s
+5 511 M
+(}) s
+5 484 M
+(OUTPUT) s
+5 475 M
+(---------------------------------------------------------------------------) s
+5 466 M
+(Name: Tharun-Kumaran) s
+5 457 M
+(Roll No: 2117250020478) s
+5 448 M
+(Compilation Error:) s
+5 439 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 d) s
+5 430 M
+(oes not exist) s
+5 421 M
+(import unit2.mypackage1.Addition;) s
+5 412 M
+(                       ^) s
+5 403 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 394 M
+(        Addition a=new Addition\(\);) s
+5 385 M
+(        ^) s
+5 376 M
+(  symbol:   class Addition) s
+5 367 M
+(  location: class task12) s
+5 358 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 349 M
+(        Addition a=new Addition\(\);) s
+5 340 M
+(                       ^) s
+5 331 M
+(  symbol:   class Addition) s
+5 322 M
+(  location: class task12) s
+5 313 M
+(3 errors) s
+5 268 M
+(===========================================================================) s
+5 259 M
+(                         TASK06) s
+5 250 M
+(===========================================================================) s
+5 232 M
+(SOURCE CODE) s
+5 223 M
+(---------------------------------------------------------------------------) s
+5 214 M
+(Name: Tharun-Kumaran) s
+5 205 M
+(Roll No: 2117250020478) s
+5 187 M
+(package unit2;) s
+5 178 M
+(// Name: Tharun-Kumaran) s
+5 169 M
+(// Roll No: 2117250020478) s
+5 151 M
+(import java.util.*;) s
+5 142 M
+(public class task06 {) s
+5 133 M
+(    static int[] reverseArray\(int[] arr\) {) s
+5 124 M
+(        int[] r=new int[arr.length];) s
+5 115 M
+(        for\(int i=0;i<arr.length;i++\) r[i]=arr[arr.length-1-i];) s
+5 106 M
+(        return r;) s
+5 97 M
+(    }) s
+5 88 M
+(    public static void main\(String[] args\) {) s
+5 79 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 70 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 61 M
+(        Scanner sc=new Scanner\(System.in\);) s
+5 52 M
+(        int n=sc.nextInt\(\);) s
+5 43 M
+(        int[] a=new int[n];) s
+5 34 M
+(        for\(int i=0;i<n;i++\) a[i]=sc.nextInt\(\);) s
+5 25 M
+(        System.out.println\(Arrays.toString\(reverseArray\(a\)\)\);) s
+5 16 M
+(    }) s
+5 7 M
+(}) s
+_R
+S
+%%Page: (5) 5
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 5 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit2_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit2_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 691 M
+(OUTPUT) s
+5 682 M
+(---------------------------------------------------------------------------) s
+5 673 M
+(Name: Tharun-Kumaran) s
+5 664 M
+(Roll No: 2117250020478) s
+5 655 M
+(Compilation Error:) s
+5 646 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 d) s
+5 637 M
+(oes not exist) s
+5 628 M
+(import unit2.mypackage1.Addition;) s
+5 619 M
+(                       ^) s
+5 610 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 601 M
+(        Addition a=new Addition\(\);) s
+5 592 M
+(        ^) s
+5 583 M
+(  symbol:   class Addition) s
+5 574 M
+(  location: class task12) s
+5 565 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 556 M
+(        Addition a=new Addition\(\);) s
+5 547 M
+(                       ^) s
+5 538 M
+(  symbol:   class Addition) s
+5 529 M
+(  location: class task12) s
+5 520 M
+(3 errors) s
+5 475 M
+(===========================================================================) s
+5 466 M
+(                         TASK07) s
+5 457 M
+(===========================================================================) s
+5 439 M
+(SOURCE CODE) s
+5 430 M
+(---------------------------------------------------------------------------) s
+5 421 M
+(Name: Tharun-Kumaran) s
+5 412 M
+(Roll No: 2117250020478) s
+5 394 M
+(package unit2;) s
+5 385 M
+(// Name: Tharun-Kumaran) s
+5 376 M
+(// Roll No: 2117250020478) s
+5 358 M
+(import java.util.*;) s
+5 349 M
+(public class task07 {) s
+5 340 M
+(    public static void main\(String[] args\) {) s
+5 331 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 322 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 313 M
+(        Scanner sc=new Scanner\(System.in\);) s
+5 304 M
+(        int r=sc.nextInt\(\),c=sc.nextInt\(\);) s
+5 295 M
+(        int[][] a=new int[r][c],b=new int[r][c];) s
+5 286 M
+(        for\(int i=0;i<r;i++\) for\(int j=0;j<c;j++\) a[i][j]=sc.nextInt\(\);) s
+5 277 M
+(        for\(int i=0;i<r;i++\) for\(int j=0;j<c;j++\) b[i][j]=sc.nextInt\(\);) s
+5 268 M
+(        for\(int i=0;i<r;i++\) {) s
+5 259 M
+(            for\(int j=0;j<c;j++\) System.out.print\(\(a[i][j]+b[i][j]\)+" "\);) s
+5 250 M
+(            System.out.println\(\);) s
+5 241 M
+(        }) s
+5 232 M
+(    }) s
+5 223 M
+(}) s
+5 196 M
+(OUTPUT) s
+5 187 M
+(---------------------------------------------------------------------------) s
+5 178 M
+(Name: Tharun-Kumaran) s
+5 169 M
+(Roll No: 2117250020478) s
+5 160 M
+(Compilation Error:) s
+5 151 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 d) s
+5 142 M
+(oes not exist) s
+5 133 M
+(import unit2.mypackage1.Addition;) s
+5 124 M
+(                       ^) s
+5 115 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 106 M
+(        Addition a=new Addition\(\);) s
+5 97 M
+(        ^) s
+5 88 M
+(  symbol:   class Addition) s
+5 79 M
+(  location: class task12) s
+5 70 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 61 M
+(        Addition a=new Addition\(\);) s
+5 52 M
+(                       ^) s
+5 43 M
+(  symbol:   class Addition) s
+5 34 M
+(  location: class task12) s
+5 25 M
+(3 errors) s
+_R
+S
+%%Page: (6) 6
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 6 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit2_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit2_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 691 M
+(===========================================================================) s
+5 682 M
+(                         TASK08) s
+5 673 M
+(===========================================================================) s
+5 655 M
+(SOURCE CODE) s
+5 646 M
+(---------------------------------------------------------------------------) s
+5 637 M
+(Name: Tharun-Kumaran) s
+5 628 M
+(Roll No: 2117250020478) s
+5 610 M
+(package unit2;) s
+5 601 M
+(// Name: Tharun-Kumaran) s
+5 592 M
+(// Roll No: 2117250020478) s
+5 574 M
+(import java.util.*;) s
+5 565 M
+(public class task08 {) s
+5 556 M
+(    public static void main\(String[] args\) {) s
+5 547 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 538 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 529 M
+(        Scanner sc=new Scanner\(System.in\);) s
+5 520 M
+(        int r1=sc.nextInt\(\),c1=sc.nextInt\(\);) s
+5 511 M
+(        int[][] a=new int[r1][c1];) s
+5 502 M
+(        for\(int i=0;i<r1;i++\) for\(int j=0;j<c1;j++\) a[i][j]=sc.nextInt\(\);) s
+5 484 M
+(        int r2=sc.nextInt\(\),c2=sc.nextInt\(\);) s
+5 475 M
+(        int[][] b=new int[r2][c2];) s
+5 466 M
+(        for\(int i=0;i<r2;i++\) for\(int j=0;j<c2;j++\) b[i][j]=sc.nextInt\(\);) s
+5 448 M
+(        if\(c1!=r2\) { System.out.println\("Multiplication not possible"\); return; }) s
+5 430 M
+(        int[][] p=new int[r1][c2];) s
+5 421 M
+(        for\(int i=0;i<r1;i++\)) s
+5 412 M
+(            for\(int j=0;j<c2;j++\)) s
+5 403 M
+(                for\(int k=0;k<c1;k++\)) s
+5 394 M
+(                    p[i][j]+=a[i][k]*b[k][j];) s
+5 376 M
+(        for\(int[] row:p\) {) s
+5 367 M
+(            for\(int x:row\) System.out.print\(x+" "\);) s
+5 358 M
+(            System.out.println\(\);) s
+5 349 M
+(        }) s
+5 340 M
+(    }) s
+5 331 M
+(}) s
+5 304 M
+(OUTPUT) s
+5 295 M
+(---------------------------------------------------------------------------) s
+5 286 M
+(Name: Tharun-Kumaran) s
+5 277 M
+(Roll No: 2117250020478) s
+5 268 M
+(Compilation Error:) s
+5 259 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 d) s
+5 250 M
+(oes not exist) s
+5 241 M
+(import unit2.mypackage1.Addition;) s
+5 232 M
+(                       ^) s
+5 223 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 214 M
+(        Addition a=new Addition\(\);) s
+5 205 M
+(        ^) s
+5 196 M
+(  symbol:   class Addition) s
+5 187 M
+(  location: class task12) s
+5 178 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 169 M
+(        Addition a=new Addition\(\);) s
+5 160 M
+(                       ^) s
+5 151 M
+(  symbol:   class Addition) s
+5 142 M
+(  location: class task12) s
+5 133 M
+(3 errors) s
+5 88 M
+(===========================================================================) s
+5 79 M
+(                         TASK09) s
+5 70 M
+(===========================================================================) s
+5 52 M
+(SOURCE CODE) s
+5 43 M
+(---------------------------------------------------------------------------) s
+5 34 M
+(Name: Tharun-Kumaran) s
+5 25 M
+(Roll No: 2117250020478) s
+5 7 M
+(package unit2;) s
+_R
+S
+%%Page: (7) 7
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 7 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit2_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit2_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(// Name: Tharun-Kumaran) s
+5 700 M
+(// Roll No: 2117250020478) s
+5 682 M
+(import java.util.*;) s
+5 673 M
+(public class task09 {) s
+5 664 M
+(    public static void main\(String[] args\) {) s
+5 655 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 646 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 637 M
+(        Scanner sc=new Scanner\(System.in\);) s
+5 628 M
+(        int r=sc.nextInt\(\),c=sc.nextInt\(\);) s
+5 619 M
+(        int[][] a=new int[r][c];) s
+5 610 M
+(        for\(int i=0;i<r;i++\) for\(int j=0;j<c;j++\) a[i][j]=sc.nextInt\(\);) s
+5 601 M
+(        for\(int j=0;j<c;j++\) {) s
+5 592 M
+(            for\(int i=0;i<r;i++\) System.out.print\(a[i][j]+" "\);) s
+5 583 M
+(            System.out.println\(\);) s
+5 574 M
+(        }) s
+5 565 M
+(    }) s
+5 556 M
+(}) s
+5 529 M
+(OUTPUT) s
+5 520 M
+(---------------------------------------------------------------------------) s
+5 511 M
+(Name: Tharun-Kumaran) s
+5 502 M
+(Roll No: 2117250020478) s
+5 493 M
+(Compilation Error:) s
+5 484 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 d) s
+5 475 M
+(oes not exist) s
+5 466 M
+(import unit2.mypackage1.Addition;) s
+5 457 M
+(                       ^) s
+5 448 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 439 M
+(        Addition a=new Addition\(\);) s
+5 430 M
+(        ^) s
+5 421 M
+(  symbol:   class Addition) s
+5 412 M
+(  location: class task12) s
+5 403 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 394 M
+(        Addition a=new Addition\(\);) s
+5 385 M
+(                       ^) s
+5 376 M
+(  symbol:   class Addition) s
+5 367 M
+(  location: class task12) s
+5 358 M
+(3 errors) s
+5 313 M
+(===========================================================================) s
+5 304 M
+(                         TASK10) s
+5 295 M
+(===========================================================================) s
+5 277 M
+(SOURCE CODE) s
+5 268 M
+(---------------------------------------------------------------------------) s
+5 259 M
+(Name: Tharun-Kumaran) s
+5 250 M
+(Roll No: 2117250020478) s
+5 232 M
+(package unit2;) s
+5 223 M
+(// Name: Tharun-Kumaran) s
+5 214 M
+(// Roll No: 2117250020478) s
+5 196 M
+(import java.util.*;) s
+5 187 M
+(public class task10 {) s
+5 178 M
+(    public static void main\(String[] args\) {) s
+5 169 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 160 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 151 M
+(        Scanner sc=new Scanner\(System.in\);) s
+5 142 M
+(        int n=sc.nextInt\(\),m=sc.nextInt\(\);) s
+5 133 M
+(        int[][] marks=new int[n][m];) s
+5 124 M
+(        int[] total=new int[n];) s
+5 106 M
+(        for\(int i=0;i<n;i++\)) s
+5 97 M
+(            for\(int j=0;j<m;j++\) {) s
+5 88 M
+(                marks[i][j]=sc.nextInt\(\);) s
+5 79 M
+(                total[i]+=marks[i][j];) s
+5 70 M
+(            }) s
+5 52 M
+(        System.out.println\("Marks:"\);) s
+5 43 M
+(        for\(int[] row:marks\) {) s
+5 34 M
+(            for\(int x:row\) System.out.print\(x+" "\);) s
+5 25 M
+(            System.out.println\(\);) s
+5 16 M
+(        }) s
+_R
+S
+%%Page: (8) 8
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 8 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit2_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit2_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(        System.out.println\("Totals:"\);) s
+5 700 M
+(        for\(int x:total\) System.out.println\(x\);) s
+5 682 M
+(        int highest=0;) s
+5 673 M
+(        for\(int x:total\) if\(x>highest\) highest=x;) s
+5 664 M
+(        System.out.println\("Highest = "+highest\);) s
+5 655 M
+(    }) s
+5 646 M
+(}) s
+5 619 M
+(OUTPUT) s
+5 610 M
+(---------------------------------------------------------------------------) s
+5 601 M
+(Name: Tharun-Kumaran) s
+5 592 M
+(Roll No: 2117250020478) s
+5 583 M
+(Compilation Error:) s
+5 574 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 d) s
+5 565 M
+(oes not exist) s
+5 556 M
+(import unit2.mypackage1.Addition;) s
+5 547 M
+(                       ^) s
+5 538 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 529 M
+(        Addition a=new Addition\(\);) s
+5 520 M
+(        ^) s
+5 511 M
+(  symbol:   class Addition) s
+5 502 M
+(  location: class task12) s
+5 493 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 484 M
+(        Addition a=new Addition\(\);) s
+5 475 M
+(                       ^) s
+5 466 M
+(  symbol:   class Addition) s
+5 457 M
+(  location: class task12) s
+5 448 M
+(3 errors) s
+5 403 M
+(===========================================================================) s
+5 394 M
+(                         TASK11) s
+5 385 M
+(===========================================================================) s
+5 367 M
+(SOURCE CODE) s
+5 358 M
+(---------------------------------------------------------------------------) s
+5 349 M
+(Name: Tharun-Kumaran) s
+5 340 M
+(Roll No: 2117250020478) s
+5 322 M
+(package unit2;) s
+5 313 M
+(// Name: Tharun-Kumaran) s
+5 304 M
+(// Roll No: 2117250020478) s
+5 286 M
+(import java.util.*;) s
+5 277 M
+(public class task11 {) s
+5 268 M
+(    public static void main\(String[] args\) {) s
+5 259 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 250 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 241 M
+(        Scanner sc=new Scanner\(System.in\);) s
+5 232 M
+(        String s=sc.nextLine\(\);) s
+5 223 M
+(        String clean=s.toLowerCase\(\).replaceAll\("\\\\s+",""\);) s
+5 214 M
+(        String rev=new StringBuilder\(clean\).reverse\(\).toString\(\);) s
+5 205 M
+(        System.out.println\(clean.equals\(rev\) ? "Palindrome" : "Not Palindrome"\);) s
+5 196 M
+(    }) s
+5 187 M
+(}) s
+5 160 M
+(OUTPUT) s
+5 151 M
+(---------------------------------------------------------------------------) s
+5 142 M
+(Name: Tharun-Kumaran) s
+5 133 M
+(Roll No: 2117250020478) s
+5 124 M
+(Compilation Error:) s
+5 115 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 d) s
+5 106 M
+(oes not exist) s
+5 97 M
+(import unit2.mypackage1.Addition;) s
+5 88 M
+(                       ^) s
+5 79 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 70 M
+(        Addition a=new Addition\(\);) s
+5 61 M
+(        ^) s
+5 52 M
+(  symbol:   class Addition) s
+5 43 M
+(  location: class task12) s
+5 34 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 25 M
+(        Addition a=new Addition\(\);) s
+5 16 M
+(                       ^) s
+5 7 M
+(  symbol:   class Addition) s
+_R
+S
+%%Page: (9) 9
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 9 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit2_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit2_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(  location: class task12) s
+5 700 M
+(3 errors) s
+5 655 M
+(===========================================================================) s
+5 646 M
+(                         TASK12) s
+5 637 M
+(===========================================================================) s
+5 619 M
+(SOURCE CODE) s
+5 610 M
+(---------------------------------------------------------------------------) s
+5 601 M
+(Name: Tharun-Kumaran) s
+5 592 M
+(Roll No: 2117250020478) s
+5 574 M
+(package unit2;) s
+5 565 M
+(// Name: Tharun-Kumaran) s
+5 556 M
+(// Roll No: 2117250020478) s
+5 538 M
+(import unit2.mypackage1.Addition;) s
+5 529 M
+(public class task12 {) s
+5 520 M
+(    public static void main\(String[] args\) {) s
+5 511 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 502 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 493 M
+(        Addition a=new Addition\(\);) s
+5 484 M
+(        System.out.println\("Sum = "+a.add\(10,20\)\);) s
+5 475 M
+(    }) s
+5 466 M
+(}) s
+5 439 M
+(OUTPUT) s
+5 430 M
+(---------------------------------------------------------------------------) s
+5 421 M
+(Name: Tharun-Kumaran) s
+5 412 M
+(Roll No: 2117250020478) s
+5 403 M
+(Compilation Error:) s
+5 394 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 d) s
+5 385 M
+(oes not exist) s
+5 376 M
+(import unit2.mypackage1.Addition;) s
+5 367 M
+(                       ^) s
+5 358 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 349 M
+(        Addition a=new Addition\(\);) s
+5 340 M
+(        ^) s
+5 331 M
+(  symbol:   class Addition) s
+5 322 M
+(  location: class task12) s
+5 313 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 304 M
+(        Addition a=new Addition\(\);) s
+5 295 M
+(                       ^) s
+5 286 M
+(  symbol:   class Addition) s
+5 277 M
+(  location: class task12) s
+5 268 M
+(3 errors) s
+5 223 M
+(===========================================================================) s
+5 214 M
+(                         TASK13) s
+5 205 M
+(===========================================================================) s
+5 187 M
+(SOURCE CODE) s
+5 178 M
+(---------------------------------------------------------------------------) s
+5 169 M
+(Name: Tharun-Kumaran) s
+5 160 M
+(Roll No: 2117250020478) s
+5 142 M
+(package unit2;) s
+5 133 M
+(// Name: Tharun-Kumaran) s
+5 124 M
+(// Roll No: 2117250020478) s
+5 106 M
+(/**) s
+5 97 M
+( * Demonstrates Javadoc comments.) s
+5 88 M
+( * @author Tharun) s
+5 79 M
+( * @version 1.0) s
+5 70 M
+( */) s
+5 61 M
+(public class task13 {) s
+5 52 M
+(    /**) s
+5 43 M
+(     * Adds two integers.) s
+5 34 M
+(     * @param a first number) s
+5 25 M
+(     * @param b second number) s
+5 16 M
+(     * @return sum) s
+5 7 M
+(     */) s
+_R
+S
+%%Page: (10) 10
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 10 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit2_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit2_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(    public int add\(int a,int b\) {) s
+5 700 M
+(        return a+b;) s
+5 691 M
+(    }) s
+5 673 M
+(    public static void main\(String[] args\) {) s
+5 664 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 655 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 646 M
+(        task13 t=new task13\(\);) s
+5 637 M
+(        System.out.println\("Sum = "+t.add\(10,20\)\);) s
+5 628 M
+(    }) s
+5 619 M
+(}) s
+5 592 M
+(OUTPUT) s
+5 583 M
+(---------------------------------------------------------------------------) s
+5 574 M
+(Name: Tharun-Kumaran) s
+5 565 M
+(Roll No: 2117250020478) s
+5 556 M
+(Compilation Error:) s
+5 547 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 d) s
+5 538 M
+(oes not exist) s
+5 529 M
+(import unit2.mypackage1.Addition;) s
+5 520 M
+(                       ^) s
+5 511 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 502 M
+(        Addition a=new Addition\(\);) s
+5 493 M
+(        ^) s
+5 484 M
+(  symbol:   class Addition) s
+5 475 M
+(  location: class task12) s
+5 466 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 457 M
+(        Addition a=new Addition\(\);) s
+5 448 M
+(                       ^) s
+5 439 M
+(  symbol:   class Addition) s
+5 430 M
+(  location: class task12) s
+5 421 M
+(3 errors) s
+5 376 M
+(===========================================================================) s
+5 367 M
+(                         TASK14) s
+5 358 M
+(===========================================================================) s
+5 340 M
+(SOURCE CODE) s
+5 331 M
+(---------------------------------------------------------------------------) s
+5 322 M
+(Name: Tharun-Kumaran) s
+5 313 M
+(Roll No: 2117250020478) s
+5 295 M
+(package unit2;) s
+5 286 M
+(// Name: Tharun-Kumaran) s
+5 277 M
+(// Roll No: 2117250020478) s
+5 259 M
+(class Vehicle {) s
+5 250 M
+(    void start\(\) { System.out.println\("Vehicle started"\); }) s
+5 241 M
+(}) s
+5 232 M
+(class Car extends Vehicle {) s
+5 223 M
+(    void drive\(\) { System.out.println\("Car is driving"\); }) s
+5 214 M
+(}) s
+5 205 M
+(class SportsCar extends Car {) s
+5 196 M
+(    void turbo\(\) { System.out.println\("Turbo mode activated"\); }) s
+5 187 M
+(}) s
+5 178 M
+(public class task14 {) s
+5 169 M
+(    public static void main\(String[] args\) {) s
+5 160 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 151 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 142 M
+(        SportsCar s=new SportsCar\(\);) s
+5 133 M
+(        s.start\(\);) s
+5 124 M
+(        s.drive\(\);) s
+5 115 M
+(        s.turbo\(\);) s
+5 106 M
+(    }) s
+5 97 M
+(}) s
+5 70 M
+(OUTPUT) s
+5 61 M
+(---------------------------------------------------------------------------) s
+5 52 M
+(Name: Tharun-Kumaran) s
+5 43 M
+(Roll No: 2117250020478) s
+5 34 M
+(Compilation Error:) s
+5 25 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 d) s
+5 16 M
+(oes not exist) s
+5 7 M
+(import unit2.mypackage1.Addition;) s
+_R
+S
+%%Page: (11) 11
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 11 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit2_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit2_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(                       ^) s
+5 700 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 691 M
+(        Addition a=new Addition\(\);) s
+5 682 M
+(        ^) s
+5 673 M
+(  symbol:   class Addition) s
+5 664 M
+(  location: class task12) s
+5 655 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 646 M
+(        Addition a=new Addition\(\);) s
+5 637 M
+(                       ^) s
+5 628 M
+(  symbol:   class Addition) s
+5 619 M
+(  location: class task12) s
+5 610 M
+(3 errors) s
+5 565 M
+(===========================================================================) s
+5 556 M
+(                         TASK15) s
+5 547 M
+(===========================================================================) s
+5 529 M
+(SOURCE CODE) s
+5 520 M
+(---------------------------------------------------------------------------) s
+5 511 M
+(Name: Tharun-Kumaran) s
+5 502 M
+(Roll No: 2117250020478) s
+5 484 M
+(package unit2;) s
+5 475 M
+(// Name: Tharun-Kumaran) s
+5 466 M
+(// Roll No: 2117250020478) s
+5 448 M
+(class Shape {) s
+5 439 M
+(    void showShape\(\) { System.out.println\("Shape"\); }) s
+5 430 M
+(}) s
+5 421 M
+(class Polygon extends Shape {) s
+5 412 M
+(    void showPolygon\(\) { System.out.println\("Polygon"\); }) s
+5 403 M
+(}) s
+5 394 M
+(class Triangle extends Polygon {) s
+5 385 M
+(    void showTriangle\(\) { System.out.println\("Triangle"\); }) s
+5 376 M
+(}) s
+5 367 M
+(public class task15 {) s
+5 358 M
+(    public static void main\(String[] args\) {) s
+5 349 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 340 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 331 M
+(        Triangle t=new Triangle\(\);) s
+5 322 M
+(        t.showShape\(\);) s
+5 313 M
+(        t.showPolygon\(\);) s
+5 304 M
+(        t.showTriangle\(\);) s
+5 295 M
+(    }) s
+5 286 M
+(}) s
+5 259 M
+(OUTPUT) s
+5 250 M
+(---------------------------------------------------------------------------) s
+5 241 M
+(Name: Tharun-Kumaran) s
+5 232 M
+(Roll No: 2117250020478) s
+5 223 M
+(Compilation Error:) s
+5 214 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 d) s
+5 205 M
+(oes not exist) s
+5 196 M
+(import unit2.mypackage1.Addition;) s
+5 187 M
+(                       ^) s
+5 178 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 169 M
+(        Addition a=new Addition\(\);) s
+5 160 M
+(        ^) s
+5 151 M
+(  symbol:   class Addition) s
+5 142 M
+(  location: class task12) s
+5 133 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 124 M
+(        Addition a=new Addition\(\);) s
+5 115 M
+(                       ^) s
+5 106 M
+(  symbol:   class Addition) s
+5 97 M
+(  location: class task12) s
+5 88 M
+(3 errors) s
+5 43 M
+(===========================================================================) s
+5 34 M
+(                         TASK16) s
+5 25 M
+(===========================================================================) s
+5 7 M
+(SOURCE CODE) s
+_R
+S
+%%Page: (12) 12
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 12 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit2_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit2_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(---------------------------------------------------------------------------) s
+5 700 M
+(Name: Tharun-Kumaran) s
+5 691 M
+(Roll No: 2117250020478) s
+5 673 M
+(package unit2;) s
+5 664 M
+(// Name: Tharun-Kumaran) s
+5 655 M
+(// Roll No: 2117250020478) s
+5 637 M
+(class Parent {) s
+5 628 M
+(    void display\(\) { System.out.println\("Parent"\); }) s
+5 619 M
+(}) s
+5 610 M
+(class ChildA extends Parent {) s
+5 601 M
+(    @Override void display\(\) { System.out.println\("Child A"\); }) s
+5 592 M
+(}) s
+5 583 M
+(class ChildB extends Parent {) s
+5 574 M
+(    @Override void display\(\) { System.out.println\("Child B"\); }) s
+5 565 M
+(}) s
+5 556 M
+(public class task16 {) s
+5 547 M
+(    public static void main\(String[] args\) {) s
+5 538 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 529 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 520 M
+(        Parent p;) s
+5 511 M
+(        p=new ChildA\(\);) s
+5 502 M
+(        p.display\(\);) s
+5 493 M
+(        p=new ChildB\(\);) s
+5 484 M
+(        p.display\(\);) s
+5 475 M
+(    }) s
+5 466 M
+(}) s
+5 439 M
+(OUTPUT) s
+5 430 M
+(---------------------------------------------------------------------------) s
+5 421 M
+(Name: Tharun-Kumaran) s
+5 412 M
+(Roll No: 2117250020478) s
+5 403 M
+(Compilation Error:) s
+5 394 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 d) s
+5 385 M
+(oes not exist) s
+5 376 M
+(import unit2.mypackage1.Addition;) s
+5 367 M
+(                       ^) s
+5 358 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 349 M
+(        Addition a=new Addition\(\);) s
+5 340 M
+(        ^) s
+5 331 M
+(  symbol:   class Addition) s
+5 322 M
+(  location: class task12) s
+5 313 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 304 M
+(        Addition a=new Addition\(\);) s
+5 295 M
+(                       ^) s
+5 286 M
+(  symbol:   class Addition) s
+5 277 M
+(  location: class task12) s
+5 268 M
+(3 errors) s
+5 223 M
+(===========================================================================) s
+5 214 M
+(                         TASK17) s
+5 205 M
+(===========================================================================) s
+5 187 M
+(SOURCE CODE) s
+5 178 M
+(---------------------------------------------------------------------------) s
+5 169 M
+(Name: Tharun-Kumaran) s
+5 160 M
+(Roll No: 2117250020478) s
+5 142 M
+(package unit2;) s
+5 133 M
+(// Name: Tharun-Kumaran) s
+5 124 M
+(// Roll No: 2117250020478) s
+5 106 M
+(class Constants {) s
+5 97 M
+(    static final double PI=3.14159;) s
+5 88 M
+(    final void display\(\) {) s
+5 79 M
+(        System.out.println\("PI = "+PI\);) s
+5 70 M
+(    }) s
+5 61 M
+(}) s
+5 52 M
+(public class task17 {) s
+5 43 M
+(    public static void main\(String[] args\) {) s
+5 34 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 25 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 16 M
+(        Constants c=new Constants\(\);) s
+5 7 M
+(        c.display\(\);) s
+_R
+S
+%%Page: (13) 13
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 13 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit2_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit2_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(        // c.PI=3.14; // ERROR: final variable cannot be reassigned) s
+5 700 M
+(        // class Test extends Constants {) s
+5 691 M
+(        //     void display\(\) {} // ERROR: final method cannot be overridden) s
+5 682 M
+(        // }) s
+5 673 M
+(    }) s
+5 664 M
+(}) s
+5 637 M
+(OUTPUT) s
+5 628 M
+(---------------------------------------------------------------------------) s
+5 619 M
+(Name: Tharun-Kumaran) s
+5 610 M
+(Roll No: 2117250020478) s
+5 601 M
+(Compilation Error:) s
+5 592 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 d) s
+5 583 M
+(oes not exist) s
+5 574 M
+(import unit2.mypackage1.Addition;) s
+5 565 M
+(                       ^) s
+5 556 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 547 M
+(        Addition a=new Addition\(\);) s
+5 538 M
+(        ^) s
+5 529 M
+(  symbol:   class Addition) s
+5 520 M
+(  location: class task12) s
+5 511 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 502 M
+(        Addition a=new Addition\(\);) s
+5 493 M
+(                       ^) s
+5 484 M
+(  symbol:   class Addition) s
+5 475 M
+(  location: class task12) s
+5 466 M
+(3 errors) s
+5 421 M
+(===========================================================================) s
+5 412 M
+(                         TASK18) s
+5 403 M
+(===========================================================================) s
+5 385 M
+(SOURCE CODE) s
+5 376 M
+(---------------------------------------------------------------------------) s
+5 367 M
+(Name: Tharun-Kumaran) s
+5 358 M
+(Roll No: 2117250020478) s
+5 340 M
+(package unit2;) s
+5 331 M
+(// Name: Tharun-Kumaran) s
+5 322 M
+(// Roll No: 2117250020478) s
+5 304 M
+(abstract class Employee {) s
+5 295 M
+(    String name;) s
+5 286 M
+(    Employee\(String name\) { this.name=name; }) s
+5 277 M
+(    abstract double calculateSalary\(\);) s
+5 268 M
+(}) s
+5 259 M
+(class Manager extends Employee {) s
+5 250 M
+(    Manager\(String name\) { super\(name\); }) s
+5 241 M
+(    double calculateSalary\(\) { return 75000; }) s
+5 232 M
+(}) s
+5 223 M
+(class Developer extends Employee {) s
+5 214 M
+(    Developer\(String name\) { super\(name\); }) s
+5 205 M
+(    double calculateSalary\(\) { return 60000; }) s
+5 196 M
+(}) s
+5 187 M
+(public class task18 {) s
+5 178 M
+(    public static void main\(String[] args\) {) s
+5 169 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 160 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 151 M
+(        Employee e1=new Manager\("Anita"\);) s
+5 142 M
+(        Employee e2=new Developer\("Karthik"\);) s
+5 133 M
+(        System.out.println\(e1.name+" Salary: "+e1.calculateSalary\(\)\);) s
+5 124 M
+(        System.out.println\(e2.name+" Salary: "+e2.calculateSalary\(\)\);) s
+5 115 M
+(    }) s
+5 106 M
+(}) s
+5 79 M
+(OUTPUT) s
+5 70 M
+(---------------------------------------------------------------------------) s
+5 61 M
+(Name: Tharun-Kumaran) s
+5 52 M
+(Roll No: 2117250020478) s
+5 43 M
+(Compilation Error:) s
+5 34 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 d) s
+5 25 M
+(oes not exist) s
+5 16 M
+(import unit2.mypackage1.Addition;) s
+5 7 M
+(                       ^) s
+_R
+S
+%%Page: (14) 14
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 14 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit2_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit2_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 700 M
+(        Addition a=new Addition\(\);) s
+5 691 M
+(        ^) s
+5 682 M
+(  symbol:   class Addition) s
+5 673 M
+(  location: class task12) s
+5 664 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 655 M
+(        Addition a=new Addition\(\);) s
+5 646 M
+(                       ^) s
+5 637 M
+(  symbol:   class Addition) s
+5 628 M
+(  location: class task12) s
+5 619 M
+(3 errors) s
+5 574 M
+(===========================================================================) s
+5 565 M
+(                         TASK19) s
+5 556 M
+(===========================================================================) s
+5 538 M
+(SOURCE CODE) s
+5 529 M
+(---------------------------------------------------------------------------) s
+5 520 M
+(Name: Tharun-Kumaran) s
+5 511 M
+(Roll No: 2117250020478) s
+5 493 M
+(package unit2;) s
+5 484 M
+(// Name: Tharun-Kumaran) s
+5 475 M
+(// Roll No: 2117250020478) s
+5 457 M
+(import java.util.*;) s
+5 448 M
+(public class task19 {) s
+5 439 M
+(    public static void main\(String[] args\) {) s
+5 430 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 421 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 412 M
+(        Scanner sc=new Scanner\(System.in\);) s
+5 403 M
+(        int a=sc.nextInt\(\),b=sc.nextInt\(\);) s
+5 394 M
+(        try {) s
+5 385 M
+(            System.out.println\("Result = "+\(a/b\)\);) s
+5 376 M
+(        } catch\(ArithmeticException e\) {) s
+5 367 M
+(            System.out.println\("ArithmeticException: Cannot divide by zero"\);) s
+5 358 M
+(        }) s
+5 349 M
+(    }) s
+5 340 M
+(}) s
+5 313 M
+(OUTPUT) s
+5 304 M
+(---------------------------------------------------------------------------) s
+5 295 M
+(Name: Tharun-Kumaran) s
+5 286 M
+(Roll No: 2117250020478) s
+5 277 M
+(Compilation Error:) s
+5 268 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 d) s
+5 259 M
+(oes not exist) s
+5 250 M
+(import unit2.mypackage1.Addition;) s
+5 241 M
+(                       ^) s
+5 232 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 223 M
+(        Addition a=new Addition\(\);) s
+5 214 M
+(        ^) s
+5 205 M
+(  symbol:   class Addition) s
+5 196 M
+(  location: class task12) s
+5 187 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 178 M
+(        Addition a=new Addition\(\);) s
+5 169 M
+(                       ^) s
+5 160 M
+(  symbol:   class Addition) s
+5 151 M
+(  location: class task12) s
+5 142 M
+(3 errors) s
+5 97 M
+(===========================================================================) s
+5 88 M
+(                         TASK20) s
+5 79 M
+(===========================================================================) s
+5 61 M
+(SOURCE CODE) s
+5 52 M
+(---------------------------------------------------------------------------) s
+5 43 M
+(Name: Tharun-Kumaran) s
+5 34 M
+(Roll No: 2117250020478) s
+5 16 M
+(package unit2;) s
+5 7 M
+(// Name: Tharun-Kumaran) s
+_R
+S
+%%Page: (15) 15
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 15 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit2_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit2_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(// Roll No: 2117250020478) s
+5 691 M
+(class InvalidAgeException extends Exception {) s
+5 682 M
+(    InvalidAgeException\(String msg\) { super\(msg\); }) s
+5 673 M
+(}) s
+5 664 M
+(class NegativeSalaryException extends RuntimeException {) s
+5 655 M
+(    NegativeSalaryException\(String msg\) { super\(msg\); }) s
+5 646 M
+(}) s
+5 637 M
+(public class task20 {) s
+5 628 M
+(    static void checkAge\(int age\) throws InvalidAgeException {) s
+5 619 M
+(        if\(age<18\) throw new InvalidAgeException\("Age must be 18 or above"\);) s
+5 610 M
+(    }) s
+5 601 M
+(    static void checkSalary\(double salary\) {) s
+5 592 M
+(        if\(salary<0\) throw new NegativeSalaryException\("Salary cannot be negative"\);) s
+5 583 M
+(    }) s
+5 574 M
+(    public static void main\(String[] args\) {) s
+5 565 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 556 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 547 M
+(        try {) s
+5 538 M
+(            checkAge\(15\);) s
+5 529 M
+(        } catch\(InvalidAgeException e\) {) s
+5 520 M
+(            System.out.println\(e.getMessage\(\)\);) s
+5 511 M
+(        }) s
+5 502 M
+(        try {) s
+5 493 M
+(            checkSalary\(-5000\);) s
+5 484 M
+(        } catch\(NegativeSalaryException e\) {) s
+5 475 M
+(            System.out.println\(e.getMessage\(\)\);) s
+5 466 M
+(        }) s
+5 457 M
+(    }) s
+5 448 M
+(}) s
+5 421 M
+(OUTPUT) s
+5 412 M
+(---------------------------------------------------------------------------) s
+5 403 M
+(Name: Tharun-Kumaran) s
+5 394 M
+(Roll No: 2117250020478) s
+5 385 M
+(Compilation Error:) s
+5 376 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 d) s
+5 367 M
+(oes not exist) s
+5 358 M
+(import unit2.mypackage1.Addition;) s
+5 349 M
+(                       ^) s
+5 340 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 331 M
+(        Addition a=new Addition\(\);) s
+5 322 M
+(        ^) s
+5 313 M
+(  symbol:   class Addition) s
+5 304 M
+(  location: class task12) s
+5 295 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 286 M
+(        Addition a=new Addition\(\);) s
+5 277 M
+(                       ^) s
+5 268 M
+(  symbol:   class Addition) s
+5 259 M
+(  location: class task12) s
+5 250 M
+(3 errors) s
+5 205 M
+(===========================================================================) s
+5 196 M
+(                         TASK21) s
+5 187 M
+(===========================================================================) s
+5 169 M
+(SOURCE CODE) s
+5 160 M
+(---------------------------------------------------------------------------) s
+5 151 M
+(Name: Tharun-Kumaran) s
+5 142 M
+(Roll No: 2117250020478) s
+5 124 M
+(package unit2;) s
+5 115 M
+(// Name: Tharun-Kumaran) s
+5 106 M
+(// Roll No: 2117250020478) s
+5 88 M
+(import java.util.*;) s
+5 79 M
+(class ZeroDivisorException extends Exception {) s
+5 70 M
+(    ZeroDivisorException\(String msg\) { super\(msg\); }) s
+5 61 M
+(}) s
+5 52 M
+(public class task21 {) s
+5 43 M
+(    static int divide\(int a,int b\) throws ZeroDivisorException {) s
+5 34 M
+(        if\(b==0\) throw new ZeroDivisorException\("Divisor cannot be zero"\);) s
+5 25 M
+(        return a/b;) s
+5 16 M
+(    }) s
+5 7 M
+(    public static void main\(String[] args\) {) s
+_R
+S
+%%Page: (16) 16
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 16 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit2_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit2_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 700 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 691 M
+(        Scanner sc=new Scanner\(System.in\);) s
+5 682 M
+(        int a=sc.nextInt\(\),b=sc.nextInt\(\);) s
+5 673 M
+(        try {) s
+5 664 M
+(            System.out.println\("Result = "+divide\(a,b\)\);) s
+5 655 M
+(        } catch\(ZeroDivisorException e\) {) s
+5 646 M
+(            System.out.println\(e.getMessage\(\)\);) s
+5 637 M
+(        } finally {) s
+5 628 M
+(            System.out.println\("Operation complete"\);) s
+5 619 M
+(        }) s
+5 610 M
+(    }) s
+5 601 M
+(}) s
+5 574 M
+(OUTPUT) s
+5 565 M
+(---------------------------------------------------------------------------) s
+5 556 M
+(Name: Tharun-Kumaran) s
+5 547 M
+(Roll No: 2117250020478) s
+5 538 M
+(Compilation Error:) s
+5 529 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 d) s
+5 520 M
+(oes not exist) s
+5 511 M
+(import unit2.mypackage1.Addition;) s
+5 502 M
+(                       ^) s
+5 493 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 484 M
+(        Addition a=new Addition\(\);) s
+5 475 M
+(        ^) s
+5 466 M
+(  symbol:   class Addition) s
+5 457 M
+(  location: class task12) s
+5 448 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 439 M
+(        Addition a=new Addition\(\);) s
+5 430 M
+(                       ^) s
+5 421 M
+(  symbol:   class Addition) s
+5 412 M
+(  location: class task12) s
+5 403 M
+(3 errors) s
+5 358 M
+(===========================================================================) s
+5 349 M
+(                         TASK22) s
+5 340 M
+(===========================================================================) s
+5 322 M
+(SOURCE CODE) s
+5 313 M
+(---------------------------------------------------------------------------) s
+5 304 M
+(Name: Tharun-Kumaran) s
+5 295 M
+(Roll No: 2117250020478) s
+5 277 M
+(package unit2;) s
+5 268 M
+(// Name: Tharun-Kumaran) s
+5 259 M
+(// Roll No: 2117250020478) s
+5 241 M
+(import java.util.*;) s
+5 232 M
+(class Book {) s
+5 223 M
+(    String isbn,title;) s
+5 214 M
+(    Book\(String isbn,String title\) {) s
+5 205 M
+(        this.isbn=isbn; this.title=title;) s
+5 196 M
+(    }) s
+5 187 M
+(    @Override public String toString\(\) {) s
+5 178 M
+(        return isbn+" - "+title;) s
+5 169 M
+(    }) s
+5 160 M
+(    @Override public boolean equals\(Object o\) {) s
+5 151 M
+(        if\(this==o\) return true;) s
+5 142 M
+(        if\(!\(o instanceof Book\)\) return false;) s
+5 133 M
+(        return isbn.equals\(\(\(Book\)o\).isbn\);) s
+5 124 M
+(    }) s
+5 115 M
+(    @Override public int hashCode\(\) {) s
+5 106 M
+(        return isbn.hashCode\(\);) s
+5 97 M
+(    }) s
+5 88 M
+(}) s
+5 79 M
+(public class task22 {) s
+5 70 M
+(    public static void main\(String[] args\) {) s
+5 61 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 52 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 43 M
+(        HashSet<Book> books=new HashSet<>\(\);) s
+5 34 M
+(        books.add\(new Book\("111","Java"\)\);) s
+5 25 M
+(        books.add\(new Book\("111","Java Programming"\)\);) s
+5 16 M
+(        books.add\(new Book\("222","Python"\)\);) s
+5 7 M
+(        System.out.println\(books\);) s
+_R
+S
+%%Page: (17) 17
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 17 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit2_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit2_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(    }) s
+5 700 M
+(}) s
+5 673 M
+(OUTPUT) s
+5 664 M
+(---------------------------------------------------------------------------) s
+5 655 M
+(Name: Tharun-Kumaran) s
+5 646 M
+(Roll No: 2117250020478) s
+5 637 M
+(Compilation Error:) s
+5 628 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 d) s
+5 619 M
+(oes not exist) s
+5 610 M
+(import unit2.mypackage1.Addition;) s
+5 601 M
+(                       ^) s
+5 592 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 583 M
+(        Addition a=new Addition\(\);) s
+5 574 M
+(        ^) s
+5 565 M
+(  symbol:   class Addition) s
+5 556 M
+(  location: class task12) s
+5 547 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 538 M
+(        Addition a=new Addition\(\);) s
+5 529 M
+(                       ^) s
+5 520 M
+(  symbol:   class Addition) s
+5 511 M
+(  location: class task12) s
+5 502 M
+(3 errors) s
+5 457 M
+(===========================================================================) s
+5 448 M
+(                         TASK23) s
+5 439 M
+(===========================================================================) s
+5 421 M
+(SOURCE CODE) s
+5 412 M
+(---------------------------------------------------------------------------) s
+5 403 M
+(Name: Tharun-Kumaran) s
+5 394 M
+(Roll No: 2117250020478) s
+5 376 M
+(package unit2;) s
+5 367 M
+(// Name: Tharun-Kumaran) s
+5 358 M
+(// Roll No: 2117250020478) s
+5 340 M
+(import java.lang.reflect.*;) s
+5 331 M
+(class Student {) s
+5 322 M
+(    private String name="Divya";) s
+5 313 M
+(    private int age=20;) s
+5 304 M
+(    private void displayInfo\(\) {) s
+5 295 M
+(        System.out.println\("Name: "+name+", Age: "+age\);) s
+5 286 M
+(    }) s
+5 277 M
+(}) s
+5 268 M
+(public class task23 {) s
+5 259 M
+(    public static void main\(String[] args\) throws Exception {) s
+5 250 M
+(        Student s=new Student\(\);) s
+5 241 M
+(        Class<?> c=s.getClass\(\);) s
+5 223 M
+(        System.out.println\("Fields:"\);) s
+5 214 M
+(        for\(Field f:c.getDeclaredFields\(\)\) {) s
+5 205 M
+(            f.setAccessible\(true\);) s
+5 196 M
+(            System.out.println\(f.getName\(\)+" = "+f.get\(s\)\);) s
+5 187 M
+(        }) s
+5 169 M
+(        System.out.println\("Methods:"\);) s
+5 160 M
+(        for\(Method m:c.getDeclaredMethods\(\)\)) s
+5 151 M
+(            System.out.println\(m.getName\(\)\);) s
+5 133 M
+(        Method m=c.getDeclaredMethod\("displayInfo"\);) s
+5 124 M
+(        m.setAccessible\(true\);) s
+5 115 M
+(        m.invoke\(s\);) s
+5 106 M
+(    }) s
+5 97 M
+(}) s
+5 70 M
+(OUTPUT) s
+5 61 M
+(---------------------------------------------------------------------------) s
+5 52 M
+(Name: Tharun-Kumaran) s
+5 43 M
+(Roll No: 2117250020478) s
+5 34 M
+(Compilation Error:) s
+5 25 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 d) s
+5 16 M
+(oes not exist) s
+5 7 M
+(import unit2.mypackage1.Addition;) s
+_R
+S
+%%Page: (18) 18
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 18 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit2_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit2_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(                       ^) s
+5 700 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 691 M
+(        Addition a=new Addition\(\);) s
+5 682 M
+(        ^) s
+5 673 M
+(  symbol:   class Addition) s
+5 664 M
+(  location: class task12) s
+5 655 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 646 M
+(        Addition a=new Addition\(\);) s
+5 637 M
+(                       ^) s
+5 628 M
+(  symbol:   class Addition) s
+5 619 M
+(  location: class task12) s
+5 610 M
+(3 errors) s
+5 565 M
+(===========================================================================) s
+5 556 M
+(                         TASK24) s
+5 547 M
+(===========================================================================) s
+5 529 M
+(SOURCE CODE) s
+5 520 M
+(---------------------------------------------------------------------------) s
+5 511 M
+(Name: Tharun-Kumaran) s
+5 502 M
+(Roll No: 2117250020478) s
+5 484 M
+(package unit2;) s
+5 475 M
+(// Name: Tharun-Kumaran) s
+5 466 M
+(// Roll No: 2117250020478) s
+5 448 M
+(interface Animal {) s
+5 439 M
+(    void sound\(\);) s
+5 430 M
+(}) s
+5 421 M
+(interface Pet extends Animal {) s
+5 412 M
+(    void play\(\);) s
+5 403 M
+(}) s
+5 394 M
+(class Dog implements Pet {) s
+5 385 M
+(    public void sound\(\) { System.out.println\("Dog barks"\); }) s
+5 376 M
+(    public void play\(\) { System.out.println\("Dog is playing"\); }) s
+5 367 M
+(}) s
+5 358 M
+(public class task24 {) s
+5 349 M
+(    public static void main\(String[] args\) {) s
+5 340 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 331 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 322 M
+(        Dog d=new Dog\(\);) s
+5 313 M
+(        d.sound\(\);) s
+5 304 M
+(        d.play\(\);) s
+5 295 M
+(    }) s
+5 286 M
+(}) s
+5 259 M
+(OUTPUT) s
+5 250 M
+(---------------------------------------------------------------------------) s
+5 241 M
+(Name: Tharun-Kumaran) s
+5 232 M
+(Roll No: 2117250020478) s
+5 223 M
+(Compilation Error:) s
+5 214 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 d) s
+5 205 M
+(oes not exist) s
+5 196 M
+(import unit2.mypackage1.Addition;) s
+5 187 M
+(                       ^) s
+5 178 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 169 M
+(        Addition a=new Addition\(\);) s
+5 160 M
+(        ^) s
+5 151 M
+(  symbol:   class Addition) s
+5 142 M
+(  location: class task12) s
+5 133 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 124 M
+(        Addition a=new Addition\(\);) s
+5 115 M
+(                       ^) s
+5 106 M
+(  symbol:   class Addition) s
+5 97 M
+(  location: class task12) s
+5 88 M
+(3 errors) s
+5 43 M
+(===========================================================================) s
+5 34 M
+(                         TASK25) s
+5 25 M
+(===========================================================================) s
+5 7 M
+(SOURCE CODE) s
+_R
+S
+%%Page: (19) 19
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 19 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit2_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit2_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(---------------------------------------------------------------------------) s
+5 700 M
+(Name: Tharun-Kumaran) s
+5 691 M
+(Roll No: 2117250020478) s
+5 673 M
+(package unit2;) s
+5 664 M
+(// Name: Tharun-Kumaran) s
+5 655 M
+(// Roll No: 2117250020478) s
+5 637 M
+(interface Vehicle2 {) s
+5 628 M
+(    void start\(\);) s
+5 619 M
+(}) s
+5 610 M
+(interface Car2 extends Vehicle2 {) s
+5 601 M
+(    void stop\(\);) s
+5 592 M
+(    void displayDetails\(\);) s
+5 583 M
+(}) s
+5 574 M
+(class Honda implements Car2 {) s
+5 565 M
+(    public void start\(\) { System.out.println\("Honda started"\); }) s
+5 556 M
+(    public void stop\(\) { System.out.println\("Honda stopped"\); }) s
+5 547 M
+(    public void displayDetails\(\) {) s
+5 538 M
+(        System.out.println\("Brand: Honda"\);) s
+5 529 M
+(        System.out.println\("Type: Car"\);) s
+5 520 M
+(    }) s
+5 511 M
+(}) s
+5 502 M
+(public class task25 {) s
+5 493 M
+(    public static void main\(String[] args\) {) s
+5 484 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 475 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 466 M
+(        Honda h=new Honda\(\);) s
+5 457 M
+(        h.start\(\);) s
+5 448 M
+(        h.displayDetails\(\);) s
+5 439 M
+(        h.stop\(\);) s
+5 430 M
+(    }) s
+5 421 M
+(}) s
+5 394 M
+(OUTPUT) s
+5 385 M
+(---------------------------------------------------------------------------) s
+5 376 M
+(Name: Tharun-Kumaran) s
+5 367 M
+(Roll No: 2117250020478) s
+5 358 M
+(Compilation Error:) s
+5 349 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 d) s
+5 340 M
+(oes not exist) s
+5 331 M
+(import unit2.mypackage1.Addition;) s
+5 322 M
+(                       ^) s
+5 313 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 304 M
+(        Addition a=new Addition\(\);) s
+5 295 M
+(        ^) s
+5 286 M
+(  symbol:   class Addition) s
+5 277 M
+(  location: class task12) s
+5 268 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 259 M
+(        Addition a=new Addition\(\);) s
+5 250 M
+(                       ^) s
+5 241 M
+(  symbol:   class Addition) s
+5 232 M
+(  location: class task12) s
+5 223 M
+(3 errors) s
+5 178 M
+(===========================================================================) s
+5 169 M
+(                         TASK26) s
+5 160 M
+(===========================================================================) s
+5 142 M
+(SOURCE CODE) s
+5 133 M
+(---------------------------------------------------------------------------) s
+5 124 M
+(Name: Tharun-Kumaran) s
+5 115 M
+(Roll No: 2117250020478) s
+5 97 M
+(package unit2;) s
+5 88 M
+(// Name: Tharun-Kumaran) s
+5 79 M
+(// Roll No: 2117250020478) s
+5 61 M
+(import java.util.*;) s
+5 52 M
+(class BookClone implements Cloneable {) s
+5 43 M
+(    String title;) s
+5 34 M
+(    ArrayList<String> chapters;) s
+5 16 M
+(    BookClone\(String title,ArrayList<String> chapters\) {) s
+5 7 M
+(        this.title=title;) s
+_R
+S
+%%Page: (20) 20
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 20 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit2_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit2_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(        this.chapters=chapters;) s
+5 700 M
+(    }) s
+5 682 M
+(    public BookClone clone\(\) throws CloneNotSupportedException {) s
+5 673 M
+(        return \(BookClone\)super.clone\(\);) s
+5 664 M
+(    }) s
+5 646 M
+(    public BookClone deepClone\(\) throws CloneNotSupportedException {) s
+5 637 M
+(        BookClone b=\(BookClone\)super.clone\(\);) s
+5 628 M
+(        b.chapters=new ArrayList<>\(chapters\);) s
+5 619 M
+(        return b;) s
+5 610 M
+(    }) s
+5 601 M
+(}) s
+5 592 M
+(public class task26 {) s
+5 583 M
+(    public static void main\(String[] args\) throws Exception {) s
+5 574 M
+(        ArrayList<String> list=new ArrayList<>\(\);) s
+5 565 M
+(        list.add\("Introduction"\);) s
+5 547 M
+(        BookClone original=new BookClone\("Java",list\);) s
+5 529 M
+(        BookClone shallow=original.clone\(\);) s
+5 520 M
+(        BookClone deep=original.deepClone\(\);) s
+5 502 M
+(        shallow.chapters.add\("OOP"\);) s
+5 493 M
+(        System.out.println\("Original after shallow clone: "+original.chapters\);) s
+5 475 M
+(        deep.chapters.add\("Exceptions"\);) s
+5 466 M
+(        System.out.println\("Original after deep clone: "+original.chapters\);) s
+5 457 M
+(        System.out.println\("Deep clone: "+deep.chapters\);) s
+5 448 M
+(    }) s
+5 439 M
+(}) s
+5 412 M
+(OUTPUT) s
+5 403 M
+(---------------------------------------------------------------------------) s
+5 394 M
+(Name: Tharun-Kumaran) s
+5 385 M
+(Roll No: 2117250020478) s
+5 376 M
+(Compilation Error:) s
+5 367 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 d) s
+5 358 M
+(oes not exist) s
+5 349 M
+(import unit2.mypackage1.Addition;) s
+5 340 M
+(                       ^) s
+5 331 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 322 M
+(        Addition a=new Addition\(\);) s
+5 313 M
+(        ^) s
+5 304 M
+(  symbol:   class Addition) s
+5 295 M
+(  location: class task12) s
+5 286 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 277 M
+(        Addition a=new Addition\(\);) s
+5 268 M
+(                       ^) s
+5 259 M
+(  symbol:   class Addition) s
+5 250 M
+(  location: class task12) s
+5 241 M
+(3 errors) s
+5 196 M
+(===========================================================================) s
+5 187 M
+(                         TASK27) s
+5 178 M
+(===========================================================================) s
+5 160 M
+(SOURCE CODE) s
+5 151 M
+(---------------------------------------------------------------------------) s
+5 142 M
+(Name: Tharun-Kumaran) s
+5 133 M
+(Roll No: 2117250020478) s
+5 115 M
+(package unit2;) s
+5 106 M
+(// Name: Tharun-Kumaran) s
+5 97 M
+(// Roll No: 2117250020478) s
+5 79 M
+(class Account {) s
+5 70 M
+(    int accountNumber=101;) s
+5 61 M
+(    String customerName="Ravi";) s
+5 52 M
+(    double balance=5000;) s
+5 34 M
+(    class Transaction {) s
+5 25 M
+(        void display\(\) {) s
+5 16 M
+(            System.out.println\("Account: "+accountNumber\);) s
+5 7 M
+(            System.out.println\("Customer: "+customerName\);) s
+_R
+S
+%%Page: (21) 21
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 21 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit2_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit2_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(            System.out.println\("Balance: "+balance\);) s
+5 700 M
+(            System.out.println\("Transaction: Deposit"\);) s
+5 691 M
+(        }) s
+5 682 M
+(    }) s
+5 673 M
+(}) s
+5 664 M
+(public class task27 {) s
+5 655 M
+(    public static void main\(String[] args\) {) s
+5 646 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 637 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 628 M
+(        Account a=new Account\(\);) s
+5 619 M
+(        Account.Transaction t=a.new Transaction\(\);) s
+5 610 M
+(        t.display\(\);) s
+5 601 M
+(    }) s
+5 592 M
+(}) s
+5 565 M
+(OUTPUT) s
+5 556 M
+(---------------------------------------------------------------------------) s
+5 547 M
+(Name: Tharun-Kumaran) s
+5 538 M
+(Roll No: 2117250020478) s
+5 529 M
+(Compilation Error:) s
+5 520 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 d) s
+5 511 M
+(oes not exist) s
+5 502 M
+(import unit2.mypackage1.Addition;) s
+5 493 M
+(                       ^) s
+5 484 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 475 M
+(        Addition a=new Addition\(\);) s
+5 466 M
+(        ^) s
+5 457 M
+(  symbol:   class Addition) s
+5 448 M
+(  location: class task12) s
+5 439 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 430 M
+(        Addition a=new Addition\(\);) s
+5 421 M
+(                       ^) s
+5 412 M
+(  symbol:   class Addition) s
+5 403 M
+(  location: class task12) s
+5 394 M
+(3 errors) s
+5 349 M
+(===========================================================================) s
+5 340 M
+(                         TASK28) s
+5 331 M
+(===========================================================================) s
+5 313 M
+(SOURCE CODE) s
+5 304 M
+(---------------------------------------------------------------------------) s
+5 295 M
+(Name: Tharun-Kumaran) s
+5 286 M
+(Roll No: 2117250020478) s
+5 268 M
+(package unit2;) s
+5 259 M
+(// Name: Tharun-Kumaran) s
+5 250 M
+(// Roll No: 2117250020478) s
+5 232 M
+(class Bank {) s
+5 223 M
+(    static String bankName="ABC Bank";) s
+5 205 M
+(    static class Branch {) s
+5 196 M
+(        void display\(\) {) s
+5 187 M
+(            System.out.println\("Bank: "+bankName\);) s
+5 178 M
+(            System.out.println\("Branch: Chennai"\);) s
+5 169 M
+(        }) s
+5 160 M
+(    }) s
+5 151 M
+(}) s
+5 142 M
+(public class task28 {) s
+5 133 M
+(    public static void main\(String[] args\) {) s
+5 124 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 115 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 106 M
+(        Bank.Branch b=new Bank.Branch\(\);) s
+5 97 M
+(        b.display\(\);) s
+5 88 M
+(    }) s
+5 79 M
+(}) s
+5 52 M
+(OUTPUT) s
+5 43 M
+(---------------------------------------------------------------------------) s
+5 34 M
+(Name: Tharun-Kumaran) s
+5 25 M
+(Roll No: 2117250020478) s
+5 16 M
+(Compilation Error:) s
+5 7 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 d) s
+_R
+S
+%%Page: (22) 22
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 22 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit2_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit2_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(oes not exist) s
+5 700 M
+(import unit2.mypackage1.Addition;) s
+5 691 M
+(                       ^) s
+5 682 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 673 M
+(        Addition a=new Addition\(\);) s
+5 664 M
+(        ^) s
+5 655 M
+(  symbol:   class Addition) s
+5 646 M
+(  location: class task12) s
+5 637 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 628 M
+(        Addition a=new Addition\(\);) s
+5 619 M
+(                       ^) s
+5 610 M
+(  symbol:   class Addition) s
+5 601 M
+(  location: class task12) s
+5 592 M
+(3 errors) s
+5 547 M
+(===========================================================================) s
+5 538 M
+(                         TASK29) s
+5 529 M
+(===========================================================================) s
+5 511 M
+(SOURCE CODE) s
+5 502 M
+(---------------------------------------------------------------------------) s
+5 493 M
+(Name: Tharun-Kumaran) s
+5 484 M
+(Roll No: 2117250020478) s
+5 466 M
+(package unit2;) s
+5 457 M
+(// Name: Tharun-Kumaran) s
+5 448 M
+(// Roll No: 2117250020478) s
+5 430 M
+(class Bank2 {) s
+5 421 M
+(    void openAccount\(\) {) s
+5 412 M
+(        class Customer {) s
+5 403 M
+(            void display\(\) {) s
+5 394 M
+(                System.out.println\("Customer account opened successfully"\);) s
+5 385 M
+(            }) s
+5 376 M
+(        }) s
+5 367 M
+(        Customer c=new Customer\(\);) s
+5 358 M
+(        c.display\(\);) s
+5 349 M
+(    }) s
+5 340 M
+(}) s
+5 331 M
+(public class task29 {) s
+5 322 M
+(    public static void main\(String[] args\) {) s
+5 313 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 304 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 295 M
+(        new Bank2\(\).openAccount\(\);) s
+5 286 M
+(    }) s
+5 277 M
+(}) s
+5 250 M
+(OUTPUT) s
+5 241 M
+(---------------------------------------------------------------------------) s
+5 232 M
+(Name: Tharun-Kumaran) s
+5 223 M
+(Roll No: 2117250020478) s
+5 214 M
+(Compilation Error:) s
+5 205 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 d) s
+5 196 M
+(oes not exist) s
+5 187 M
+(import unit2.mypackage1.Addition;) s
+5 178 M
+(                       ^) s
+5 169 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 160 M
+(        Addition a=new Addition\(\);) s
+5 151 M
+(        ^) s
+5 142 M
+(  symbol:   class Addition) s
+5 133 M
+(  location: class task12) s
+5 124 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 115 M
+(        Addition a=new Addition\(\);) s
+5 106 M
+(                       ^) s
+5 97 M
+(  symbol:   class Addition) s
+5 88 M
+(  location: class task12) s
+5 79 M
+(3 errors) s
+5 34 M
+(===========================================================================) s
+5 25 M
+(                         TASK30) s
+5 16 M
+(===========================================================================) s
+_R
+S
+%%Page: (23) 23
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 23 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit2_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit2_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(SOURCE CODE) s
+5 700 M
+(---------------------------------------------------------------------------) s
+5 691 M
+(Name: Tharun-Kumaran) s
+5 682 M
+(Roll No: 2117250020478) s
+5 664 M
+(package unit2;) s
+5 655 M
+(// Name: Tharun-Kumaran) s
+5 646 M
+(// Roll No: 2117250020478) s
+5 628 M
+(abstract class Transaction {) s
+5 619 M
+(    abstract void processTransaction\(\);) s
+5 610 M
+(}) s
+5 601 M
+(public class task30 {) s
+5 592 M
+(    public static void main\(String[] args\) {) s
+5 583 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 574 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 565 M
+(        Transaction t=new Transaction\(\) {) s
+5 556 M
+(            void processTransaction\(\) {) s
+5 547 M
+(                System.out.println\("Bank transaction processed"\);) s
+5 538 M
+(            }) s
+5 529 M
+(        };) s
+5 520 M
+(        t.processTransaction\(\);) s
+5 511 M
+(    }) s
+5 502 M
+(}) s
+5 475 M
+(OUTPUT) s
+5 466 M
+(---------------------------------------------------------------------------) s
+5 457 M
+(Name: Tharun-Kumaran) s
+5 448 M
+(Roll No: 2117250020478) s
+5 439 M
+(Compilation Error:) s
+5 430 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 d) s
+5 421 M
+(oes not exist) s
+5 412 M
+(import unit2.mypackage1.Addition;) s
+5 403 M
+(                       ^) s
+5 394 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 385 M
+(        Addition a=new Addition\(\);) s
+5 376 M
+(        ^) s
+5 367 M
+(  symbol:   class Addition) s
+5 358 M
+(  location: class task12) s
+5 349 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 340 M
+(        Addition a=new Addition\(\);) s
+5 331 M
+(                       ^) s
+5 322 M
+(  symbol:   class Addition) s
+5 313 M
+(  location: class task12) s
+5 304 M
+(3 errors) s
+5 259 M
+(===========================================================================) s
+5 250 M
+(                         TASK31) s
+5 241 M
+(===========================================================================) s
+5 223 M
+(SOURCE CODE) s
+5 214 M
+(---------------------------------------------------------------------------) s
+5 205 M
+(Name: Tharun-Kumaran) s
+5 196 M
+(Roll No: 2117250020478) s
+5 178 M
+(package unit2;) s
+5 169 M
+(// Name: Tharun-Kumaran) s
+5 160 M
+(// Roll No: 2117250020478) s
+5 142 M
+(import java.lang.reflect.*;) s
+5 133 M
+(interface Calculator {) s
+5 124 M
+(    int add\(int a,int b\);) s
+5 115 M
+(}) s
+5 106 M
+(class CalculatorImpl implements Calculator {) s
+5 97 M
+(    public int add\(int a,int b\) {) s
+5 88 M
+(        return a+b;) s
+5 79 M
+(    }) s
+5 70 M
+(}) s
+5 61 M
+(class LoggingHandler implements InvocationHandler {) s
+5 52 M
+(    private final Object target;) s
+5 43 M
+(    LoggingHandler\(Object target\) {) s
+5 34 M
+(        this.target=target;) s
+5 25 M
+(    }) s
+5 16 M
+(    public Object invoke\(Object proxy,Method method,Object[] args\) throws Throwable {) s
+5 7 M
+(        long start=System.nanoTime\(\);) s
+_R
+S
+%%Page: (24) 24
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 24 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit2_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit2_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(        Object result=method.invoke\(target,args\);) s
+5 700 M
+(        long end=System.nanoTime\(\);) s
+5 682 M
+(        System.out.println\("Method: "+method.getName\(\)\);) s
+5 673 M
+(        System.out.println\("Result: "+result\);) s
+5 664 M
+(        System.out.println\("Time: "+\(end-start\)+" ns"\);) s
+5 655 M
+(        return result;) s
+5 646 M
+(    }) s
+5 637 M
+(}) s
+5 628 M
+(public class task31 {) s
+5 619 M
+(    public static void main\(String[] args\) {) s
+5 610 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 601 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 592 M
+(        Calculator real=new CalculatorImpl\(\);) s
+5 574 M
+(        Calculator proxy=\(Calculator\)Proxy.newProxyInstance\() s
+5 565 M
+(            Calculator.class.getClassLoader\(\),) s
+5 556 M
+(            new Class<?>[]{Calculator.class},) s
+5 547 M
+(            new LoggingHandler\(real\)) s
+5 538 M
+(        \);) s
+5 520 M
+(        proxy.add\(10,20\);) s
+5 511 M
+(    }) s
+5 502 M
+(}) s
+5 475 M
+(OUTPUT) s
+5 466 M
+(---------------------------------------------------------------------------) s
+5 457 M
+(Name: Tharun-Kumaran) s
+5 448 M
+(Roll No: 2117250020478) s
+5 439 M
+(Compilation Error:) s
+5 430 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 d) s
+5 421 M
+(oes not exist) s
+5 412 M
+(import unit2.mypackage1.Addition;) s
+5 403 M
+(                       ^) s
+5 394 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 385 M
+(        Addition a=new Addition\(\);) s
+5 376 M
+(        ^) s
+5 367 M
+(  symbol:   class Addition) s
+5 358 M
+(  location: class task12) s
+5 349 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 340 M
+(        Addition a=new Addition\(\);) s
+5 331 M
+(                       ^) s
+5 322 M
+(  symbol:   class Addition) s
+5 313 M
+(  location: class task12) s
+5 304 M
+(3 errors) s
+5 259 M
+(===========================================================================) s
+5 250 M
+(                         TASK32) s
+5 241 M
+(===========================================================================) s
+5 223 M
+(SOURCE CODE) s
+5 214 M
+(---------------------------------------------------------------------------) s
+5 205 M
+(Name: Tharun-Kumaran) s
+5 196 M
+(Roll No: 2117250020478) s
+5 178 M
+(package unit2;) s
+5 169 M
+(// Name: Tharun-Kumaran) s
+5 160 M
+(// Roll No: 2117250020478) s
+5 142 M
+(import java.io.*;) s
+5 133 M
+(public class task32 {) s
+5 124 M
+(    public static void main\(String[] args\) {) s
+5 115 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 106 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 97 M
+(        String source="source.txt";) s
+5 88 M
+(        String destination="copy.txt";) s
+5 70 M
+(        try\(FileInputStream in=new FileInputStream\(source\);) s
+5 61 M
+(            FileOutputStream out=new FileOutputStream\(destination\)\) {) s
+5 43 M
+(            int b;) s
+5 34 M
+(            while\(\(b=in.read\(\)\)!=-1\)) s
+5 25 M
+(                out.write\(b\);) s
+5 7 M
+(            System.out.println\("File copied successfully"\);) s
+_R
+S
+%%Page: (25) 25
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 25 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit2_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit2_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 700 M
+(        } catch\(IOException e\) {) s
+5 691 M
+(            System.out.println\("Error: "+e.getMessage\(\)\);) s
+5 682 M
+(        }) s
+5 673 M
+(    }) s
+5 664 M
+(}) s
+5 637 M
+(OUTPUT) s
+5 628 M
+(---------------------------------------------------------------------------) s
+5 619 M
+(Name: Tharun-Kumaran) s
+5 610 M
+(Roll No: 2117250020478) s
+5 601 M
+(Compilation Error:) s
+5 592 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 d) s
+5 583 M
+(oes not exist) s
+5 574 M
+(import unit2.mypackage1.Addition;) s
+5 565 M
+(                       ^) s
+5 556 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 547 M
+(        Addition a=new Addition\(\);) s
+5 538 M
+(        ^) s
+5 529 M
+(  symbol:   class Addition) s
+5 520 M
+(  location: class task12) s
+5 511 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 502 M
+(        Addition a=new Addition\(\);) s
+5 493 M
+(                       ^) s
+5 484 M
+(  symbol:   class Addition) s
+5 475 M
+(  location: class task12) s
+5 466 M
+(3 errors) s
+5 421 M
+(===========================================================================) s
+5 412 M
+(                         TASK33) s
+5 403 M
+(===========================================================================) s
+5 385 M
+(SOURCE CODE) s
+5 376 M
+(---------------------------------------------------------------------------) s
+5 367 M
+(Name: Tharun-Kumaran) s
+5 358 M
+(Roll No: 2117250020478) s
+5 340 M
+(package unit2;) s
+5 331 M
+(// Name: Tharun-Kumaran) s
+5 322 M
+(// Roll No: 2117250020478) s
+5 304 M
+(import java.io.*;) s
+5 295 M
+(public class task33 {) s
+5 286 M
+(    public static void main\(String[] args\) {) s
+5 277 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 268 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 259 M
+(        String file="data.txt";) s
+5 250 M
+(        int lines=0,words=0,chars=0;) s
+5 232 M
+(        try\(BufferedReader br=new BufferedReader\(new FileReader\(file\)\)\) {) s
+5 223 M
+(            String line;) s
+5 214 M
+(            while\(\(line=br.readLine\(\)\)!=null\) {) s
+5 205 M
+(                lines++;) s
+5 196 M
+(                chars+=line.length\(\);) s
+5 187 M
+(                if\(!line.trim\(\).isEmpty\(\)\)) s
+5 178 M
+(                    words+=line.trim\(\).split\("\\\\s+"\).length;) s
+5 169 M
+(            }) s
+5 151 M
+(            System.out.println\("Lines = "+lines\);) s
+5 142 M
+(            System.out.println\("Words = "+words\);) s
+5 133 M
+(            System.out.println\("Characters = "+chars\);) s
+5 115 M
+(        } catch\(IOException e\) {) s
+5 106 M
+(            System.out.println\("Error: "+e.getMessage\(\)\);) s
+5 97 M
+(        }) s
+5 88 M
+(    }) s
+5 79 M
+(}) s
+5 52 M
+(OUTPUT) s
+5 43 M
+(---------------------------------------------------------------------------) s
+5 34 M
+(Name: Tharun-Kumaran) s
+5 25 M
+(Roll No: 2117250020478) s
+5 16 M
+(Compilation Error:) s
+5 7 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 d) s
+_R
+S
+%%Page: (26) 26
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 26 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit2_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit2_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(oes not exist) s
+5 700 M
+(import unit2.mypackage1.Addition;) s
+5 691 M
+(                       ^) s
+5 682 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 673 M
+(        Addition a=new Addition\(\);) s
+5 664 M
+(        ^) s
+5 655 M
+(  symbol:   class Addition) s
+5 646 M
+(  location: class task12) s
+5 637 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 628 M
+(        Addition a=new Addition\(\);) s
+5 619 M
+(                       ^) s
+5 610 M
+(  symbol:   class Addition) s
+5 601 M
+(  location: class task12) s
+5 592 M
+(3 errors) s
+5 547 M
+(===========================================================================) s
+5 538 M
+(                         TASK34) s
+5 529 M
+(===========================================================================) s
+5 511 M
+(SOURCE CODE) s
+5 502 M
+(---------------------------------------------------------------------------) s
+5 493 M
+(Name: Tharun-Kumaran) s
+5 484 M
+(Roll No: 2117250020478) s
+5 466 M
+(package unit2;) s
+5 457 M
+(// Name: Tharun-Kumaran) s
+5 448 M
+(// Roll No: 2117250020478) s
+5 430 M
+(import java.util.*;) s
+5 421 M
+(public class task34 {) s
+5 412 M
+(    public static void main\(String[] args\) {) s
+5 403 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 394 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 385 M
+(        Scanner sc=new Scanner\(System.in\);) s
+5 376 M
+(        System.out.print\("Number of subjects: "\);) s
+5 367 M
+(        int n=sc.nextInt\(\);) s
+5 349 M
+(        int total=0;) s
+5 340 M
+(        for\(int i=0;i<n;i++\)) s
+5 331 M
+(            total+=sc.nextInt\(\);) s
+5 313 M
+(        double average=\(double\)total/n;) s
+5 295 M
+(        System.out.println\("Total = "+total\);) s
+5 286 M
+(        System.out.println\("Average = "+average\);) s
+5 277 M
+(    }) s
+5 268 M
+(}) s
+5 241 M
+(OUTPUT) s
+5 232 M
+(---------------------------------------------------------------------------) s
+5 223 M
+(Name: Tharun-Kumaran) s
+5 214 M
+(Roll No: 2117250020478) s
+5 205 M
+(Compilation Error:) s
+5 196 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 d) s
+5 187 M
+(oes not exist) s
+5 178 M
+(import unit2.mypackage1.Addition;) s
+5 169 M
+(                       ^) s
+5 160 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 151 M
+(        Addition a=new Addition\(\);) s
+5 142 M
+(        ^) s
+5 133 M
+(  symbol:   class Addition) s
+5 124 M
+(  location: class task12) s
+5 115 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 106 M
+(        Addition a=new Addition\(\);) s
+5 97 M
+(                       ^) s
+5 88 M
+(  symbol:   class Addition) s
+5 79 M
+(  location: class task12) s
+5 70 M
+(3 errors) s
+5 25 M
+(===========================================================================) s
+5 16 M
+(                         TASK35) s
+5 7 M
+(===========================================================================) s
+_R
+S
+%%Page: (27) 27
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 27 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit2_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit2_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 700 M
+(SOURCE CODE) s
+5 691 M
+(---------------------------------------------------------------------------) s
+5 682 M
+(Name: Tharun-Kumaran) s
+5 673 M
+(Roll No: 2117250020478) s
+5 655 M
+(package unit2;) s
+5 646 M
+(// Name: Tharun-Kumaran) s
+5 637 M
+(// Roll No: 2117250020478) s
+5 619 M
+(import java.io.*;) s
+5 610 M
+(public class task35 {) s
+5 601 M
+(    public static void main\(String[] args\) {) s
+5 592 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 583 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 574 M
+(        File file=new File\("sample.txt"\);) s
+5 556 M
+(        try {) s
+5 547 M
+(            if\(file.createNewFile\(\)\)) s
+5 538 M
+(                System.out.println\("File created"\);) s
+5 529 M
+(            else) s
+5 520 M
+(                System.out.println\("File already exists"\);) s
+5 502 M
+(            System.out.println\("Name: "+file.getName\(\)\);) s
+5 493 M
+(            System.out.println\("Path: "+file.getAbsolutePath\(\)\);) s
+5 484 M
+(            System.out.println\("Size: "+file.length\(\)+" bytes"\);) s
+5 466 M
+(            if\(file.delete\(\)\)) s
+5 457 M
+(                System.out.println\("File deleted"\);) s
+5 439 M
+(        } catch\(IOException e\) {) s
+5 430 M
+(            System.out.println\("Error: "+e.getMessage\(\)\);) s
+5 421 M
+(        }) s
+5 412 M
+(    }) s
+5 403 M
+(}) s
+5 376 M
+(OUTPUT) s
+5 367 M
+(---------------------------------------------------------------------------) s
+5 358 M
+(Name: Tharun-Kumaran) s
+5 349 M
+(Roll No: 2117250020478) s
+5 340 M
+(Compilation Error:) s
+5 331 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 d) s
+5 322 M
+(oes not exist) s
+5 313 M
+(import unit2.mypackage1.Addition;) s
+5 304 M
+(                       ^) s
+5 295 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 286 M
+(        Addition a=new Addition\(\);) s
+5 277 M
+(        ^) s
+5 268 M
+(  symbol:   class Addition) s
+5 259 M
+(  location: class task12) s
+5 250 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 241 M
+(        Addition a=new Addition\(\);) s
+5 232 M
+(                       ^) s
+5 223 M
+(  symbol:   class Addition) s
+5 214 M
+(  location: class task12) s
+5 205 M
+(3 errors) s
+5 160 M
+(===========================================================================) s
+5 151 M
+(                         TASK36) s
+5 142 M
+(===========================================================================) s
+5 124 M
+(SOURCE CODE) s
+5 115 M
+(---------------------------------------------------------------------------) s
+5 106 M
+(Name: Tharun-Kumaran) s
+5 97 M
+(Roll No: 2117250020478) s
+5 79 M
+(package unit2;) s
+5 70 M
+(// Name: Tharun-Kumaran) s
+5 61 M
+(// Roll No: 2117250020478) s
+5 43 M
+(import java.nio.file.*;) s
+5 34 M
+(import java.io.*;) s
+5 25 M
+(public class task36 {) s
+5 16 M
+(    public static void main\(String[] args\) {) s
+5 7 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+_R
+S
+%%Page: (28) 28
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 28 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit2_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit2_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 700 M
+(        Path source=Paths.get\("source.txt"\);) s
+5 691 M
+(        Path destination=Paths.get\("nio_copy.txt"\);) s
+5 673 M
+(        try {) s
+5 664 M
+(            Files.copy\(source,destination,StandardCopyOption.REPLACE_EXISTING\);) s
+5 655 M
+(            System.out.println\("File copied using NIO"\);) s
+5 646 M
+(        } catch\(IOException e\) {) s
+5 637 M
+(            System.out.println\("Error: "+e.getMessage\(\)\);) s
+5 628 M
+(        }) s
+5 619 M
+(    }) s
+5 610 M
+(}) s
+5 583 M
+(OUTPUT) s
+5 574 M
+(---------------------------------------------------------------------------) s
+5 565 M
+(Name: Tharun-Kumaran) s
+5 556 M
+(Roll No: 2117250020478) s
+5 547 M
+(Compilation Error:) s
+5 538 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 d) s
+5 529 M
+(oes not exist) s
+5 520 M
+(import unit2.mypackage1.Addition;) s
+5 511 M
+(                       ^) s
+5 502 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 493 M
+(        Addition a=new Addition\(\);) s
+5 484 M
+(        ^) s
+5 475 M
+(  symbol:   class Addition) s
+5 466 M
+(  location: class task12) s
+5 457 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 448 M
+(        Addition a=new Addition\(\);) s
+5 439 M
+(                       ^) s
+5 430 M
+(  symbol:   class Addition) s
+5 421 M
+(  location: class task12) s
+5 412 M
+(3 errors) s
+5 367 M
+(===========================================================================) s
+5 358 M
+(                         TASK37) s
+5 349 M
+(===========================================================================) s
+5 331 M
+(SOURCE CODE) s
+5 322 M
+(---------------------------------------------------------------------------) s
+5 313 M
+(Name: Tharun-Kumaran) s
+5 304 M
+(Roll No: 2117250020478) s
+5 286 M
+(package unit2;) s
+5 277 M
+(// Name: Tharun-Kumaran) s
+5 268 M
+(// Roll No: 2117250020478) s
+5 250 M
+(import java.io.*;) s
+5 232 M
+(class StudentData implements Serializable {) s
+5 223 M
+(    String name;) s
+5 214 M
+(    int rollNo;) s
+5 205 M
+(    transient String password;) s
+5 187 M
+(    StudentData\(String name,int rollNo,String password\) {) s
+5 178 M
+(        this.name=name;) s
+5 169 M
+(        this.rollNo=rollNo;) s
+5 160 M
+(        this.password=password;) s
+5 151 M
+(    }) s
+5 142 M
+(}) s
+5 124 M
+(public class task37 {) s
+5 115 M
+(    public static void main\(String[] args\) {) s
+5 106 M
+(                System.out.println\("Name: Tharun-Kumaran"\);) s
+5 97 M
+(                System.out.println\("Roll No: 2117250020478"\);) s
+5 88 M
+(        StudentData s1=new StudentData\("Kavya",101,"secret"\);) s
+5 70 M
+(        try {) s
+5 61 M
+(            ObjectOutputStream out=) s
+5 52 M
+(                new ObjectOutputStream\(new FileOutputStream\("student.ser"\)\);) s
+5 43 M
+(            out.writeObject\(s1\);) s
+5 34 M
+(            out.close\(\);) s
+5 16 M
+(            ObjectInputStream in=) s
+5 7 M
+(                new ObjectInputStream\(new FileInputStream\("student.ser"\)\);) s
+_R
+S
+%%Page: (29) 29
+%%BeginPageSetup
+_S
+18 36 translate
+/pagenum 29 def
+/fname (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/.unit2_combined.txt) def
+/fdir (/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP) def
+/ftail (.unit2_combined.txt) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+5 709 M
+(            StudentData s2=\(StudentData\)in.readObject\(\);) s
+5 700 M
+(            in.close\(\);) s
+5 682 M
+(            System.out.println\("Name: "+s2.name\);) s
+5 673 M
+(            System.out.println\("Roll No: "+s2.rollNo\);) s
+5 664 M
+(            System.out.println\("Password: "+s2.password\);) s
+5 646 M
+(        } catch\(IOException | ClassNotFoundException e\) {) s
+5 637 M
+(            System.out.println\("Error: "+e.getMessage\(\)\);) s
+5 628 M
+(        }) s
+5 619 M
+(    }) s
+5 610 M
+(}) s
+5 583 M
+(OUTPUT) s
+5 574 M
+(---------------------------------------------------------------------------) s
+5 565 M
+(Name: Tharun-Kumaran) s
+5 556 M
+(Roll No: 2117250020478) s
+5 547 M
+(Compilation Error:) s
+5 538 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:5: error: package unit2.mypackage1 d) s
+5 529 M
+(oes not exist) s
+5 520 M
+(import unit2.mypackage1.Addition;) s
+5 511 M
+(                       ^) s
+5 502 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 493 M
+(        Addition a=new Addition\(\);) s
+5 484 M
+(        ^) s
+5 475 M
+(  symbol:   class Addition) s
+5 466 M
+(  location: class task12) s
+5 457 M
+(/home/tharun/snap/eclipse/common/eclipse-workspace/javaOOP/src/unit2/task12.java:10: error: cannot find symbol) s
+5 448 M
+(        Addition a=new Addition\(\);) s
+5 439 M
+(                       ^) s
+5 430 M
+(  symbol:   class Addition) s
+5 421 M
+(  location: class task12) s
+5 412 M
+(3 errors) s
+_R
+S
+%%Trailer
+%%Pages: 29
+%%DocumentNeededResources: font Courier-Bold Courier 
+%%EOF

@@ -1,4 +1,7 @@
 package unit1;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
 /*Write a Java program to implement a Mobile Store using a default constructor. Create a Mobile class
 with the attributes brand and price. The default constructor should display a welcome message when
 a mobile object is created. Display the mobile details after object creation.*/
@@ -23,6 +26,8 @@ class Mobile {
 public class task20 {
 
 	public static void main(String[] args) {
+		System.out.println("Name: Tharun-Kumaran");
+		System.out.println("Roll No: 2117250020478");
 		// TODO Auto-generated method stub
 		Mobile myMobile = new Mobile();
         

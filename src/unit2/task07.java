@@ -1,7 +1,12 @@
 package unit2;
+// Name: Tharun-Kumaran
+// Roll No: 2117250020478
+
 import java.util.*;
 public class task07 {
     public static void main(String[] args) {
+		System.out.println("Name: Tharun-Kumaran");
+		System.out.println("Roll No: 2117250020478");
         Scanner sc=new Scanner(System.in);
         int r=sc.nextInt(),c=sc.nextInt();
         int[][] a=new int[r][c],b=new int[r][c];
